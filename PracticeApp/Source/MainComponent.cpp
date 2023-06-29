@@ -12,7 +12,7 @@ MainComponent::~MainComponent(void)
 //
 void MainComponent::paint(Graphics& g)
 {
-    g.fillAll(Colours::powderblue);
+    g.fillAll(Colours::hotpink);
 }
 //
 void MainComponent::resized(void)
