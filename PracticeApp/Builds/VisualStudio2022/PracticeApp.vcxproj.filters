@@ -3267,6 +3267,15 @@
     <ClCompile Include="..\..\Source\MainFrame.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\DummyComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TrackComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TracksListBox.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\modules\juce_analytics\analytics\juce_Analytics.h">
@@ -6423,6 +6432,15 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\MainFrame.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DummyComponent.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\TrackComponent.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\TracksListBox.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>
