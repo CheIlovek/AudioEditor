@@ -19,9 +19,39 @@ public:
     void menuItemSelected(int menuID, int index);
 
     enum MenuIDs {
-        LabelClear = 1000,
-        SliderMin,
-        SliderMax
+        CreateProject = 1000,
+        OpenProject,
+        Save,
+        SaveAs,
+        ExportAs,
+        Import,
+        CloseProject,
+        Exit,
+
+        Undo,
+        Redo,
+
+        AddTrack,
+        RemoveTrack,
+        Mute,
+        Solo,
+        SelectAllTracks,
+
+        SelectAll,
+        Area,
+        FromStartToCursor,
+        FromCursorToEnd,
+        SetRange,
+
+        Deceleration,
+        Acceleration,
+        RaisingTone,
+        LoweringTone,
+        Echo,
+        Equalizer,
+
+        Description,
+        Help
     };
 private:
     DummyComponent effectHistoryContainer;
