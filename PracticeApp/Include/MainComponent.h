@@ -20,6 +20,5 @@ private:
     DummyComponent generalVolumeContainer;
     DummyComponent playControlsContainer;
     DummyComponent systemMenuContainer; // Твоя менюшка сверху
-    MenuBarComponent menuBarComp;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
