@@ -3276,19 +3276,7 @@
     <ClCompile Include="..\..\Source\TracksListBox.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\MenuBar.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FilesTableComponent.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\MainAudioComponent.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectFilesComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -6452,16 +6440,7 @@
     <ClInclude Include="..\..\Include\DummyComponent.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Include\FilesTableComponent.h">
-      <Filter>Headers Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Include\MainAudioComponent.h">
-      <Filter>Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Include\MenuBar.h">
-      <Filter>Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Include\ProjectFilesComponent.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\TrackComponent.h">

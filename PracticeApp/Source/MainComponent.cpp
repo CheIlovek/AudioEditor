@@ -11,10 +11,6 @@ MainComponent::MainComponent(void)
     addAndMakeVisible(systemMenuContainer);
     setOpaque(true);
     setSize(800, 800);
-    MenuBar mb = MenuBar();
-    menuBarComp.setModel(&mb);
-    addAndMakeVisible(&menuBarComp);
-    menuBarComp.setBounds(0, 0, proportionOfWidth(1.0f), 20);
 }
 //
 MainComponent::~MainComponent(void)
@@ -44,5 +40,4 @@ void MainComponent::resized(void)
     generalVolumeContainer.setBounds(r.removeFromRight(r.getWidth() * percentageGeneralVolume));
     mainAudioWaveContainer.setBounds(r);
 
-    menuBarComp.setBounds(0, 0, proportionOfWidth(1.0f), 20);
 }
