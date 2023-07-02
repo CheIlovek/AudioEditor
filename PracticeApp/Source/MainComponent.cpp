@@ -1,14 +1,13 @@
 #include "../Include/MainComponent.h"
-#include "../Include/Menubar.h"
 //
-MainComponent::MainComponent(void)
+MainComponent::MainComponent(void) : systemMenuContainer(this)
 {
     addAndMakeVisible(effectHistoryContainer);
     addAndMakeVisible(projectFilesContainer);
     addAndMakeVisible(mainAudioWaveContainer);
     addAndMakeVisible(generalVolumeContainer);
     addAndMakeVisible(playControlsContainer);
-    addAndMakeVisible(systemMenuContainer);
+    addAndMakeVisible(&systemMenuContainer);
     setOpaque(true);
     setSize(800, 800);
 }
@@ -40,4 +39,40 @@ void MainComponent::resized(void)
     generalVolumeContainer.setBounds(r.removeFromRight(r.getWidth() * percentageGeneralVolume));
     mainAudioWaveContainer.setBounds(r);
 
+}
+
+StringArray MainComponent::getMenuBarNames()
+{
+    const char* menuNames[] = { "Label", "Slider", 0 };
+    return StringArray(menuNames);
+}
+
+PopupMenu MainComponent::getMenuForIndex(int index, const String& name)
+{
+    PopupMenu menu;
+    if (name == "Label")
+    {
+        menu.addItem(LabelClear, "Clear");
+    }
+    else if (name == "Slider") {
+        menu.addItem(SliderMin, "Set to minimum");
+        menu.addItem(SliderMax, "Set to maximum");
+    }
+    return menu;
+}
+
+void MainComponent::menuItemSelected(int menuID, int index)
+{
+    int a = 0;
+    switch (menuID) {
+    case LabelClear:
+        a = 1;
+        break;
+    case SliderMin:
+        a = 2;
+        break;
+    case SliderMax:
+        a = 3;
+        break;
+    }
 }

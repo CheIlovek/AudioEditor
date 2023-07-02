@@ -2677,7 +2677,6 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_product_unlocking.cpp" />
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_video.cpp" />
     <ClCompile Include="..\..\Source\DummyComponent.cpp" />
-    <ClCompile Include="..\..\Source\MainAudioComponent.cpp" />
     <ClCompile Include="..\..\Source\MainComponent.cpp" />
     <ClCompile Include="..\..\Source\MainFrame.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
@@ -3734,7 +3733,6 @@
     <ClInclude Include="..\..\..\..\modules\juce_video\juce_video.h" />
     <ClInclude Include="..\..\Include\Application.h" />
     <ClInclude Include="..\..\Include\DummyComponent.h" />
-    <ClInclude Include="..\..\Include\MainAudioComponent.h" />
     <ClInclude Include="..\..\Include\MainComponent.h" />
     <ClInclude Include="..\..\Include\MainFrame.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
