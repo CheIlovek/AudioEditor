@@ -41,7 +41,11 @@ PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
     }
     else if (name == "Selection") {
         menu.addItem(SelectAll, "Select all");
-        menu.addItem(Area, "Area...");
+        PopupMenu subMenu;
+        subMenu.addItem(FromStartToCursor, "From start to cursor");
+        subMenu.addItem(FromCursorToEnd, "From cursor to end");
+        subMenu.addItem(SetRange, "Set range");
+        menu.addSubMenu("Area", subMenu);
     }
     else if (name == "Effects") {
         menu.addItem(Deceleration, "Deceleration");
