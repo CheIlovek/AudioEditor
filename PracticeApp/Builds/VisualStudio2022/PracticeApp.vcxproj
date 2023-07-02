@@ -2679,6 +2679,7 @@
     <ClCompile Include="..\..\Source\DummyComponent.cpp" />
     <ClCompile Include="..\..\Source\MainComponent.cpp" />
     <ClCompile Include="..\..\Source\MainFrame.cpp" />
+    <ClCompile Include="..\..\Source\MainMenuBarModel.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
     <ClCompile Include="..\..\Source\TracksListBox.cpp" />
   </ItemGroup>
@@ -3735,6 +3736,7 @@
     <ClInclude Include="..\..\Include\DummyComponent.h" />
     <ClInclude Include="..\..\Include\MainComponent.h" />
     <ClInclude Include="..\..\Include\MainFrame.h" />
+    <ClInclude Include="..\..\Include\MainMenuBarModel.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
     <ClInclude Include="..\..\Include\TracksListBox.h" />
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h" />
