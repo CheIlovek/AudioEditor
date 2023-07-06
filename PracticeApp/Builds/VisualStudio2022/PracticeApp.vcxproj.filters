@@ -3285,6 +3285,12 @@
     <ClCompile Include="..\..\Source\FileComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\WaveformComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TracksAudioSource.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\modules\juce_analytics\analytics\juce_Analytics.h">
@@ -6459,6 +6465,12 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\FileComponent.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\WaveformComponent.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\TracksAudioSource.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,10 +2,12 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "FileListBoxComponent.h"
+#include "TracksListBox.h"
 
 class MainMenuBarModel : public MenuBarModel
 {
 public:
+    MainMenuBarModel(FileListBoxComponent*, TracksListBox*);
     MainMenuBarModel();
 	~MainMenuBarModel();
 
@@ -14,6 +16,8 @@ public:
 	PopupMenu getMenuForIndex(int index, const String& name);
 	void menuItemSelected(int menuID, int index);
 
+    void addNewTrack();
+    void setAudioOnTrack();
     void setFileList(FileListBoxComponent* flbm);
 
     enum MenuIDs {
@@ -50,10 +54,12 @@ public:
         Equalizer,
 
         Description,
-        Help
+        Help,
     };
 
 private:
     FileListBoxComponent* flbm;
+    TracksListBox* tracks;
+    
 
 };

@@ -15,6 +15,7 @@ public:
 	void resized(void) override;
 	void openFile();
 	File getFile(int index);
+	File getSelectedFile();
 
 private:
 	std::unique_ptr<juce::FileChooser> chooser;

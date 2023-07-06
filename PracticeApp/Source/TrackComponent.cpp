@@ -1,8 +1,10 @@
 #include "TrackComponent.h"
 
-TrackComponent::TrackComponent(void) {
+TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager) :
+	waveformCache(5),
+	waveform(512, formatManager, waveformCache) {
 	trackName.setText("Audio 1");
-	
+
 	muteButton.setButtonText("MUTE");
 	muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::green);
 	muteButton.setEnabled(false);
@@ -26,6 +28,7 @@ TrackComponent::TrackComponent(void) {
 }
 
 TrackComponent::~TrackComponent(void) {
+
 }
 
 void TrackComponent::paint(Graphics& g) {
@@ -49,7 +52,7 @@ void TrackComponent::resized(void) {
 	leftSideBox.justifyContent = juce::FlexBox::JustifyContent::flexStart;
 
 
-	juce::FlexItem trackNameItem(100,40,trackName);
+	juce::FlexItem trackNameItem(100, 40, trackName);
 	juce::FlexItem muteButtonItem(100, 40, muteButton);
 	juce::FlexItem superiorButtonItem(100, 40, superiorButton);
 	juce::FlexItem balanceSliderItem(50, 100, balanceSlider);
@@ -59,8 +62,17 @@ void TrackComponent::resized(void) {
 	juce::FlexItem leftSideBoxItem(getWidth() * controlPanelPercentage, getHeight(), leftSideBox);
 	juce::FlexItem volumeSliderItem(100, getHeight(), volumeSlider);
 	juce::FlexItem waveformItem(getWidth(), getHeight(), waveform);
-	controlsBox.items = { leftSideBoxItem, volumeSliderItem, waveformItem};
+	controlsBox.items = { leftSideBoxItem, volumeSliderItem, waveformItem };
 
 	controlsBox.performLayout(getBounds());
 
+}
+
+void TrackComponent::setSource(juce::AudioSampleBuffer* buffer, double sampleRate) {
+	waveform.setSource(buffer, sampleRate);
+
+}
+
+void TrackComponent::clear() {
+	waveform.clear();
 }

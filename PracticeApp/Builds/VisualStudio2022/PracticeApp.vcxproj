@@ -2683,7 +2683,9 @@
     <ClCompile Include="..\..\Source\MainFrame.cpp" />
     <ClCompile Include="..\..\Source\MainMenuBarModel.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
+    <ClCompile Include="..\..\Source\TracksAudioSource.cpp" />
     <ClCompile Include="..\..\Source\TracksListBox.cpp" />
+    <ClCompile Include="..\..\Source\WaveformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\modules\juce_analytics\analytics\juce_Analytics.h" />
@@ -3742,7 +3744,9 @@
     <ClInclude Include="..\..\Include\MainFrame.h" />
     <ClInclude Include="..\..\Include\MainMenuBarModel.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
+    <ClInclude Include="..\..\Include\TracksAudioSource.h" />
     <ClInclude Include="..\..\Include\TracksListBox.h" />
+    <ClInclude Include="..\..\Include\WaveformComponent.h" />
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h" />
   </ItemGroup>
   <ItemGroup>

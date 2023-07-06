@@ -6,8 +6,7 @@ FileListBoxComponent::FileListBoxComponent()
     fileListBox.setColour(ListBox::outlineColourId, Colours::white);
     fileListBox.setOutlineThickness(1);
     fileListBox.setRowSelectedOnMouseDown(false);
-    File f("D:/GUITAR/Toxicity_v1.wav");
-    fileList.push_back(new FileComponent(f));
+    fileListBox.setRowSelectedOnMouseDown(true);
     addAndMakeVisible(fileListBox);
     //DBG(fileList.size());
     fileListBox.setRowHeight(20);
@@ -55,7 +54,9 @@ void FileListBoxComponent::openFile()
             if (file != juce::File{})                                                
             {
                 fileList.push_back(new FileComponent(file));
+                
                 fileListBox.updateContent();
+                fileListBox.selectRow(fileList.size() - 1, true, true);
             }
         });
 }
@@ -63,5 +64,10 @@ void FileListBoxComponent::openFile()
 File FileListBoxComponent::getFile(int index)
 {
     return fileList[index]->getFile();
+}
+
+File FileListBoxComponent::getSelectedFile() {
+    auto f = fileListBox.getSelectedRow();
+    return getFile(f);
 }
 

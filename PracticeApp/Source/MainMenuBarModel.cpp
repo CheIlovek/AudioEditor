@@ -1,5 +1,9 @@
 #include "MainMenuBarModel.h"
 
+MainMenuBarModel::MainMenuBarModel(FileListBoxComponent* flbm, TracksListBox* tracks) :
+    flbm(flbm), tracks(tracks) {
+}
+
 MainMenuBarModel::MainMenuBarModel()
 {
 }
@@ -65,11 +69,26 @@ PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
 
 void MainMenuBarModel::menuItemSelected(int menuID, int index)
 {
+
     switch (menuID) {
     case Import:
         flbm->openFile();
         break;
+    case AddTrack:
+        addNewTrack();
+        break;
+    case AddAudio:
+        setAudioOnTrack();
+        break;
     }
+}
+
+void MainMenuBarModel::addNewTrack() {
+    tracks->addNewTrack();
+}
+
+void MainMenuBarModel::setAudioOnTrack() {
+    tracks->setFileOnTrack(flbm->getSelectedFile());
 }
 
 void MainMenuBarModel::setFileList(FileListBoxComponent* f)

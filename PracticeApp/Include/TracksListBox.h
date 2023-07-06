@@ -2,6 +2,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TrackComponent.h"
+#include "TracksAudioSource.h"
 class TracksListBox : public ListBoxModel, public Component {
 public:
     TracksListBox(void);
@@ -12,12 +13,24 @@ public:
     Component* refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate);
     void resized(void) override;
 
-    //void addElement(Component*);
+    void addNewTrack();
+    void addNewTrack(juce::File file);
+    void setFileOnTrack(int trackId, juce::File file);
+    void setFileOnTrack(juce::File file);
 
+
+    void prepareToPlay(int samplesPerBlockExpected, double sampleRate);
+    void releaseResources();
+    void getNextAudioBlock(const AudioSourceChannelInfo&);
+    TracksAudioSource& getAudioSource();
 
 private:
+
+    juce::AudioFormatManager formatManager;
+    TracksAudioSource audioMixer;
+    juce::Array<TrackComponent*> dataList;
     juce::ListBox listBox;
-    std::vector<TrackComponent*> dataList;
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TracksListBox)
 
 };
 

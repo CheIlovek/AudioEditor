@@ -1,8 +1,8 @@
 #include "../Include/MainComponent.h"
 //
-MainComponent::MainComponent(void)
+MainComponent::MainComponent(void) : mainMenuBarModel(&fileListBoxComponent, &mainAudioTracksContainer)
 {
-    mainMenuBarModel.setFileList(&fileListBoxComponent);
+    //mainMenuBarModel.setFileList(&fileListBoxComponent);
     mainMenuBarContainer.setModel(&mainMenuBarModel);
     addAndMakeVisible(effectHistoryContainer);
     addAndMakeVisible(fileListBoxComponent);
@@ -31,7 +31,6 @@ void MainComponent::resized(void)
     const double percentageGeneralVolume = 0.1;
     const double percentagePlayControls = 0.05;
     
-
     auto r = getBounds();
     mainMenuBarContainer.setBounds(r.removeFromTop(r.getHeight() * percentageSystemMenu));
     auto leftSide = r.removeFromLeft(getWidth() * percentageLeftSide);
