@@ -40,7 +40,7 @@ void FileListBoxComponent::resized(void)
 
 void FileListBoxComponent::openFile()
 {
-    chooser = std::make_unique<juce::FileChooser>("Select a Wave file to play...", juce::File{}, "*.wav");     
+    chooser = std::make_unique<juce::FileChooser>("Select a Wave file to play...", juce::File{}, "*.wav,*.mp3");     
 
     auto chooserFlags = juce::FileBrowserComponent::openMode
         | juce::FileBrowserComponent::canSelectFiles;

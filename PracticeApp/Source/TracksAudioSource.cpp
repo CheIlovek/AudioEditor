@@ -127,17 +127,16 @@ void TracksAudioSource::stop() {
 
 void TracksAudioSource::recalculateBuffer() {
     if (inputs.size() > 0) {
-        std::unique_ptr<AudioSampleBuffer> buff(getBufferMaxSize());
-        AudioSourceChannelInfo info(*buff.get());
+        AudioSourceChannelInfo info(*getBufferMaxSize());
         if (inputs.size() > 1) {
 
-            for (int i = 1; i < inputs.size(); ++i) {
-                AudioSourceChannelInfo info2(*inputs.getUnchecked(i));
-                for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan) {
-                    if (chan < info2.buffer->getNumChannels()) {
-                        info.buffer->addFrom(chan, info.startSample, *inputs.getUnchecked(i), chan, 0, info2.numSamples);
-                    }
-                }
+            for (int i = 0; i < inputs.size(); ++i) {
+                if (info.buffer == inputs.getUnchecked(i))
+                    continue;
+                
+                for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
+                    if (chan < inputs.getUnchecked(i)->getNumChannels())
+                        info.buffer->addFrom(chan, info.startSample, *inputs.getUnchecked(i), chan, 0, inputs.getUnchecked(i)->getNumSamples());
             }
         }
         auto newSource = std::make_unique<MemoryAudioSource>(*info.buffer, true);
@@ -151,11 +150,13 @@ void TracksAudioSource::recalculateBuffer() {
 }
 
 AudioSampleBuffer* TracksAudioSource::getBufferMaxSize() {
-    int maxChannels = 0;
-    int maxSamples = 0;
+    int maxSamples = -1;
+    AudioSampleBuffer* res = nullptr;
     for (auto& in : inputs) {
-        maxChannels = std::max(in->getNumChannels(), maxChannels);
-        maxSamples = std::max(in->getNumSamples(), maxSamples);
+        if (in->getNumSamples() > maxSamples) {
+            res = in;
+            maxSamples = in->getNumSamples();
+        }
     }
-    return new AudioSampleBuffer(maxChannels, maxSamples);
+    return res;
 }
