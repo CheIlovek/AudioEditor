@@ -25,7 +25,7 @@ public:
     TracksAudioSource& getAudioSource();
 
 private:
-
+    const Colour background{ 0xff242223 };
     juce::AudioFormatManager formatManager;
     TracksAudioSource audioMixer;
     juce::Array<TrackComponent*> dataList;
