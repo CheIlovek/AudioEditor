@@ -35,6 +35,7 @@ PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
     else if (name == "Tracks") {
         menu.addItem(AddTrack, "Add track");
         menu.addItem(RemoveTrack, "Remove track");
+        menu.addItem(AddAudio, "Add audio");
         menu.addItem(Mute, "Mute");
         menu.addItem(Solo, "Solo");
         menu.addItem(SelectAllTracks, "Select all tracks");
@@ -64,18 +65,14 @@ PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
 
 void MainMenuBarModel::menuItemSelected(int menuID, int index)
 {
-    /*
-    int a = 0;
     switch (menuID) {
-    case LabelClear:
-        a = 1;
-        break;
-    case SliderMin:
-        a = 2;
-        break;
-    case SliderMax:
-        a = 3;
+    case Import:
+        flbm->openFile();
         break;
     }
-    */
+}
+
+void MainMenuBarModel::setFileList(FileListBoxComponent* f)
+{
+    flbm = f;
 }

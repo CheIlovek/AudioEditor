@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "FileListBoxComponent.h"
 
 class MainMenuBarModel : public MenuBarModel
 {
@@ -13,8 +14,10 @@ public:
 	PopupMenu getMenuForIndex(int index, const String& name);
 	void menuItemSelected(int menuID, int index);
 
+    void setFileList(FileListBoxComponent* flbm);
+
     enum MenuIDs {
-        CreateProject = 1000,
+        CreateProject = 1,
         OpenProject,
         Save,
         SaveAs,
@@ -28,6 +31,7 @@ public:
 
         AddTrack,
         RemoveTrack,
+        AddAudio,
         Mute,
         Solo,
         SelectAllTracks,
@@ -50,5 +54,6 @@ public:
     };
 
 private:
+    FileListBoxComponent* flbm;
 
 };

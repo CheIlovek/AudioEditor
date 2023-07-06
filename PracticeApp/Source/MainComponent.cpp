@@ -2,10 +2,11 @@
 //
 MainComponent::MainComponent(void)
 {
+    mainMenuBarModel.setFileList(&fileListBoxComponent);
     mainMenuBarContainer.setModel(&mainMenuBarModel);
     addAndMakeVisible(effectHistoryContainer);
-    addAndMakeVisible(projectFilesContainer);
-    addAndMakeVisible(mainAudioWaveContainer);
+    addAndMakeVisible(fileListBoxComponent);
+    addAndMakeVisible(mainAudioTracksContainer);
     addAndMakeVisible(generalVolumeContainer);
     addAndMakeVisible(playControlsContainer);
     addAndMakeVisible(mainMenuBarContainer);
@@ -35,9 +36,9 @@ void MainComponent::resized(void)
     mainMenuBarContainer.setBounds(r.removeFromTop(r.getHeight() * percentageSystemMenu));
     auto leftSide = r.removeFromLeft(getWidth() * percentageLeftSide);
     effectHistoryContainer.setBounds(leftSide.removeFromTop(leftSide.getHeight() * percentageEffects));
-    projectFilesContainer.setBounds(leftSide);
+    fileListBoxComponent.setBounds(leftSide);
     playControlsContainer.setBounds(r.removeFromBottom(r.getHeight() * percentagePlayControls));
     generalVolumeContainer.setBounds(r.removeFromRight(r.getWidth() * percentageGeneralVolume));
-    mainAudioWaveContainer.setBounds(r);
+    mainAudioTracksContainer.setBounds(r);
 
 }

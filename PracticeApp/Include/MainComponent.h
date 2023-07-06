@@ -4,6 +4,7 @@
 #include "DummyComponent.h"
 #include "TracksListBox.h"
 #include "MainMenuBarModel.h"
+#include "FileListBoxComponent.h"
 //
 class MainComponent : public Component
 {
@@ -16,11 +17,17 @@ public:
     //
 private:
     DummyComponent effectHistoryContainer;
-    DummyComponent projectFilesContainer;
-    TracksListBox mainAudioWaveContainer;
+
+    FileListBoxComponent fileListBoxComponent;
+
+    TracksListBox mainAudioTracksContainer;
+
     DummyComponent generalVolumeContainer;
+
     DummyComponent playControlsContainer;
+
     MainMenuBarModel mainMenuBarModel;
     MenuBarComponent mainMenuBarContainer; 
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
