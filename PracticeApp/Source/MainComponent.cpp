@@ -24,14 +24,14 @@ void MainComponent::paint(Graphics& g)
 //
 void MainComponent::resized(void)
 {
-    const double percentageSystemMenu = 0.03;
+    //const double percentageSystemMenu = 0.03;
     const double percentageLeftSide = 0.3;
     const double percentageEffects = 0.5;
     const double percentageGeneralVolume = 0.1;
     const double percentagePlayback = 0.05;
     
     auto r = getBounds();
-    mainMenuBarContainer.setBounds(r.removeFromTop(r.getHeight() * percentageSystemMenu));
+    mainMenuBarContainer.setBounds(r.removeFromTop(22));
     auto leftSide = r.removeFromLeft(getWidth() * percentageLeftSide);
     effectHistorySection.setBounds(leftSide.removeFromTop(leftSide.getHeight() * percentageEffects));
     fileListBoxSection.setBounds(leftSide);

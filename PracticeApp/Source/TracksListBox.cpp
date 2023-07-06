@@ -3,12 +3,13 @@
 
 TracksListBox::TracksListBox(void) : listBox("ListBox", this) {
 	formatManager.registerBasicFormats();
-	listBox.setColour(juce::ListBox::outlineColourId, juce::Colours::grey);
+	listBox.setColour(juce::ListBox::outlineColourId, Colours::darkgreen);
 	listBox.setOutlineThickness(1);
 	listBox.setMultipleSelectionEnabled(false);
 	listBox.setRowSelectedOnMouseDown(true);
+	listBox.setColour(ListBox::backgroundColourId, background);
 	addAndMakeVisible(listBox);
-	listBox.setRowHeight(100);
+	listBox.setRowHeight(150);
 	resized();
 }
 
@@ -21,10 +22,10 @@ int TracksListBox::getNumRows() {
 
 void TracksListBox::paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) {
 	if (rowIsSelected) {
-		g.fillAll(juce::Colours::lightblue);
+		g.fillAll(juce::Colours::blue);
 	}
 	else {
-		g.fillAll(juce::Colours::darkblue);
+		g.fillAll(juce::Colours::red);
 	}
 }
 
@@ -36,7 +37,7 @@ Component* TracksListBox::refreshComponentForRow(int rowNumber, bool isRowSelect
 }
 
 void TracksListBox::resized(void) {
-	listBox.setBoundsInset(juce::BorderSize<int>(8));
+	listBox.setBounds(getLocalBounds());
 }
 
 void TracksListBox::addNewTrack() {

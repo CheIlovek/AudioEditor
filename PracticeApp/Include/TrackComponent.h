@@ -16,6 +16,12 @@ public:
 
 private:
 
+    const Colour textColour{ 0xffffffff };
+    const Colour buttonColour{ 0xff363636 };
+    const Colour sliderColour{ 0xff23c1fe };
+    
+    
+
     juce::DrawableText trackName;
     juce::TextButton muteButton;
     juce::TextButton superiorButton;
