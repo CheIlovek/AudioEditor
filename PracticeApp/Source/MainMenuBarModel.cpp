@@ -1,7 +1,8 @@
 #include "MainMenuBarModel.h"
 
 MainMenuBarModel::MainMenuBarModel(FileListBoxComponent* flbm, TracksListBox* tracks) :
-    flbm(flbm), tracks(tracks) {
+    flbm(flbm), tracks(tracks) 
+{
 }
 
 MainMenuBarModel::MainMenuBarModel()
@@ -75,23 +76,10 @@ void MainMenuBarModel::menuItemSelected(int menuID, int index)
         flbm->openFile();
         break;
     case AddTrack:
-        addNewTrack();
+        tracks->addNewTrack();
         break;
     case AddAudio:
-        setAudioOnTrack();
+        tracks->setFileOnTrack(flbm->getSelectedFile());
         break;
     }
-}
-
-void MainMenuBarModel::addNewTrack() {
-    tracks->addNewTrack();
-}
-
-void MainMenuBarModel::setAudioOnTrack() {
-    tracks->setFileOnTrack(flbm->getSelectedFile());
-}
-
-void MainMenuBarModel::setFileList(FileListBoxComponent* f)
-{
-    flbm = f;
 }

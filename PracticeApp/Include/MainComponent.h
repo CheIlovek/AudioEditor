@@ -5,6 +5,7 @@
 #include "TracksListBox.h"
 #include "MainMenuBarModel.h"
 #include "FileListBoxComponent.h"
+#include "PlaybackComponent.h"
 //
 class MainComponent : public Component
 {
@@ -16,15 +17,15 @@ public:
     void resized(void) override;
     //
 private:
-    DummyComponent effectHistoryContainer;
+    DummyComponent effectHistorySection;
 
-    FileListBoxComponent fileListBoxComponent;
+    FileListBoxComponent fileListBoxSection;
 
-    TracksListBox mainAudioTracksContainer;
+    TracksListBox audioTracksSection;
 
-    DummyComponent generalVolumeContainer;
+    DummyComponent generalVolumeSection;
 
-    DummyComponent playControlsContainer;
+    PlaybackComponent playbackSection;
 
     MainMenuBarModel mainMenuBarModel;
     MenuBarComponent mainMenuBarContainer; 
