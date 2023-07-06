@@ -94,7 +94,6 @@ void TracksListBox::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill
 
 }
 
-
 TracksAudioSource& TracksListBox::getAudioSource() {
 	return audioMixer;
 }

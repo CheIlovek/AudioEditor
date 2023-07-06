@@ -16,10 +16,6 @@ public:
 	PopupMenu getMenuForIndex(int index, const String& name);
 	void menuItemSelected(int menuID, int index);
 
-    void addNewTrack();
-    void setAudioOnTrack();
-    void setFileList(FileListBoxComponent* flbm);
-
     enum MenuIDs {
         CreateProject = 1,
         OpenProject,
@@ -61,5 +57,5 @@ private:
     FileListBoxComponent* flbm;
     TracksListBox* tracks;
     
-
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainMenuBarModel)
 };

@@ -8,7 +8,6 @@ FileListBoxComponent::FileListBoxComponent()
     fileListBox.setRowSelectedOnMouseDown(false);
     fileListBox.setRowSelectedOnMouseDown(true);
     addAndMakeVisible(fileListBox);
-    //DBG(fileList.size());
     fileListBox.setRowHeight(20);
     resized();
 }
@@ -31,7 +30,6 @@ Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRo
 {
     if (rowNumber < 0 || rowNumber >= fileList.size())
         return nullptr;
-    DBG(fileList[rowNumber]->getFileName());
     return fileList[rowNumber];
 }
 

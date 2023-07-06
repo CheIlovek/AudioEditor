@@ -19,8 +19,8 @@ public:
 
 private:
 	std::unique_ptr<juce::FileChooser> chooser;
-
 	std::vector<FileComponent*> fileList;
-
 	ListBox fileListBox;
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FileListBoxComponent)
 };
