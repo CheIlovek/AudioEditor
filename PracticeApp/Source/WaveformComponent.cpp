@@ -13,7 +13,7 @@ void WaveformComponent::setSource(const juce::AudioSampleBuffer* buffer, double 
 }
 
 void WaveformComponent::paint(juce::Graphics& g) {
-    if (!thumbnail.isFullyLoaded() && thumbnail.getNumChannels() == 0)
+    if (!thumbnail.isFullyLoaded() || thumbnail.getNumChannels() == 0)
         paintIfNoFileLoaded(g);
     else
         paintIfFileLoaded(g);

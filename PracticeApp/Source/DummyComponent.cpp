@@ -5,6 +5,9 @@ DummyComponent::DummyComponent(void) {
 	colour = juce::Colour::fromRGB(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
 }
 
+DummyComponent::DummyComponent(Colour colour) : colour(colour) {
+}
+
 DummyComponent::~DummyComponent(void) {
 }
 //

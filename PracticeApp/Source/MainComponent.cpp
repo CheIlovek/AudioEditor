@@ -1,6 +1,10 @@
 #include "../Include/MainComponent.h"
 //
-MainComponent::MainComponent(void) : mainMenuBarModel(&fileListBoxSection, &audioTracksSection), playbackSection(&audioTracksSection.getAudioSource())
+MainComponent::MainComponent(void) :
+    mainMenuBarModel(&fileListBoxSection, &audioTracksSection),
+    playbackSection(&audioTracksSection.getAudioSource()),
+    generalVolumeSection(Colours::grey),
+    effectHistorySection(Colours::grey)
 {
     mainMenuBarContainer.setModel(&mainMenuBarModel);
     addAndMakeVisible(effectHistorySection);
@@ -19,7 +23,7 @@ MainComponent::~MainComponent(void)
 //
 void MainComponent::paint(Graphics& g)
 {
-    g.fillAll(Colours::hotpink);
+    g.fillAll(backgroundColour);
 }
 //
 void MainComponent::resized(void)
