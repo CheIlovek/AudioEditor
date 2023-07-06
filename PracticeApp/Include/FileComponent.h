@@ -5,6 +5,7 @@
 class FileComponent : public Component
 {
 public:
+
 	FileComponent(const File file);
 	~FileComponent() override;
 
