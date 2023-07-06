@@ -2,7 +2,8 @@
 
 TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager) :
 	waveformCache(5),
-	waveform(512, formatManager, waveformCache) {
+	waveform(512, formatManager, waveformCache),
+	volumeSlider(Colours::black) {
 	trackName.setColour(textColour);
 	trackName.setText("Audio 1");
 

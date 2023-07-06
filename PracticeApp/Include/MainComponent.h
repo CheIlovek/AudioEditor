@@ -18,6 +18,7 @@ public:
     //
 private:
     DummyComponent effectHistorySection;
+    const Colour backgroundColour{ 0xff131313 };
 
     FileListBoxComponent fileListBoxSection;
 
