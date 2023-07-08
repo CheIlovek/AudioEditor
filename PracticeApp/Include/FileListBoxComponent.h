@@ -6,6 +6,8 @@
 class FileListBoxComponent : public Component, public ListBoxModel
 {
 public:
+	const Colour colour{ 0xff131313 };
+
 	FileListBoxComponent();
 	~FileListBoxComponent();
 
@@ -13,6 +15,7 @@ public:
 	void paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) override;
 	Component* refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate);
 	void resized(void) override;
+	void paint(Graphics& g) override;
 	void openFile();
 	File getFile(int index);
 	File getSelectedFile();
@@ -21,6 +24,9 @@ private:
 	std::unique_ptr<juce::FileChooser> chooser;
 	std::vector<FileComponent*> fileList;
 	ListBox fileListBox;
+
+	DrawableText name;
+	DrawableText added;
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FileListBoxComponent)
 };

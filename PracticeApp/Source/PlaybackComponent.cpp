@@ -4,7 +4,7 @@ PlaybackComponent::PlaybackComponent(TracksAudioSource* audioSource) : state(Sto
 {
     addAndMakeVisible(&playButton);
     addAndMakeVisible(&stopButton);
-    audioSource->addChangeListener(this);
+    
     playButton.setButtonText("Play");
     stopButton.setButtonText("Stop");
 
@@ -16,6 +16,8 @@ PlaybackComponent::PlaybackComponent(TracksAudioSource* audioSource) : state(Sto
 
     playButton.setEnabled(true);
     stopButton.setEnabled(false);
+
+    audioSource->addChangeListener(this);
 
     setAudioChannels(2, 2);
 }

@@ -3,12 +3,23 @@
 FileListBoxComponent::FileListBoxComponent()
 {
     fileListBox.setModel(this);
-    fileListBox.setColour(ListBox::outlineColourId, Colours::white);
     fileListBox.setOutlineThickness(1);
     fileListBox.setRowSelectedOnMouseDown(false);
     fileListBox.setRowSelectedOnMouseDown(true);
+
     addAndMakeVisible(fileListBox);
+    addAndMakeVisible(&name);
+    addAndMakeVisible(&added);
+
+    name.setText("Name");
+    added.setText("Added");
+    name.setColour(Colours::white);
+    added.setColour(Colours::white);
+    name.setFontHeight(16);
+    added.setFontHeight(16);
     fileListBox.setRowHeight(20);
+    fileListBox.setColour(ListBox::backgroundColourId, colour);
+    
     resized();
 }
 
@@ -23,7 +34,7 @@ int FileListBoxComponent::getNumRows()
 
 void FileListBoxComponent::paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected)
 {
-    g.fillAll(juce::Colours::darkgrey);
+    g.fillAll(Colours::grey);
 }
 
 Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate)
@@ -35,7 +46,14 @@ Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRo
 
 void FileListBoxComponent::resized(void)
 {
-    fileListBox.setBounds(getLocalBounds());
+    name.setBounds(5, 0, getWidth() * 0.8 - 5, 20);
+    added.setBounds(getWidth() * 0.8, 0, getWidth() * 0.2, 20);
+    fileListBox.setBounds(0, 20, getWidth(), getHeight() - 20);
+}
+
+void FileListBoxComponent::paint(Graphics& g)
+{
+    g.fillAll(colour);
 }
 
 void FileListBoxComponent::openFile()
