@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "TracksAudioSource.h";
+#include "TracksAudioSource.h"
 
 class PlaybackComponent : public AudioAppComponent, public ChangeListener
 {

@@ -1,9 +1,12 @@
 #include "TrackComponent.h"
+#include "TracksListBox.h"
 
-TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager) :
+TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksListBox& newOwner,int row) :
 	waveformCache(5),
 	waveform(512, formatManager, waveformCache),
-	volumeSlider(Colours::black) {
+	volumeSlider(Colours::black),
+	owner(newOwner),
+	row(row) {
 	trackName.setColour(textColour);
 	trackName.setText("Audio 1");
 
@@ -83,4 +86,16 @@ void TrackComponent::setSource(juce::AudioSampleBuffer* buffer, double sampleRat
 
 void TrackComponent::clear() {
 	waveform.clear();
+}
+
+void TrackComponent::mouseDown(const juce::MouseEvent& event) {
+	owner.listBoxItemClicked(row, event);
+}
+
+void TrackComponent::setRow(int newRow) {
+	row = newRow;
+}
+
+int TrackComponent::getRow() {
+	return row;
 }

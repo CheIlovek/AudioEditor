@@ -1,7 +1,9 @@
 #include "TracksListBox.h"
 #include "TrackComponent.h"
 
-TracksListBox::TracksListBox(void) : listBox("ListBox", this) {
+TracksListBox::TracksListBox(void) : 
+	playPosition(&audioMixer),
+	listBox("ListBox", this) {
 	formatManager.registerBasicFormats();
 	listBox.setColour(juce::ListBox::outlineColourId, Colours::black);
 	listBox.setOutlineThickness(1);
@@ -9,8 +11,9 @@ TracksListBox::TracksListBox(void) : listBox("ListBox", this) {
 	listBox.setRowSelectedOnMouseDown(true);
 	listBox.setColour(ListBox::backgroundColourId, background);
 	addAndMakeVisible(listBox);
+	addAndMakeVisible(playPosition);
 	listBox.setRowHeight(150);
-	resized();
+	//resized();
 	
 }
 
@@ -37,11 +40,18 @@ Component* TracksListBox::refreshComponentForRow(int rowNumber, bool isRowSelect
 }
 
 void TracksListBox::resized(void) {
-	listBox.setBounds(getLocalBounds());
+	auto r = getLocalBounds();
+	listBox.setBounds(r);
+	r.removeFromLeft(100 + 10);
+	playPosition.setBounds(r);
+}
+
+void TracksListBox::listBoxItemClicked(int row, const MouseEvent& event) {
+	listBox.selectRowsBasedOnModifierKeys(row, event.mods, false);
 }
 
 void TracksListBox::addNewTrack() {
-	auto track = std::make_unique<TrackComponent>(formatManager);
+	auto track = std::make_unique<TrackComponent>(formatManager, *this, dataList.size());
 	audioMixer.addInputSource(new AudioSampleBuffer(0, 0));
 	dataList.add(track.release());
 	listBox.updateContent();
@@ -49,7 +59,7 @@ void TracksListBox::addNewTrack() {
 }
 
 void TracksListBox::addNewTrack(juce::File file) {
-	auto track = std::make_unique<TrackComponent>(formatManager);
+	auto track = std::make_unique<TrackComponent>(formatManager, *this, dataList.size());
 	audioMixer.addInputSource(new AudioSampleBuffer());
 	dataList.add(track.release());
 	setFileOnTrack(dataList.size() - 1, file);
