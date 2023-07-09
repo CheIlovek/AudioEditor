@@ -172,17 +172,18 @@ void TracksAudioSource::recalculateBuffer() {
 
     DBG("CLEAR BIT: " << muteChannels.findNextClearBit(0));
     if (inputs.size() > 0 && muteChannels.findNextClearBit(0) < inputs.size()) {
+        TrackAudioBuffer* exampleBuffer = getBufferMaxSize();
+        TrackAudioBuffer resBuffer(*exampleBuffer);
         // TODO: Дорожки перезаписываются, нужно тут создать ещё один буффер
-        AudioSourceChannelInfo info(*getBufferMaxSize());
+        AudioSourceChannelInfo info(resBuffer);
         if (inputs.size() > 1) {
-
             for (int i = 0; i < inputs.size(); ++i) {
-                if (info.buffer == inputs.getUnchecked(i) || muteChannels[i])
+                if (exampleBuffer == inputs.getUnchecked(i) || muteChannels[i])
                     continue;
                 
                 for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
                     if (chan < inputs.getUnchecked(i)->getNumChannels())
-                        info.buffer->addFrom(chan, info.startSample, *inputs.getUnchecked(i), chan, 0, inputs.getUnchecked(i)->getNumSamples());
+                        info.buffer->addFrom(chan, 0, *inputs.getUnchecked(i), chan, 0, inputs.getUnchecked(i)->getNumSamples());
             }
         } 
         auto newSource = std::make_unique<MemoryAudioSource>(*info.buffer, true);
