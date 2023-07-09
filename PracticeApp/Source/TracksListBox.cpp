@@ -52,6 +52,11 @@ void TracksListBox::listBoxItemClicked(int row, const MouseEvent& event) {
 	DBG("ITEM CLICKED DIST: " << event.getDistanceFromDragStartX());
 }
 
+void TracksListBox::backgroundClicked(const MouseEvent&)
+{
+	listBox.deselectAllRows();
+}
+
 void TracksListBox::mouseDown(const MouseEvent& event) {
 	for (TrackComponent* comp : dataList) {
 		auto relEvent = event.getEventRelativeTo(comp);
@@ -62,6 +67,7 @@ void TracksListBox::mouseDown(const MouseEvent& event) {
 			break;
 		}
 	}
+	
 }
 
 void TracksListBox::mouseUp(const MouseEvent& event) {
@@ -141,6 +147,11 @@ void TracksListBox::setTrackOffset(int trackId, int offset) {
 	double offsetInSeconds = offset / (defaultPixelsBySecond * zoomRatio);
 	DBG("offsetInSeconds = " << offsetInSeconds);
 	audioMixer.setOffset(trackId, offsetInSeconds);
+}
+
+int TracksListBox::getNumOfSelectedRows()
+{
+	return listBox.getSelectedRows().size();
 }
 
 void TracksListBox::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {

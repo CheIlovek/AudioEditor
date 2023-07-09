@@ -104,3 +104,8 @@ File FileListBoxComponent::getSelectedFile() {
     return getFile(f);
 }
 
+int FileListBoxComponent::getNumOfSelectedRows()
+{
+    return fileListBox.getSelectedRows().size();
+}
+

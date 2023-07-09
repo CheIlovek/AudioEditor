@@ -79,7 +79,8 @@ void MainMenuBarModel::menuItemSelected(int menuID, int index)
         tracks->addNewTrack();
         break;
     case AddAudio:
-        tracks->setFileOnTrack(flbm->getSelectedFile());
+        if(tracks->getNumOfSelectedRows() == 1 && flbm->getNumOfSelectedRows() == 1)
+            tracks->setFileOnTrack(flbm->getSelectedFile());
         break;
     }
 }

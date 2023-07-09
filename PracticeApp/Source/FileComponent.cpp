@@ -7,9 +7,7 @@ FileComponent::FileComponent(const File newFile, FileListBoxComponent& newOwner,
 	addAndMakeVisible(isAddedToggle);
 
 	fileName.setColour(Colours::white);
-	//Font font(16, Font::italic);
-	//fileName.setFont(font, true);
-	//fileName.setBoundsInset(BorderSize<int>(1));
+
 	fileName.setFontHeight(16);
 
 	isAddedToggle.setEnabled(false);
