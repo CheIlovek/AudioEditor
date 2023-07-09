@@ -8,7 +8,7 @@ WaveformComponent::WaveformComponent(int sourceSamplesPerThumbnailSample,
     thumbnail.addChangeListener(this);
 }
 
-void WaveformComponent::setSource(const juce::AudioSampleBuffer* buffer, double sampleRate) {
+void WaveformComponent::setSource(const TrackAudioBuffer* buffer, double sampleRate) {
     thumbnail.setSource(buffer, sampleRate, 0); // TODO: считать хеш
 }
 

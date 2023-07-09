@@ -17,10 +17,35 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	muteButton.setColour(juce::TextButton::textColourOnId, textColour);
 	muteButton.setAlpha(1.0f);
 	muteButton.setEnabled(true);
+	muteButton.setClickingTogglesState(true);
+	muteButton.setToggleState(false, juce::dontSendNotification);
+	muteButton.onClick = [this] {
+		if (muteButton.getToggleState()) {
+			muteButton.setColour(juce::TextButton::buttonColourId, buttonColour);
+			owner.unmuteTrack(this->row);
+		}
+		else {
+			muteButton.setColour(juce::TextButton::buttonColourId, buttonColour.darker());
+			owner.muteTrack(this->row);
+		}
+	};
 
 	superiorButton.setButtonText("SOLO");
-	superiorButton.setColour(juce::TextButton::buttonColourId, juce::Colours::red);
-	superiorButton.setEnabled(false);
+	superiorButton.setColour(juce::TextButton::buttonColourId, buttonColour);
+	superiorButton.setEnabled(true);
+	superiorButton.setClickingTogglesState(true);
+	superiorButton.setToggleState(false, juce::dontSendNotification);
+	superiorButton.onClick = [this] {
+		if (superiorButton.getToggleState()) {
+			superiorButton.setColour(juce::TextButton::buttonColourId, buttonColour);
+			owner.soloTrack(-1);
+		}
+		else {
+			superiorButton.setColour(juce::TextButton::buttonColourId, buttonColour.darker());
+			owner.soloTrack(this->row);
+		}
+	};
+
 
 	balanceSlider.setSliderStyle(juce::Slider::SliderStyle::Rotary);
 	balanceSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
@@ -48,8 +73,6 @@ void TrackComponent::paint(Graphics& g) {
 
 void TrackComponent::resized(void) {
 
-	const double controlPanelPercentage = 0.1;
-
 	juce::FlexBox controlsBox;
 	controlsBox.flexDirection = juce::FlexBox::Direction::row;
 	controlsBox.flexWrap = juce::FlexBox::Wrap::noWrap;
@@ -69,19 +92,25 @@ void TrackComponent::resized(void) {
 	juce::FlexItem balanceSliderItem(50, 70, balanceSlider);
 	//balanceSliderItem.maxWidth = 200;
 	leftSideBox.items = { trackNameItem, muteButtonItem, superiorButtonItem, balanceSliderItem };
+	auto r = getLocalBounds();
+	leftSideBox.performLayout(r.removeFromLeft(100));
+	volumeSlider.setBounds(r.removeFromLeft(10));
+	r.setBounds(r.getX() + waveformOffset, r.getY(), waveformSize, r.getHeight());
+	waveform.setBounds(r);
 
-	juce::FlexItem leftSideBoxItem(100, getHeight(), leftSideBox);
-	juce::FlexItem volumeSliderItem(10, getHeight(), volumeSlider);
-	juce::FlexItem waveformItem(getWidth(), getHeight(), waveform);
-	controlsBox.items = { leftSideBoxItem, volumeSliderItem, waveformItem };
+	//juce::FlexItem leftSideBoxItem(100, getHeight(), leftSideBox);
+	//juce::FlexItem volumeSliderItem(10, getHeight(), volumeSlider);
+	//juce::FlexItem waveformItem(getWidth(), getHeight(), waveform);
+	//controlsBox.items = { leftSideBoxItem, volumeSliderItem, waveformItem };
 
-	controlsBox.performLayout(getBounds());
+	//controlsBox.performLayout(getBounds());
 
 }
 
-void TrackComponent::setSource(juce::AudioSampleBuffer* buffer, double sampleRate) {
+void TrackComponent::setSource(TrackAudioBuffer* buffer, double sampleRate, int wavefromSize) {
 	waveform.setSource(buffer, sampleRate);
-
+	this->waveformSize = wavefromSize;
+	resized();
 }
 
 void TrackComponent::clear() {
@@ -94,6 +123,14 @@ void TrackComponent::mouseDown(const juce::MouseEvent& event) {
 
 void TrackComponent::setRow(int newRow) {
 	row = newRow;
+}
+
+void TrackComponent::setWaveformSize(int newSize) {
+	waveformSize = newSize;
+}
+
+void TrackComponent::setWaveformOffset(int newOffset) {
+	waveformOffset = newOffset;
 }
 
 int TrackComponent::getRow() {

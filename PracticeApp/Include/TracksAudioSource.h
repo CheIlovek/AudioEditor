@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "TrackAudioBuffer.h"
 
 class TracksAudioSource : public AudioSource,
     public juce::ChangeListener,
@@ -10,12 +11,12 @@ public:
     TracksAudioSource();
     ~TracksAudioSource() override;
 
-    void addInputSource(AudioSampleBuffer* newInput);
+    void addInputSource(TrackAudioBuffer* newInput);
     void addInputSource(juce::File file, AudioFormatManager* formatManager);
-    void setInputSource(int index, AudioSampleBuffer* newInput);
-    void removeInputSource(AudioSampleBuffer* input);
+    void setInputSource(int index, TrackAudioBuffer* newInput);
+    void removeInputSource(TrackAudioBuffer* input);
     void removeInputSource(int index);
-    AudioSampleBuffer* getBuffer(int index);
+    TrackAudioBuffer* getBuffer(int index);
     void removeAllInputs();
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
     void releaseResources() override;
@@ -28,13 +29,18 @@ public:
     void setPosition(double newPosition);
     void start();
     void stop();
+    void setSampleRate(double);
+    double getSampleRate();
+    void unmuteTrack(int trackId);
+    void muteTrack(int trackId);
+    void soloTrack(int trackId);
 
 
 private:
     void recalculateBuffer();
-    AudioSampleBuffer* getBufferMaxSize();
+    TrackAudioBuffer* getBufferMaxSize();
     //==============================================================================
-    OwnedArray<AudioSampleBuffer> inputs;
+    OwnedArray<TrackAudioBuffer> inputs;
     std::unique_ptr<MemoryAudioSource> mainBuffer;
     AudioTransportSource mainSource;
     CriticalSection lock;
@@ -42,6 +48,9 @@ private:
     double currentSampleRate;
     int bufferSizeExpected;
     int sourcesPlaying = 0;
+    double sampleRate = 44100;
+    BigInteger muteChannels;
+    int soloId = -1;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TracksAudioSource)
 };

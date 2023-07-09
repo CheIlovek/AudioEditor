@@ -5,13 +5,15 @@
 class PlayPositionComponent : public juce::Component, private juce::Timer {
 
 public:
-    PlayPositionComponent(TracksAudioSource* transportSourceToUse);
+    PlayPositionComponent(TracksAudioSource* transportSourceToUse,int&, const double&);
 
     void paint(juce::Graphics& g) override;
 
     void mouseDown(const juce::MouseEvent& event) override;
 
 private:
+    int& curZoom;
+    const double& pixelsPerSecond;
     void timerCallback() override;
 
     TracksAudioSource* transportSource;

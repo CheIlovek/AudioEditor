@@ -1,5 +1,6 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "TrackAudioBuffer.h"
 
 class WaveformComponent : public juce::Component, private juce::ChangeListener {
 public:
@@ -7,7 +8,7 @@ public:
         juce::AudioFormatManager& formatManager,
         juce::AudioThumbnailCache& cache);
 
-    void setSource(const juce::AudioSampleBuffer* buffer, double sampleRate);
+    void setSource(const TrackAudioBuffer* buffer, double sampleRate);
     void paint(juce::Graphics& g) override;
     void paintIfNoFileLoaded(juce::Graphics& g);
     void paintIfFileLoaded(juce::Graphics& g);

@@ -3297,6 +3297,9 @@
     <ClCompile Include="..\..\Source\PlayPositionComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TrackAudioBuffer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\modules\juce_analytics\analytics\juce_Analytics.h">
@@ -6483,6 +6486,9 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\PlayPositionComponent.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\TrackAudioBuffer.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>

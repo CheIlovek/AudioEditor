@@ -10,7 +10,7 @@ TracksAudioSource::~TracksAudioSource() {
 }
 
 //==============================================================================
-void TracksAudioSource::addInputSource(AudioSampleBuffer* input) {
+void TracksAudioSource::addInputSource(TrackAudioBuffer* input) {
     if (input != nullptr && !inputs.contains(input)) {
         double localRate;
         int localBufferSize;
@@ -20,16 +20,19 @@ void TracksAudioSource::addInputSource(AudioSampleBuffer* input) {
             localBufferSize = bufferSizeExpected;
         }
         const ScopedLock sl(lock);
+        muteChannels.insertBit(inputs.size(), false);
         inputs.add(input);
+        
         recalculateBuffer();
     }
 }
 
 void TracksAudioSource::addInputSource(juce::File file, AudioFormatManager* formatManager) {
+    
     if (file != juce::File{}) {
         auto* reader = formatManager->createReaderFor(file);
         if (reader != nullptr) {
-            auto buffer = new AudioBuffer<float>(reader->numChannels, reader->lengthInSamples);
+            auto buffer = new TrackAudioBuffer(reader->numChannels, reader->lengthInSamples);
             AudioSourceChannelInfo info(*buffer);
             reader->read(buffer, 0, reader->lengthInSamples, 0, true, true);
             addInputSource(buffer);
@@ -38,12 +41,12 @@ void TracksAudioSource::addInputSource(juce::File file, AudioFormatManager* form
     }
 }
 
-void TracksAudioSource::setInputSource(int index, AudioSampleBuffer* newInput) {
+void TracksAudioSource::setInputSource(int index, TrackAudioBuffer* newInput) {
     inputs.set(index, newInput, true);
     recalculateBuffer();
 }
 
-void TracksAudioSource::removeInputSource(AudioSampleBuffer* const input) {
+void TracksAudioSource::removeInputSource(TrackAudioBuffer* const input) {
     if (input != nullptr) {
         {
             const ScopedLock sl(lock);
@@ -53,6 +56,10 @@ void TracksAudioSource::removeInputSource(AudioSampleBuffer* const input) {
                 return;
 
             inputs.remove(index);
+            if (soloId == index) {
+                soloId = -1;
+            }
+            muteChannels.shiftBits(-1, index);
             recalculateBuffer();
         }
 
@@ -64,7 +71,7 @@ void TracksAudioSource::removeInputSource(int index) {
     inputs.remove(index);
 }
 
-AudioSampleBuffer* TracksAudioSource::getBuffer(int index) {
+TrackAudioBuffer* TracksAudioSource::getBuffer(int index) {
     return inputs[index];
 }
 
@@ -125,35 +132,75 @@ void TracksAudioSource::stop() {
     mainSource.stop();
 }
 
+void TracksAudioSource::setSampleRate(double rate) {
+    sampleRate = rate;
+}
+
+double TracksAudioSource::getSampleRate() {
+    return sampleRate;
+}
+
+void TracksAudioSource::unmuteTrack(int trackId) {
+    if (trackId >= 0 && trackId < inputs.size() && muteChannels[trackId]) {
+        muteChannels.clearBit(trackId);
+        recalculateBuffer();
+    }
+        
+}
+
+void TracksAudioSource::muteTrack(int trackId) {
+    if (trackId >= 0 && trackId < inputs.size() && !muteChannels[trackId]) {
+        muteChannels.setBit(trackId);
+        recalculateBuffer();
+    }
+        
+}
+
+void TracksAudioSource::soloTrack(int trackId) {
+    if (trackId >= 0 && trackId < inputs.size() && trackId != soloId) {
+        soloId = trackId;
+        recalculateBuffer();
+    }
+}
+
 void TracksAudioSource::recalculateBuffer() {
-    if (inputs.size() > 0) {
+    if (soloId != -1) {
+        auto newSource = std::make_unique<MemoryAudioSource>(*inputs[soloId], true);
+        mainSource.setSource(newSource.get(), 0, nullptr, sampleRate, inputs[soloId]->getNumChannels());
+        mainBuffer.reset(newSource.release());
+    }
+
+    DBG("CLEAR BIT: " << muteChannels.findNextClearBit(0));
+    if (inputs.size() > 0 && muteChannels.findNextClearBit(0) < inputs.size()) {
+        // TODO: Дорожки перезаписываются, нужно тут создать ещё один буффер
         AudioSourceChannelInfo info(*getBufferMaxSize());
         if (inputs.size() > 1) {
 
             for (int i = 0; i < inputs.size(); ++i) {
-                if (info.buffer == inputs.getUnchecked(i))
+                if (info.buffer == inputs.getUnchecked(i) || muteChannels[i])
                     continue;
                 
                 for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
                     if (chan < inputs.getUnchecked(i)->getNumChannels())
                         info.buffer->addFrom(chan, info.startSample, *inputs.getUnchecked(i), chan, 0, inputs.getUnchecked(i)->getNumSamples());
             }
-        }
+        } 
         auto newSource = std::make_unique<MemoryAudioSource>(*info.buffer, true);
-        mainSource.setSource(newSource.get());
+        mainSource.setSource(newSource.get(),0,nullptr,sampleRate,info.buffer->getNumChannels());
         mainBuffer.reset(newSource.release());
     }
     else {
         mainSource.setSource(nullptr);
-        mainBuffer.release();
+        mainBuffer.reset();
     }
 }
 
-AudioSampleBuffer* TracksAudioSource::getBufferMaxSize() {
+TrackAudioBuffer* TracksAudioSource::getBufferMaxSize() {
     int maxSamples = -1;
-    AudioSampleBuffer* res = nullptr;
-    for (auto& in : inputs) {
-        if (in->getNumSamples() > maxSamples) {
+    TrackAudioBuffer* res = nullptr;
+    for (int i = 0; i < inputs.size(); i++) {
+        auto in = inputs[i];
+        if (in->getNumSamples() > maxSamples && !muteChannels[i]) {
             res = in;
             maxSamples = in->getNumSamples();
         }

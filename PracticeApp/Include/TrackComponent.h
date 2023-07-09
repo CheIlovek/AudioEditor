@@ -14,10 +14,12 @@ public:
 
     void paint(Graphics&) override;
     void resized(void) override;
-    void setSource(juce::AudioSampleBuffer* buffer, double sampleRate);
+    void setSource(TrackAudioBuffer* buffer, double sampleRate, int wavefromSize);
     void clear();
     void mouseDown(const juce::MouseEvent& event) override;
     void setRow(int newRow);
+    void setWaveformSize(int);
+    void setWaveformOffset(int);
     int getRow();
 
 private:
@@ -36,6 +38,8 @@ private:
     WaveformComponent waveform;
     TracksListBox& owner;
     int row;
+    int waveformSize = 0;
+    int waveformOffset = 0;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TrackComponent);
 };

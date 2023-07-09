@@ -19,6 +19,9 @@ public:
     void addNewTrack(juce::File file);
     void setFileOnTrack(int trackId, juce::File file);
     void setFileOnTrack(juce::File file);
+    void muteTrack(int trackId);
+    void unmuteTrack(int trackId);
+    void soloTrack(int trackId);
 
 
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate);
@@ -27,6 +30,9 @@ public:
     TracksAudioSource& getAudioSource();
 
 private:
+    const double defaultPixelsBySecond = 10;
+    int zoomRatio = 1;
+
     const Colour background{ 0xff242223 };
     PlayPositionComponent playPosition;
     juce::AudioFormatManager formatManager;
