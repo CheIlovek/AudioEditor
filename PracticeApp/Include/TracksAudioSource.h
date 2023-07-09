@@ -34,6 +34,7 @@ public:
     void unmuteTrack(int trackId);
     void muteTrack(int trackId);
     void soloTrack(int trackId);
+    void setOffset(int trackId, double offset);
 
 
 private:

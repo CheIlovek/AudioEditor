@@ -14,6 +14,10 @@ public:
     Component* refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate);
     void resized(void) override;
     void listBoxItemClicked(int row, const MouseEvent&) override;
+    void mouseDown(const MouseEvent& event) override;
+    void mouseUp(const MouseEvent& event) override;
+    void mouseDrag(const MouseEvent& event) override;
+    void paint(Graphics&) override;
 
     void addNewTrack();
     void addNewTrack(juce::File file);
@@ -22,6 +26,7 @@ public:
     void muteTrack(int trackId);
     void unmuteTrack(int trackId);
     void soloTrack(int trackId);
+    void setTrackOffset(int trackId, int offset);
 
 
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate);
@@ -39,6 +44,8 @@ private:
     TracksAudioSource audioMixer;
     juce::Array<TrackComponent*> dataList;
     juce::ListBox listBox;
+    TrackComponent* mouseSelected = nullptr;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TracksListBox)
 
 };

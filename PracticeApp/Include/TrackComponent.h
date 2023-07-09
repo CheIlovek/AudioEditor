@@ -17,10 +17,13 @@ public:
     void setSource(TrackAudioBuffer* buffer, double sampleRate, int wavefromSize);
     void clear();
     void mouseDown(const juce::MouseEvent& event) override;
+    void mouseDrag(const MouseEvent& event) override;
+    void mouseUp(const MouseEvent& event) override;
     void setRow(int newRow);
     void setWaveformSize(int);
     void setWaveformOffset(int);
     int getRow();
+    
 
 private:
 
@@ -40,6 +43,9 @@ private:
     int row;
     int waveformSize = 0;
     int waveformOffset = 0;
+    int oldWaveformOffset = 0;
+
+    bool isDraggingWaveform = false;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TrackComponent);
 };

@@ -8,7 +8,7 @@ public:
         juce::AudioFormatManager& formatManager,
         juce::AudioThumbnailCache& cache);
 
-    void setSource(const TrackAudioBuffer* buffer, double sampleRate);
+    void setSource(TrackAudioBuffer* buffer, double sampleRate);
     void paint(juce::Graphics& g) override;
     void paintIfNoFileLoaded(juce::Graphics& g);
     void paintIfFileLoaded(juce::Graphics& g);

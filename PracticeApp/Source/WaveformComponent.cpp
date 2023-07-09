@@ -8,7 +8,7 @@ WaveformComponent::WaveformComponent(int sourceSamplesPerThumbnailSample,
     thumbnail.addChangeListener(this);
 }
 
-void WaveformComponent::setSource(const TrackAudioBuffer* buffer, double sampleRate) {
+void WaveformComponent::setSource(TrackAudioBuffer* buffer, double sampleRate) {
     thumbnail.setSource(buffer, sampleRate, 0); // TODO: считать хеш
 }
 
@@ -27,7 +27,6 @@ void WaveformComponent::paintIfNoFileLoaded(juce::Graphics& g) {
 
 void WaveformComponent::paintIfFileLoaded(juce::Graphics& g) {
     g.fillAll(juce::Colours::white);
-
     g.setColour(juce::Colours::red);
     thumbnail.drawChannels(g, getLocalBounds(), 0.0, thumbnail.getTotalLength(), 1.0f);
 }
@@ -40,6 +39,7 @@ void WaveformComponent::changeListenerCallback(juce::ChangeBroadcaster* source) 
 void WaveformComponent::clear() {
     thumbnail.clear();
 }
+
 
 
 void WaveformComponent::thumbnailChanged() {
