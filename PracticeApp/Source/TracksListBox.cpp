@@ -49,6 +49,38 @@ void TracksListBox::resized(void) {
 
 void TracksListBox::listBoxItemClicked(int row, const MouseEvent& event) {
 	listBox.selectRowsBasedOnModifierKeys(row, event.mods, false);
+	DBG("ITEM CLICKED DIST: " << event.getDistanceFromDragStartX());
+}
+
+void TracksListBox::mouseDown(const MouseEvent& event) {
+	for (TrackComponent* comp : dataList) {
+		auto relEvent = event.getEventRelativeTo(comp);
+		if (comp->contains(relEvent.getMouseDownPosition())) {
+			mouseSelected = comp;
+			DBG("TRACK DOWNED");
+			mouseSelected->mouseDown(event);
+			break;
+		}
+	}
+}
+
+void TracksListBox::mouseUp(const MouseEvent& event) {
+	if (mouseSelected != nullptr) {
+		mouseSelected->mouseUp(event);
+		mouseSelected = nullptr;
+		DBG("TRACK RELEASED");
+	}
+	
+}
+
+void TracksListBox::mouseDrag(const MouseEvent& event) {
+	if (mouseSelected != nullptr) {
+		mouseSelected->mouseDrag(event);
+	}
+}
+
+void TracksListBox::paint(Graphics& g) {
+	g.fillAll(background);
 }
 
 void TracksListBox::addNewTrack() {
@@ -103,6 +135,12 @@ void TracksListBox::unmuteTrack(int trackId) {
 
 void TracksListBox::soloTrack(int trackId) {
 	audioMixer.soloTrack(trackId);
+}
+
+void TracksListBox::setTrackOffset(int trackId, int offset) {
+	double offsetInSeconds = offset / (defaultPixelsBySecond * zoomRatio);
+	DBG("offsetInSeconds = " << offsetInSeconds);
+	audioMixer.setOffset(trackId, offsetInSeconds);
 }
 
 void TracksListBox::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {

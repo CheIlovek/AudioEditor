@@ -29,6 +29,15 @@ void PlayPositionComponent::mouseDown(const juce::MouseEvent& event) {
 
         transportSource->setPosition(audioPosition);
     }
+    getParentComponent()->mouseDown(event);
+}
+
+void PlayPositionComponent::mouseDrag(const MouseEvent& event) {
+    getParentComponent()->mouseDrag(event);
+}
+
+void PlayPositionComponent::mouseUp(const MouseEvent& event) {
+    getParentComponent()->mouseUp(event);
 }
 
 

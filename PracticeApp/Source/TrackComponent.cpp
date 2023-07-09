@@ -68,7 +68,6 @@ TrackComponent::~TrackComponent(void) {
 }
 
 void TrackComponent::paint(Graphics& g) {
-	//g.fillAll(juce::Colours::aqua);
 }
 
 void TrackComponent::resized(void) {
@@ -119,6 +118,14 @@ void TrackComponent::clear() {
 
 void TrackComponent::mouseDown(const juce::MouseEvent& event) {
 	owner.listBoxItemClicked(row, event);
+	auto relEvent = event.getEventRelativeTo(&waveform);
+	auto startPoint = event.getMouseDownPosition();
+	if (waveform.contains(relEvent.getMouseDownPosition())) {
+		DBG("WAVEFORM DOWNED");
+		isDraggingWaveform = true;
+		oldWaveformOffset = waveformOffset;
+	}
+
 }
 
 void TrackComponent::setRow(int newRow) {
@@ -135,4 +142,18 @@ void TrackComponent::setWaveformOffset(int newOffset) {
 
 int TrackComponent::getRow() {
 	return row;
+}
+
+void TrackComponent::mouseDrag(const MouseEvent& event) {
+	if (isDraggingWaveform) {
+		waveformOffset = std::max(0, oldWaveformOffset + event.getDistanceFromDragStartX());
+		resized();
+	}
+	DBG("DRAG DIST: " << event.getMouseDownX() << " " << event.getMouseDownY());
+}
+
+void TrackComponent::mouseUp(const MouseEvent& event) {
+	DBG("WAVEFORM RELEASED");
+	owner.setTrackOffset(row, waveformOffset);
+	isDraggingWaveform = false;
 }

@@ -163,29 +163,57 @@ void TracksAudioSource::soloTrack(int trackId) {
     }
 }
 
+void TracksAudioSource::setOffset(int trackId, double offset) {
+    if (trackId >= 0 && trackId < inputs.size() && offset >= 0) {
+        DBG("OFFSET IN SEC = " << offset);
+        int offsetInSamples = offset * sampleRate;
+        DBG("OFFSET IN SAMP = " << offsetInSamples);
+        inputs.getUnchecked(trackId)->setOffset(offsetInSamples);
+        recalculateBuffer();
+    }
+    
+}
+
 void TracksAudioSource::recalculateBuffer() {
+    DBG("SOLO IS " << soloId);
     if (soloId != -1) {
-        auto newSource = std::make_unique<MemoryAudioSource>(*inputs[soloId], true);
+        TrackAudioBuffer resBuffer(inputs[soloId]->getNumChannels(), inputs[soloId]->getNumSamples() + inputs[soloId]->getOffset());
+        resBuffer.clear();
+        AudioSourceChannelInfo info(resBuffer);
+
+        for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
+            if (chan < inputs.getUnchecked(soloId)->getNumChannels()) {
+                DBG("OFFSET FOR " << soloId << " = " << inputs.getUnchecked(soloId)->getOffset());
+                DBG("NUMSAMPLES FOR " << soloId << " = " << inputs.getUnchecked(soloId)->getNumSamples());
+                info.buffer->addFrom(chan, inputs.getUnchecked(soloId)->getOffset(), *inputs.getUnchecked(soloId), chan, 0, inputs.getUnchecked(soloId)->getNumSamples());
+            }
+
+        auto newSource = std::make_unique<MemoryAudioSource>(*info.buffer, true);
         mainSource.setSource(newSource.get(), 0, nullptr, sampleRate, inputs[soloId]->getNumChannels());
         mainBuffer.reset(newSource.release());
+        return;
     }
 
     DBG("CLEAR BIT: " << muteChannels.findNextClearBit(0));
     if (inputs.size() > 0 && muteChannels.findNextClearBit(0) < inputs.size()) {
         TrackAudioBuffer* exampleBuffer = getBufferMaxSize();
-        TrackAudioBuffer resBuffer(*exampleBuffer);
-        // TODO: Дорожки перезаписываются, нужно тут создать ещё один буффер
+        TrackAudioBuffer resBuffer(exampleBuffer->getNumChannels(), exampleBuffer->getNumSamples() + exampleBuffer->getOffset());
+        resBuffer.clear();
         AudioSourceChannelInfo info(resBuffer);
-        if (inputs.size() > 1) {
-            for (int i = 0; i < inputs.size(); ++i) {
-                if (exampleBuffer == inputs.getUnchecked(i) || muteChannels[i])
-                    continue;
+        for (int i = 0; i < inputs.size(); ++i) {
+            if (/*exampleBuffer == inputs.getUnchecked(i) ||*/ muteChannels[i])
+                continue;
                 
-                for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
-                    if (chan < inputs.getUnchecked(i)->getNumChannels())
-                        info.buffer->addFrom(chan, 0, *inputs.getUnchecked(i), chan, 0, inputs.getUnchecked(i)->getNumSamples());
-            }
-        } 
+            for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
+                if (chan < inputs.getUnchecked(i)->getNumChannels()) {
+                    DBG("OFFSET FOR " << i << " = " << inputs.getUnchecked(i)->getOffset());
+                    DBG("NUMSAMPLES FOR " << i << " = " << inputs.getUnchecked(i)->getNumSamples());
+                    info.buffer->addFrom(chan, inputs.getUnchecked(i)->getOffset(), *inputs.getUnchecked(i), chan, 0, inputs.getUnchecked(i)->getNumSamples());
+                }
+        }
+        info.buffer->setNotClear();
+        
+        
         auto newSource = std::make_unique<MemoryAudioSource>(*info.buffer, true);
         mainSource.setSource(newSource.get(),0,nullptr,sampleRate,info.buffer->getNumChannels());
         mainBuffer.reset(newSource.release());
@@ -201,9 +229,9 @@ TrackAudioBuffer* TracksAudioSource::getBufferMaxSize() {
     TrackAudioBuffer* res = nullptr;
     for (int i = 0; i < inputs.size(); i++) {
         auto in = inputs[i];
-        if (in->getNumSamples() > maxSamples && !muteChannels[i]) {
+        if ((in->getNumSamples() + in->getOffset()) > maxSamples && !muteChannels[i]) {
             res = in;
-            maxSamples = in->getNumSamples();
+            maxSamples = in->getNumSamples() + in->getOffset();
         }
     }
     return res;
