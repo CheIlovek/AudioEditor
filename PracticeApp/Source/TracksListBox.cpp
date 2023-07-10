@@ -5,11 +5,11 @@ TracksListBox::TracksListBox(void) :
 	playPosition(&audioMixer, zoomRatio, defaultPixelsBySecond),
 	listBox("ListBox", this) {
 	formatManager.registerBasicFormats();
-	listBox.setColour(juce::ListBox::outlineColourId, Colours::black);
+	listBox.setColour(ListBox::outlineColourId,		ProjectColours::Tracks::listBoxOutline);
+	listBox.setColour(ListBox::backgroundColourId,	ProjectColours::Tracks::listBoxBackground);
 	listBox.setOutlineThickness(1);
 	listBox.setMultipleSelectionEnabled(false);
 	listBox.setRowSelectedOnMouseDown(true);
-	listBox.setColour(ListBox::backgroundColourId, background);
 	addAndMakeVisible(listBox);
 	addAndMakeVisible(playPosition);
 	listBox.setRowHeight(150);
@@ -18,8 +18,6 @@ TracksListBox::TracksListBox(void) :
 }
 
 TracksListBox::~TracksListBox(void) {
-	//listBox.setModel(nullptr);
-	//listBox.updateContent();
 }
 
 int TracksListBox::getNumRows() {
@@ -28,7 +26,7 @@ int TracksListBox::getNumRows() {
 
 void TracksListBox::paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) {
 	if (rowIsSelected) {
-		g.fillAll(background.brighter());
+		g.fillAll(ProjectColours::Tracks::listBoxBackground.brighter());
 	}
 }
 
@@ -79,12 +77,24 @@ void TracksListBox::mouseDrag(const MouseEvent& event) {
 	}
 }
 
+void TracksListBox::mouseWheelMove(const MouseEvent& event, const MouseWheelDetails& wheel) {
+	auto relEvent = event.getEventRelativeTo(&playPosition);
+	if (event.mods.isAltDown() && playPosition.contains(relEvent.getPosition())) {
+		DBG("WHEEL WITH ALT SCROLLED");
+		zoomRatio += wheel.deltaY * scrollStep;
+		for (TrackComponent* comp : dataList) {
+			comp->resized();
+		}
+	}
+	
+}
+
 void TracksListBox::paint(Graphics& g) {
-	g.fillAll(background);
+	g.fillAll(ProjectColours::Tracks::listBoxBackground);
 }
 
 void TracksListBox::addNewTrack() {
-	auto track = std::make_unique<TrackComponent>(formatManager, *this, dataList.size());
+	auto track = std::make_unique<TrackComponent>(formatManager, *this, dataList.size(), zoomRatio);
 	audioMixer.addInputSource(new TrackAudioBuffer(0, 0));
 	dataList.add(track.release());
 	listBox.updateContent();
@@ -92,7 +102,7 @@ void TracksListBox::addNewTrack() {
 }
 
 void TracksListBox::addNewTrack(juce::File file) {
-	auto track = std::make_unique<TrackComponent>(formatManager, *this, dataList.size());
+	auto track = std::make_unique<TrackComponent>(formatManager, *this, dataList.size(), zoomRatio);
 	audioMixer.addInputSource(new TrackAudioBuffer());
 	dataList.add(track.release());
 	setFileOnTrack(dataList.size() - 1, file);
@@ -100,6 +110,7 @@ void TracksListBox::addNewTrack(juce::File file) {
 	listBox.selectRow(dataList.size() - 1, true, true);
 
 }
+
 
 void TracksListBox::setFileOnTrack(int trackId, juce::File file) {
 	if (trackId >= 0 && trackId < dataList.size()) {
@@ -112,7 +123,7 @@ void TracksListBox::setFileOnTrack(int trackId, juce::File file) {
 				audioMixer.setSampleRate(reader->sampleRate);
 				audioMixer.setInputSource(trackId, buffer);
 				DBG("DUR_LISTBOX: " << (double)info.numSamples / reader->sampleRate);
-				int waveformSize = (double)(info.numSamples * defaultPixelsBySecond * zoomRatio) / (reader->sampleRate) ;
+				int waveformSize = (double)(info.numSamples * defaultPixelsBySecond) / (reader->sampleRate) ;
 				DBG("LISTBOX SIZE: " << waveformSize);
 				dataList[trackId]->setSource(buffer, reader->sampleRate, waveformSize);
 			}
@@ -122,7 +133,9 @@ void TracksListBox::setFileOnTrack(int trackId, juce::File file) {
 }
 
 void TracksListBox::setFileOnTrack(juce::File file) {
-	setFileOnTrack(listBox.getSelectedRow(),file);
+	int index = listBox.getSelectedRow();
+	if (index >= 0)
+		setFileOnTrack(listBox.getSelectedRow(),file);
 }
 
 void TracksListBox::muteTrack(int trackId) {
@@ -137,8 +150,8 @@ void TracksListBox::soloTrack(int trackId) {
 	audioMixer.soloTrack(trackId);
 }
 
-void TracksListBox::setTrackOffset(int trackId, int offset) {
-	double offsetInSeconds = offset / (defaultPixelsBySecond * zoomRatio);
+void TracksListBox::setTrackOffset(int trackId, int offsetInPixels) {
+	double offsetInSeconds = offsetInPixels / (defaultPixelsBySecond);
 	DBG("offsetInSeconds = " << offsetInSeconds);
 	audioMixer.setOffset(trackId, offsetInSeconds);
 }

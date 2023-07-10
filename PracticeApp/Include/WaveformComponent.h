@@ -1,7 +1,11 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TrackAudioBuffer.h"
+#include "ProjectColours.h"
 
+/**
+@brief Класс для отображение спектрограммы звука
+*/
 class WaveformComponent : public juce::Component, private juce::ChangeListener {
 public:
     WaveformComponent(int sourceSamplesPerThumbnailSample,

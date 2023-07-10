@@ -6,6 +6,7 @@
 #include "MainMenuBarModel.h"
 #include "FileListBoxComponent.h"
 #include "PlaybackComponent.h"
+#include "FileComponent.h"
 //
 class MainComponent : public Component
 {
@@ -18,7 +19,6 @@ public:
     //
 private:
     DummyComponent effectHistorySection;
-    const Colour backgroundColour{ 0xff131313 };
 
     FileListBoxComponent fileListBoxSection;
 

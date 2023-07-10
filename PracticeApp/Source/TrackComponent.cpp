@@ -1,47 +1,54 @@
 #include "TrackComponent.h"
 #include "TracksListBox.h"
 
-TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksListBox& newOwner,int row) :
+int TrackComponent::TrackNumber = 1;
+
+TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksListBox& newOwner,int row, const double& zoom) :
 	waveformCache(5),
 	waveform(512, formatManager, waveformCache),
 	volumeSlider(Colours::black),
 	owner(newOwner),
-	row(row) {
-	trackName.setColour(textColour);
-	trackName.setText("Audio 1");
+	row(row),
+	waveformZoom(zoom) {
+	trackName.setColour(ProjectColours::textColour);
+	trackName.setText("Audio " + std::to_string(TrackNumber));
+	TrackNumber++;
 
 	muteButton.setButtonText("MUTE");
-	muteButton.setColour(juce::TextButton::buttonColourId, buttonColour);
-	muteButton.setColour(juce::TextButton::buttonOnColourId, buttonColour);
-	muteButton.setColour(juce::TextButton::ColourIds::textColourOffId, textColour);
-	muteButton.setColour(juce::TextButton::textColourOnId, textColour);
+	muteButton.setColour(TextButton::buttonColourId,	ProjectColours::Tracks::buttonColour);
+	muteButton.setColour(TextButton::buttonOnColourId,	ProjectColours::Tracks::buttonColour);
+	muteButton.setColour(TextButton::textColourOffId,	ProjectColours::textColour);
+	muteButton.setColour(TextButton::textColourOnId,	ProjectColours::textColour);
 	muteButton.setAlpha(1.0f);
 	muteButton.setEnabled(true);
 	muteButton.setClickingTogglesState(true);
 	muteButton.setToggleState(false, juce::dontSendNotification);
 	muteButton.onClick = [this] {
 		if (muteButton.getToggleState()) {
-			muteButton.setColour(juce::TextButton::buttonColourId, buttonColour);
+			muteButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour);
 			owner.unmuteTrack(this->row);
 		}
 		else {
-			muteButton.setColour(juce::TextButton::buttonColourId, buttonColour.darker());
+			muteButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour.darker());
 			owner.muteTrack(this->row);
 		}
 	};
 
 	superiorButton.setButtonText("SOLO");
-	superiorButton.setColour(juce::TextButton::buttonColourId, buttonColour);
+	superiorButton.setColour(TextButton::buttonColourId,	ProjectColours::Tracks::buttonColour);
+	superiorButton.setColour(TextButton::buttonOnColourId,	ProjectColours::Tracks::buttonColour);
+	superiorButton.setColour(TextButton::textColourOffId,	ProjectColours::textColour);
+	superiorButton.setColour(TextButton::textColourOnId,	ProjectColours::textColour);
 	superiorButton.setEnabled(true);
 	superiorButton.setClickingTogglesState(true);
 	superiorButton.setToggleState(false, juce::dontSendNotification);
 	superiorButton.onClick = [this] {
 		if (superiorButton.getToggleState()) {
-			superiorButton.setColour(juce::TextButton::buttonColourId, buttonColour);
+			superiorButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour);
 			owner.soloTrack(-1);
 		}
 		else {
-			superiorButton.setColour(juce::TextButton::buttonColourId, buttonColour.darker());
+			superiorButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour.darker());
 			owner.soloTrack(this->row);
 		}
 	};
@@ -49,7 +56,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 
 	balanceSlider.setSliderStyle(juce::Slider::SliderStyle::Rotary);
 	balanceSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
-	balanceSlider.setColour(Slider::thumbColourId, sliderColour);
+	balanceSlider.setColour(Slider::thumbColourId, ProjectColours::Tracks::sliderColour);
 	balanceSlider.setBounds(0, 0, 50, 100);
 	volumeSlider.setBounds(0, 0, 50, 100);
 
@@ -60,11 +67,11 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	addAndMakeVisible(balanceSlider);
 	addAndMakeVisible(waveform);
 	addAndMakeVisible(volumeSlider);
+	resized();
 
 }
 
 TrackComponent::~TrackComponent(void) {
-
 }
 
 void TrackComponent::paint(Graphics& g) {
@@ -94,16 +101,8 @@ void TrackComponent::resized(void) {
 	auto r = getLocalBounds();
 	leftSideBox.performLayout(r.removeFromLeft(100));
 	volumeSlider.setBounds(r.removeFromLeft(10));
-	r.setBounds(r.getX() + waveformOffset, r.getY(), waveformSize, r.getHeight());
+	r.setBounds(r.getX() + (waveformOffset * waveformZoom), r.getY(), waveformSize * waveformZoom, r.getHeight());
 	waveform.setBounds(r);
-
-	//juce::FlexItem leftSideBoxItem(100, getHeight(), leftSideBox);
-	//juce::FlexItem volumeSliderItem(10, getHeight(), volumeSlider);
-	//juce::FlexItem waveformItem(getWidth(), getHeight(), waveform);
-	//controlsBox.items = { leftSideBoxItem, volumeSliderItem, waveformItem };
-
-	//controlsBox.performLayout(getBounds());
-
 }
 
 void TrackComponent::setSource(TrackAudioBuffer* buffer, double sampleRate, int wavefromSize) {
@@ -114,18 +113,6 @@ void TrackComponent::setSource(TrackAudioBuffer* buffer, double sampleRate, int 
 
 void TrackComponent::clear() {
 	waveform.clear();
-}
-
-void TrackComponent::mouseDown(const juce::MouseEvent& event) {
-	owner.listBoxItemClicked(row, event);
-	auto relEvent = event.getEventRelativeTo(&waveform);
-	auto startPoint = event.getMouseDownPosition();
-	if (waveform.contains(relEvent.getMouseDownPosition())) {
-		DBG("WAVEFORM DOWNED");
-		isDraggingWaveform = true;
-		oldWaveformOffset = waveformOffset;
-	}
-
 }
 
 void TrackComponent::setRow(int newRow) {
@@ -144,9 +131,22 @@ int TrackComponent::getRow() {
 	return row;
 }
 
+void TrackComponent::mouseDown(const juce::MouseEvent& event) {
+	owner.listBoxItemClicked(row, event);
+	auto relEvent = event.getEventRelativeTo(&waveform);
+	auto startPoint = event.getMouseDownPosition();
+	if (waveform.contains(relEvent.getMouseDownPosition())) {
+		DBG("WAVEFORM DOWNED");
+		isDraggingWaveform = true;
+		oldWaveformOffset = waveformOffset;
+	}
+
+}
+
 void TrackComponent::mouseDrag(const MouseEvent& event) {
 	if (isDraggingWaveform) {
-		waveformOffset = std::max(0, oldWaveformOffset + event.getDistanceFromDragStartX());
+		int newOffset = oldWaveformOffset + event.getDistanceFromDragStartX() / waveformZoom;
+		waveformOffset = std::max(0, newOffset);
 		resized();
 	}
 	DBG("DRAG DIST: " << event.getMouseDownX() << " " << event.getMouseDownY());
@@ -157,3 +157,5 @@ void TrackComponent::mouseUp(const MouseEvent& event) {
 	owner.setTrackOffset(row, waveformOffset);
 	isDraggingWaveform = false;
 }
+
+

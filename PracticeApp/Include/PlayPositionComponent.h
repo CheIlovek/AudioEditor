@@ -1,11 +1,12 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TracksAudioSource.h"
+#include "ProjectColours.h"
 
 class PlayPositionComponent : public juce::Component, private juce::Timer {
 
 public:
-    PlayPositionComponent(TracksAudioSource* transportSourceToUse,int&, const double&);
+    PlayPositionComponent(TracksAudioSource* transportSourceToUse, const double&, const double&);
 
     void paint(juce::Graphics& g) override;
 
@@ -14,7 +15,7 @@ public:
     void mouseUp(const MouseEvent& event) override;
 
 private:
-    int& curZoom;
+    const double& curZoom;
     const double& pixelsPerSecond;
     void timerCallback() override;
 

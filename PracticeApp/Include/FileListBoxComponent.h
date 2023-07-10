@@ -6,7 +6,6 @@
 class FileListBoxComponent : public Component, public ListBoxModel
 {
 public:
-	const Colour colour{ 0xff131313 };
 
 	FileListBoxComponent();
 	~FileListBoxComponent();

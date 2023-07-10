@@ -1,6 +1,5 @@
 #pragma once
 
-// Затычка пока нет настоящих классов
 
 
 #include "../JuceLibraryCode/JuceHeader.h"

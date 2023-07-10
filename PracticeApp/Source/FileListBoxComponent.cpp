@@ -13,12 +13,12 @@ FileListBoxComponent::FileListBoxComponent()
 
     name.setText("Name");
     added.setText("Added");
-    name.setColour(Colours::white);
-    added.setColour(Colours::white);
+    name.setColour(ProjectColours::textColour);
+    added.setColour(ProjectColours::textColour);
     name.setFontHeight(16);
     added.setFontHeight(16);
     fileListBox.setRowHeight(20);
-    fileListBox.setColour(ListBox::backgroundColourId, colour);
+    fileListBox.setColour(ListBox::backgroundColourId, ProjectColours::Files::listBoxBackground);
     
     resized();
 }
@@ -34,7 +34,7 @@ int FileListBoxComponent::getNumRows()
 
 void FileListBoxComponent::paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected)
 {
-    g.fillAll(Colours::grey);
+    g.fillAll(ProjectColours::Files::fileRowBackground);
 }
 
 Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate)
@@ -53,7 +53,7 @@ void FileListBoxComponent::resized(void)
 
 void FileListBoxComponent::paint(Graphics& g)
 {
-    g.fillAll(colour);
+    g.fillAll(ProjectColours::Files::listBoxBackground);
 }
 
 void FileListBoxComponent::openFile()

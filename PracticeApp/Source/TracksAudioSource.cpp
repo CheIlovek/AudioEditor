@@ -157,7 +157,7 @@ void TracksAudioSource::muteTrack(int trackId) {
 }
 
 void TracksAudioSource::soloTrack(int trackId) {
-    if (trackId >= 0 && trackId < inputs.size() && trackId != soloId) {
+    if (trackId < inputs.size() && trackId != soloId) {
         soloId = trackId;
         recalculateBuffer();
     }
@@ -176,7 +176,7 @@ void TracksAudioSource::setOffset(int trackId, double offset) {
 
 void TracksAudioSource::recalculateBuffer() {
     DBG("SOLO IS " << soloId);
-    if (soloId != -1) {
+    if (soloId >= 0) {
         TrackAudioBuffer resBuffer(inputs[soloId]->getNumChannels(), inputs[soloId]->getNumSamples() + inputs[soloId]->getOffset());
         resBuffer.clear();
         AudioSourceChannelInfo info(resBuffer);

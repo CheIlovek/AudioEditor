@@ -20,14 +20,14 @@ void WaveformComponent::paint(juce::Graphics& g) {
 }
 
 void WaveformComponent::paintIfNoFileLoaded(juce::Graphics& g) {
-    g.fillAll(juce::Colours::white);
-    g.setColour(juce::Colours::darkgrey);
+    g.fillAll(ProjectColours::Tracks::Waveform::noLoadFileBackground);
+    g.setColour(ProjectColours::Tracks::Waveform::noLoadFileText);
     g.drawFittedText("No File Loaded", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void WaveformComponent::paintIfFileLoaded(juce::Graphics& g) {
-    g.fillAll(juce::Colours::white);
-    g.setColour(juce::Colours::red);
+    g.fillAll(ProjectColours::Tracks::Waveform::loadFileBackground);
+    g.setColour(ProjectColours::Tracks::Waveform::brush);
     thumbnail.drawChannels(g, getLocalBounds(), 0.0, thumbnail.getTotalLength(), 1.0f);
 }
 

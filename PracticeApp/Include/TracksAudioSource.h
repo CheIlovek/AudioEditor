@@ -3,6 +3,9 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TrackAudioBuffer.h"
 
+/**
+@brief Класс реализует работу со звуком в проекте
+*/
 class TracksAudioSource : public AudioSource,
     public juce::ChangeListener,
     public juce::ChangeBroadcaster {

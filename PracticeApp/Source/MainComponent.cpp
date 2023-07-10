@@ -23,7 +23,7 @@ MainComponent::~MainComponent(void)
 //
 void MainComponent::paint(Graphics& g)
 {
-    g.fillAll(backgroundColour);
+    g.fillAll(ProjectColours::generalBackground);
 }
 //
 void MainComponent::resized(void)

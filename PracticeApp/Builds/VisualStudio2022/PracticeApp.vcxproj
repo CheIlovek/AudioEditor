@@ -3748,6 +3748,7 @@
     <ClInclude Include="..\..\Include\MainMenuBarModel.h" />
     <ClInclude Include="..\..\Include\PlaybackComponent.h" />
     <ClInclude Include="..\..\Include\PlayPositionComponent.h" />
+    <ClInclude Include="..\..\Include\ProjectColours.h" />
     <ClInclude Include="..\..\Include\TrackAudioBuffer.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
     <ClInclude Include="..\..\Include\TracksAudioSource.h" />

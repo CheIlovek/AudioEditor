@@ -1,6 +1,11 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 
+/**
+@brief AudioSampleBuffer с отступом воспроизведения
+@detailed Реализует AudioSampleBuffer без изменений
+и дополнительно запоминает своё расположение на звуковой дорожке.
+*/
 class TrackAudioBuffer : public AudioSampleBuffer {
 public:
 	TrackAudioBuffer();

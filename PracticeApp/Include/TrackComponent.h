@@ -4,32 +4,57 @@
 
 #include "DummyComponent.h"
 #include "WaveformComponent.h"
-//#include "TracksListBox.h"
+#include "ProjectColours.h"
+
 class TracksListBox;
 
+/**
+@brief Графическое отображение одной звуквой дорожки
+*/
 class TrackComponent : public Component {
 public:
-    TrackComponent(juce::AudioFormatManager&, TracksListBox&, int);
+    TrackComponent(juce::AudioFormatManager&, TracksListBox&, int, const double&);
     ~TrackComponent(void) override;
 
     void paint(Graphics&) override;
     void resized(void) override;
-    void setSource(TrackAudioBuffer* buffer, double sampleRate, int wavefromSize);
-    void clear();
     void mouseDown(const juce::MouseEvent& event) override;
     void mouseDrag(const MouseEvent& event) override;
     void mouseUp(const MouseEvent& event) override;
+
+    /**
+    * @brief Устанавливает звуковой источник для отображения
+    * @param buffer Новый источник звука
+    * @param wavefromSize Изначальный размер спектрограммы(без учёта приближения)
+    */
+    void setSource(TrackAudioBuffer* buffer, double sampleRate, int wavefromSize);
+    /**
+    * @brief Удаляет звуковой источник
+    */
+    void clear();
+    /**
+    * @brief Обновляет информацию о положении дорожки в общем списке
+    * @detailed Метод не влияет на расположение дорожки в списке,
+    * а предназначен только для обновления информации при измении расположения.
+    */
     void setRow(int newRow);
-    void setWaveformSize(int);
+    /**
+    * @brief Изменяет начальный размер спектрограммы
+    * @param newSize Новый размер спектрограммы(без учёта приближения)
+    */
+    void setWaveformSize(int newSize);
+    /**
+    * @brief Задает отступ для спектрограммы
+    * @param newOffset Отступ спектрограммы в пикселях
+    */
     void setWaveformOffset(int);
+    /**
+    * @brief Возвращает на какой строке списка находится дорожка
+    */
     int getRow();
     
 
 private:
-
-    const Colour textColour{ 0xffffffff };
-    const Colour buttonColour{ 0xff363636 };
-    const Colour sliderColour{ 0xff23c1fe };
     
     juce::DrawableText trackName;
     juce::TextButton muteButton;
@@ -43,7 +68,9 @@ private:
     int row;
     int waveformSize = 0;
     int waveformOffset = 0;
+    const double& waveformZoom;
     int oldWaveformOffset = 0;
+    static int TrackNumber;
 
     bool isDraggingWaveform = false;
 

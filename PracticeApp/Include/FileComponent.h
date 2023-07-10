@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "ProjectColours.h"
 
 class FileComponent : public Component
 {

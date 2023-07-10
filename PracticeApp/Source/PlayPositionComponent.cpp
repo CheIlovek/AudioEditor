@@ -1,7 +1,7 @@
 #include "PlayPositionComponent.h";
 
 
-PlayPositionComponent::PlayPositionComponent(TracksAudioSource* transportSourceToUse, int& zoom, const double& pixelsPerSecond) :
+PlayPositionComponent::PlayPositionComponent(TracksAudioSource* transportSourceToUse, const double& zoom, const double& pixelsPerSecond) :
     transportSource(transportSourceToUse),
     curZoom(zoom),
     pixelsPerSecond(pixelsPerSecond) {
@@ -15,7 +15,7 @@ void PlayPositionComponent::paint(juce::Graphics& g) {
         auto audioPosition = (float)transportSource->getCurrentPosition();
         auto drawPosition = (audioPosition / duration) * duration * curZoom * pixelsPerSecond;
 
-        g.setColour(juce::Colours::green);
+        g.setColour(ProjectColours::Tracks::playMarker);
         g.drawLine(drawPosition, 0.0f, drawPosition, (float)getHeight(), 2.0f);
     }
 }

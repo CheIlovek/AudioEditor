@@ -7,7 +7,7 @@ FileComponent::FileComponent(const File file)
 	addAndMakeVisible(fileName);
 	addAndMakeVisible(isAddedToggle);
 
-	fileName.setColour(Colours::white);
+	fileName.setColour(ProjectColours::textColour);
 	Font font(16, Font::italic);
 	fileName.setFont(font, true);
 	//fileName.setFontHeight(20);
@@ -23,7 +23,7 @@ FileComponent::~FileComponent()
 
 void FileComponent::paint(Graphics& g)
 {
-	g.fillAll(juce::Colours::grey);
+	g.fillAll(ProjectColours::Files::fileRowBackground);
 }
 
 void FileComponent::resized(void)

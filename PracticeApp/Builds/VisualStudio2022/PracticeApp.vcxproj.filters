@@ -6491,6 +6491,9 @@
     <ClInclude Include="..\..\Include\TrackAudioBuffer.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\ProjectColours.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\modules\juce_audio_devices\native\oboe\CMakeLists.txt">
