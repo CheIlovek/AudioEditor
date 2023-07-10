@@ -34,9 +34,9 @@ int FileListBoxComponent::getNumRows()
 void FileListBoxComponent::paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected)
 {
     if (rowIsSelected)
-        g.fillAll(Colours::grey);
+        g.fillAll(ProjectColours::Files::fileRowBackgroundSelected);
     else
-        g.fillAll(ProjectColours::Files::fileRowBackground);
+        g.fillAll(ProjectColours::Files::fileRowBackgroundUnselected);
 }
 
 Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate)

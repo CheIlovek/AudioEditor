@@ -2,6 +2,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "FileListBoxComponent.h"
+#include "ProjectColours.h"
 class FileListBoxComponent;
 
 class FileComponent : public Component

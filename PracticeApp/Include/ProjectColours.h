@@ -5,7 +5,8 @@ namespace ProjectColours {
 	const Colour textColour{ Colours::white };
 	const Colour generalBackground { 0xff131313 };
 	namespace Files {
-		const Colour fileRowBackground{ 0xff303030 };
+		const Colour fileRowBackgroundUnselected{ 0xff303030 };
+		const Colour fileRowBackgroundSelected{ Colours::grey };
 		const Colour listBoxBackground{ 0xff242223 };
 		const Colour listBoxOutline{ Colours::black };
 	}
