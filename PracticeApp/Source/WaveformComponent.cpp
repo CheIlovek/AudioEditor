@@ -1,5 +1,6 @@
 #include "WaveformComponent.h"
 
+int WaveformComponent::brushCounter = 0;
 
 WaveformComponent::WaveformComponent(int sourceSamplesPerThumbnailSample,
     juce::AudioFormatManager& formatManager,

@@ -12,6 +12,7 @@ namespace ProjectColours {
 	}
 
 	namespace Tracks {
+
 		const Colour listBoxBackground{ 0xff242223 };
 		const Colour listBoxOutline{ Colours::black };
 		const Colour playMarker{ Colours::green };
