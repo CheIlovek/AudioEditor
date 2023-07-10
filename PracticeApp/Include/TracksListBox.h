@@ -21,6 +21,7 @@ public:
     Component* refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate);
     void resized(void) override;
     void listBoxItemClicked(int row, const MouseEvent&) override;
+    void backgroundClicked(const MouseEvent&) override;
     void mouseDown(const MouseEvent& event) override;
     void mouseUp(const MouseEvent& event) override;
     void mouseDrag(const MouseEvent& event) override;
@@ -72,6 +73,7 @@ public:
     */
     void setTrackOffset(int trackId, int offsetInPixels);
 
+    int getNumOfSelectedRows();
 
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate);
     void releaseResources();

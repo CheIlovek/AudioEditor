@@ -4,7 +4,6 @@ FileListBoxComponent::FileListBoxComponent()
 {
     fileListBox.setModel(this);
     fileListBox.setOutlineThickness(1);
-    fileListBox.setRowSelectedOnMouseDown(false);
     fileListBox.setRowSelectedOnMouseDown(true);
 
     addAndMakeVisible(fileListBox);
@@ -34,7 +33,10 @@ int FileListBoxComponent::getNumRows()
 
 void FileListBoxComponent::paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected)
 {
-    g.fillAll(ProjectColours::Files::fileRowBackground);
+    if (rowIsSelected)
+        g.fillAll(Colours::grey);
+    else
+        g.fillAll(ProjectColours::Files::fileRowBackground);
 }
 
 Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRowSelected, Component* existingComponentToUpdate)
@@ -42,6 +44,18 @@ Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRo
     if (rowNumber < 0 || rowNumber >= fileList.size())
         return nullptr;
     return fileList[rowNumber];
+}
+
+void FileListBoxComponent::listBoxItemClicked(int row, const MouseEvent&)
+{
+    DBG("clicked");
+    fileListBox.selectRow(row);
+    repaint();
+}
+
+void FileListBoxComponent::backgroundClicked(const MouseEvent&)
+{
+    fileListBox.deselectAllRows();
 }
 
 void FileListBoxComponent::resized(void)
@@ -69,7 +83,9 @@ void FileListBoxComponent::openFile()
 
             if (file != juce::File{})                                                
             {
-                fileList.push_back(new FileComponent(file));
+                auto fileComponent = std::make_unique<FileComponent>(file, *this, fileList.size());
+
+                fileList.add(fileComponent.release());
                 
                 fileListBox.updateContent();
                 fileListBox.selectRow(fileList.size() - 1, true, true);
@@ -85,5 +101,10 @@ File FileListBoxComponent::getFile(int index)
 File FileListBoxComponent::getSelectedFile() {
     auto f = fileListBox.getSelectedRow();
     return getFile(f);
+}
+
+int FileListBoxComponent::getNumOfSelectedRows()
+{
+    return fileListBox.getSelectedRows().size();
 }
 
