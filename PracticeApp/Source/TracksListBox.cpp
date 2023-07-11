@@ -162,6 +162,23 @@ void TracksListBox::setTrackOffset(int trackId, int offsetInPixels) {
 	audioMixer.setOffset(trackId, offsetInSeconds);
 }
 
+void TracksListBox::applyReverbOnTrack(int trackId) {
+	if (trackId >= 0 && trackId < dataList.size()) {
+		auto* curTrack = dataList[trackId];
+		if (curTrack->haveSelection()) {
+			auto pos = curTrack->getSelectedAreaInPixels();
+			int startInSamps = (double)pos.first / defaultPixelsBySecond * audioMixer.getSampleRate();
+			int endInSamps = (double)pos.second / defaultPixelsBySecond * audioMixer.getSampleRate();
+			audioMixer.applyReverb(trackId, startInSamps, endInSamps);
+		}
+		else {
+			audioMixer.applyReverb(trackId);
+		}
+	}
+	
+
+}
+
 int TracksListBox::getNumOfSelectedRows()
 {
 	return listBox.getSelectedRows().size();

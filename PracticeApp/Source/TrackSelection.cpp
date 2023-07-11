@@ -4,10 +4,13 @@
 TrackSelection::TrackSelection() {}
 
 void TrackSelection::paint(juce::Graphics& g) {
-    if (startSelectionPos != -1) {
-        float width = startSelectionPos - endSelectionPos;
+    if (startSelectionPos != -1 && endSelectionPos != -1) {
+        float trueStart = std::min(startSelectionPos, endSelectionPos);
+        float width = std::abs(startSelectionPos - endSelectionPos);
+        if (width == 0)
+            return;
         g.setColour(ProjectColours::Tracks::selectionArea);
-        g.drawRect(startSelectionPos, 0.f, width, (float)getHeight());
+        g.fillRect(trueStart, 0.f, width, (float)getHeight());
 
         g.setColour(ProjectColours::Tracks::selectionBorders);
         g.drawLine(startSelectionPos, 0.0f, startSelectionPos, (float)getHeight(), lineWidth);
@@ -27,11 +30,18 @@ void TrackSelection::setEndOfSelection(float endPos) {
 
 void TrackSelection::clearSelection() {
     startSelectionPos = -1;
+    endSelectionPos = -1;
 
 }
 
+bool TrackSelection::isAreaSelected() {
+    return startSelectionPos != -1.f && endSelectionPos != -1.f;
+}
+
 std::pair<float, float> TrackSelection::getSelectedArea() {
-    return { startSelectionPos, endSelectionPos };
+    float trueStart = std::min(startSelectionPos, endSelectionPos);
+    float trueEnd = std::max(startSelectionPos, endSelectionPos);
+    return { trueStart, trueEnd };
 }
 
 void TrackSelection::setSelectedArea(float start, float end) {

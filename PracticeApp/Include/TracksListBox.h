@@ -28,6 +28,7 @@ public:
     void mouseWheelMove(const MouseEvent& event, const MouseWheelDetails& wheel) override;
     void paint(Graphics&) override;
 
+
     /*
     * @brief Добавляет пустую дорожку в конец списка
     */
@@ -72,6 +73,8 @@ public:
     * @param offsetInPixels Отступ в пикселях
     */
     void setTrackOffset(int trackId, int offsetInPixels);
+
+    void applyReverbOnTrack(int trackId);
 
     int getNumOfSelectedRows();
     int getSelectedRow();

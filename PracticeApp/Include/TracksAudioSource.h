@@ -44,6 +44,9 @@ public:
     void soloTrack(int trackId);
     void setOffset(int trackId, double offset);
 
+    void applyReverb(int trackId);
+    void applyReverb(int trackId, int startSamp, int endSamp);
+
 
 private:
     void recalculateBuffer();

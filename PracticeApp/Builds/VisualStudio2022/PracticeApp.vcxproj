@@ -2689,7 +2689,7 @@
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
     <ClCompile Include="..\..\Source\TracksAudioSource.cpp" />
     <ClCompile Include="..\..\Source\TrackSelection.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Source\TracksListBox.cpp" />
     <ClCompile Include="..\..\Source\WaveformComponent.cpp" />
@@ -3758,7 +3758,7 @@
     <ClInclude Include="..\..\Include\TrackComponent.h" />
     <ClInclude Include="..\..\Include\TracksAudioSource.h" />
     <ClInclude Include="..\..\Include\TrackSelection.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Include\TracksListBox.h" />
     <ClInclude Include="..\..\Include\WaveformComponent.h" />

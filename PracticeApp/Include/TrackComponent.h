@@ -5,6 +5,7 @@
 #include "DummyComponent.h"
 #include "WaveformComponent.h"
 #include "ProjectColours.h"
+#include "TrackSelection.h"
 
 class TracksListBox;
 
@@ -52,10 +53,21 @@ public:
     * @brief Возвращает на какой строке списка находится дорожка
     */
     int getRow();
+
+    bool haveSelection();
+    std::pair<float, float> getSelectedAreaInPixels();
     
 
 private:
+
+    enum State {
+        selecting,
+        dragging,
+        none
+    };
     
+    State curState = State::none;
+
     juce::DrawableText trackName;
     juce::TextButton muteButton;
     juce::TextButton superiorButton;
@@ -64,6 +76,7 @@ private:
 
     juce::AudioThumbnailCache waveformCache;
     WaveformComponent waveform;
+    TrackSelection selection;
     TracksListBox& owner;
     int row;
     int waveformSize = 0;
@@ -71,8 +84,6 @@ private:
     const double& waveformZoom;
     int oldWaveformOffset = 0;
     static int TrackNumber;
-
-    bool isDraggingWaveform = false;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TrackComponent);
 };

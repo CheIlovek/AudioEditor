@@ -13,6 +13,7 @@ public:
     void setStartOfSelection(float startPos);
     void setEndOfSelection(float endPos);
     void clearSelection();
+    bool isAreaSelected();
 
 
     std::pair<float, float> getSelectedArea();

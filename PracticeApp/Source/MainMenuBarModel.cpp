@@ -85,9 +85,8 @@ void MainMenuBarModel::menuItemSelected(int menuID, int index)
     case Reverberation:
         if (tracks->getNumOfSelectedRows() == 1)
         {
-            auto sampleRate = tracks->getAudioSource().getSampleRate();
-            auto buffer = tracks->getAudioSource().getBuffer(tracks->getSelectedRow());
-            tracks->getAudioSource().getEffectsProcessor().makeReverb(*buffer, sampleRate);
+            int index = tracks->getSelectedRow();
+            tracks->applyReverbOnTrack(index);
         }
         break;
     }

@@ -17,7 +17,7 @@ namespace ProjectColours {
 		const Colour listBoxOutline{ Colours::black };
 		const Colour playMarker{ Colours::green };
 
-		const Colour selectionArea{ 0xff363636 };
+		const Colour selectionArea{ Colours::blue.withAlpha(.2f)};
 		const Colour selectionBorders{ Colours::blue };
 		const Colour buttonColour{ 0xff363636 };
 		const Colour sliderColour{ 0xff23c1fe };

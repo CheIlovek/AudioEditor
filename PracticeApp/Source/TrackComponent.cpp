@@ -67,6 +67,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	addAndMakeVisible(balanceSlider);
 	addAndMakeVisible(waveform);
 	addAndMakeVisible(volumeSlider);
+	addAndMakeVisible(selection);
 	resized();
 
 }
@@ -101,8 +102,10 @@ void TrackComponent::resized(void) {
 	auto r = getLocalBounds();
 	leftSideBox.performLayout(r.removeFromLeft(100));
 	volumeSlider.setBounds(r.removeFromLeft(10));
+	selection.setBounds(r);
 	r.setBounds(r.getX() + (waveformOffset * waveformZoom), r.getY(), waveformSize * waveformZoom, r.getHeight());
 	waveform.setBounds(r);
+	
 }
 
 void TrackComponent::setSource(TrackAudioBuffer* buffer, double sampleRate, int wavefromSize) {
@@ -132,30 +135,71 @@ int TrackComponent::getRow() {
 }
 
 void TrackComponent::mouseDown(const juce::MouseEvent& event) {
+	DBG("BUTTON PRESSED");
 	owner.listBoxItemClicked(row, event);
-	auto relEvent = event.getEventRelativeTo(&waveform);
-	auto startPoint = event.getMouseDownPosition();
-	if (waveform.contains(relEvent.getMouseDownPosition())) {
-		DBG("WAVEFORM DOWNED");
-		isDraggingWaveform = true;
-		oldWaveformOffset = waveformOffset;
+	if (curState == State::selecting)
+		selection.clearSelection();
+	if (event.mods.isLeftButtonDown()) {
+		curState = State::dragging;
+		auto relEvent = event.getEventRelativeTo(&waveform);
+		auto startPoint = event.getMouseDownPosition();
+		if (waveform.contains(relEvent.getMouseDownPosition())) {
+			DBG("WAVEFORM DOWNED");
+			oldWaveformOffset = waveformOffset;
+		}
 	}
+	else if (event.mods.isRightButtonDown()) {
+		curState = State::selecting;
+		selection.setStartOfSelection(event.position.x);
+	}
+	
 
 }
 
 void TrackComponent::mouseDrag(const MouseEvent& event) {
-	if (isDraggingWaveform) {
-		int newOffset = oldWaveformOffset + event.getDistanceFromDragStartX() / waveformZoom;
+	int newOffset;
+	switch (curState) {
+	case TrackComponent::selecting:
+		selection.setEndOfSelection(event.position.x);
+		break;
+	case TrackComponent::dragging:
+		newOffset = oldWaveformOffset + event.getDistanceFromDragStartX() / waveformZoom;
 		waveformOffset = std::max(0, newOffset);
 		resized();
+		break;
 	}
-	DBG("DRAG DIST: " << event.getMouseDownX() << " " << event.getMouseDownY());
+	
 }
 
 void TrackComponent::mouseUp(const MouseEvent& event) {
-	DBG("WAVEFORM RELEASED");
-	owner.setTrackOffset(row, waveformOffset);
-	isDraggingWaveform = false;
+	switch (curState) {
+	case TrackComponent::selecting:
+		selection.setEndOfSelection(event.position.x);
+		break;
+	case TrackComponent::dragging:
+		if (oldWaveformOffset != waveformOffset)
+			owner.setTrackOffset(row, waveformOffset);
+		break;
+	}
+	
+}
+
+bool TrackComponent::haveSelection() {
+	return selection.isAreaSelected();
+}
+
+std::pair<float, float> TrackComponent::getSelectedAreaInPixels() {
+	auto pos = selection.getSelectedArea();
+	pos.first /= waveformZoom;
+	pos.first -= waveformOffset;
+	
+	pos.second /= waveformZoom;
+	pos.second -= waveformOffset;
+
+	pos.first = std::max(pos.first, 0.f);
+	pos.second = std::min(pos.second, (float)waveformSize);
+
+	return pos;
 }
 
 
