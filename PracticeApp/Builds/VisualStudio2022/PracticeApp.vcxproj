@@ -2677,6 +2677,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_product_unlocking.cpp" />
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_video.cpp" />
     <ClCompile Include="..\..\Source\DummyComponent.cpp" />
+    <ClCompile Include="..\..\Source\EffectsProcessor.cpp" />
     <ClCompile Include="..\..\Source\FileComponent.cpp" />
     <ClCompile Include="..\..\Source\FileListBoxComponent.cpp" />
     <ClCompile Include="..\..\Source\MainComponent.cpp" />
@@ -3742,8 +3743,10 @@
     <ClInclude Include="..\..\..\..\modules\juce_video\juce_video.h" />
     <ClInclude Include="..\..\Include\Application.h" />
     <ClInclude Include="..\..\Include\DummyComponent.h" />
+    <ClInclude Include="..\..\Include\EffectsProcessor.h" />
     <ClInclude Include="..\..\Include\FileComponent.h" />
     <ClInclude Include="..\..\Include\FileListBoxComponent.h" />
+    <ClInclude Include="..\..\Include\Headers.h" />
     <ClInclude Include="..\..\Include\MainComponent.h" />
     <ClInclude Include="..\..\Include\MainFrame.h" />
     <ClInclude Include="..\..\Include\MainMenuBarModel.h" />

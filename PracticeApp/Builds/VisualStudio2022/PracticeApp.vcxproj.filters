@@ -3303,6 +3303,9 @@
     <ClCompile Include="..\..\Source\TrackSelection.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\EffectsProcessor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\modules\juce_analytics\analytics\juce_Analytics.h">
@@ -6495,6 +6498,12 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\ProjectColours.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\EffectsProcessor.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Headers.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\TrackSelection.h">

@@ -42,6 +42,7 @@ public:
         FromCursorToEnd,
         SetRange,
 
+        Reverberation,
         Deceleration,
         Acceleration,
         RaisingTone,

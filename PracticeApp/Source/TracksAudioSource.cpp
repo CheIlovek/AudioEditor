@@ -1,7 +1,8 @@
-#include "TracksAudioSource.h";
+#include "TracksAudioSource.h"
+//#include "EffectsProcessor.h"
 
 TracksAudioSource::TracksAudioSource()
-    : currentSampleRate(0.0), bufferSizeExpected(0) {
+    : currentSampleRate(0.0), bufferSizeExpected(0), effectsProcessor() {
     mainSource.addChangeListener(this);
 }
 
@@ -73,6 +74,11 @@ void TracksAudioSource::removeInputSource(int index) {
 
 TrackAudioBuffer* TracksAudioSource::getBuffer(int index) {
     return inputs[index];
+}
+
+EffectsProcessor& TracksAudioSource::getEffectsProcessor()
+{
+    return effectsProcessor;
 }
 
 void TracksAudioSource::removeAllInputs() {
