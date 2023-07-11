@@ -2687,6 +2687,7 @@
     <ClCompile Include="..\..\Source\TrackAudioBuffer.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
     <ClCompile Include="..\..\Source\TracksAudioSource.cpp" />
+    <ClCompile Include="..\..\Source\TrackSelection.cpp" />
     <ClCompile Include="..\..\Source\TracksListBox.cpp" />
     <ClCompile Include="..\..\Source\WaveformComponent.cpp" />
   </ItemGroup>
@@ -3752,6 +3753,7 @@
     <ClInclude Include="..\..\Include\TrackAudioBuffer.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
     <ClInclude Include="..\..\Include\TracksAudioSource.h" />
+    <ClInclude Include="..\..\Include\TrackSelection.h" />
     <ClInclude Include="..\..\Include\TracksListBox.h" />
     <ClInclude Include="..\..\Include\WaveformComponent.h" />
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h" />
