@@ -6503,9 +6503,6 @@
     <ClInclude Include="..\..\Include\EffectsProcessor.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Include\Headers.h">
-      <Filter>Headers Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Include\TrackSelection.h">
       <Filter>Headers Files</Filter>
     </ClInclude>

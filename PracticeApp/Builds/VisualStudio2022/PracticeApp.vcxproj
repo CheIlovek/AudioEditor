@@ -2688,7 +2688,9 @@
     <ClCompile Include="..\..\Source\TrackAudioBuffer.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
     <ClCompile Include="..\..\Source\TracksAudioSource.cpp" />
-    <ClCompile Include="..\..\Source\TrackSelection.cpp" />
+    <ClCompile Include="..\..\Source\TrackSelection.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Source\TracksListBox.cpp" />
     <ClCompile Include="..\..\Source\WaveformComponent.cpp" />
   </ItemGroup>
@@ -3746,7 +3748,6 @@
     <ClInclude Include="..\..\Include\EffectsProcessor.h" />
     <ClInclude Include="..\..\Include\FileComponent.h" />
     <ClInclude Include="..\..\Include\FileListBoxComponent.h" />
-    <ClInclude Include="..\..\Include\Headers.h" />
     <ClInclude Include="..\..\Include\MainComponent.h" />
     <ClInclude Include="..\..\Include\MainFrame.h" />
     <ClInclude Include="..\..\Include\MainMenuBarModel.h" />
@@ -3756,7 +3757,9 @@
     <ClInclude Include="..\..\Include\TrackAudioBuffer.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
     <ClInclude Include="..\..\Include\TracksAudioSource.h" />
-    <ClInclude Include="..\..\Include\TrackSelection.h" />
+    <ClInclude Include="..\..\Include\TrackSelection.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\Include\TracksListBox.h" />
     <ClInclude Include="..\..\Include\WaveformComponent.h" />
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h" />

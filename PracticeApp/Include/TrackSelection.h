@@ -21,8 +21,6 @@ public:
 private:
     float startSelectionPos = -1;
     float endSelectionPos = 0;
-    const double& curZoom;
-    const double& pixelsPerSecond;
     const float lineWidth = 2.f;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TrackSelection);

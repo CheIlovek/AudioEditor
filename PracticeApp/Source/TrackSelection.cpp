@@ -1,11 +1,7 @@
 #include "TrackSelection.h";
 
 
-TrackSelection::TrackSelection(const double& zoom, const double& pixelsPerSecond) :
-    curZoom(zoom),
-    pixelsPerSecond(pixelsPerSecond) {
-
-}
+TrackSelection::TrackSelection() {}
 
 void TrackSelection::paint(juce::Graphics& g) {
     if (startSelectionPos != -1) {
