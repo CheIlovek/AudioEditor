@@ -140,11 +140,11 @@ void TrackComponent::mouseDown(const juce::MouseEvent& event) {
 	if (curState == State::selecting)
 		selection.clearSelection();
 	if (event.mods.isLeftButtonDown()) {
-		curState = State::dragging;
 		auto relEvent = event.getEventRelativeTo(&waveform);
 		auto startPoint = event.getMouseDownPosition();
 		if (waveform.contains(relEvent.getMouseDownPosition())) {
 			DBG("WAVEFORM DOWNED");
+			curState = State::dragging;
 			oldWaveformOffset = waveformOffset;
 		}
 	}
@@ -179,6 +179,7 @@ void TrackComponent::mouseUp(const MouseEvent& event) {
 	case TrackComponent::dragging:
 		if (oldWaveformOffset != waveformOffset)
 			owner.setTrackOffset(row, waveformOffset);
+		curState = State::none;
 		break;
 	}
 	
