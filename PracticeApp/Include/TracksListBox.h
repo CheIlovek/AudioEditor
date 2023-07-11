@@ -74,6 +74,7 @@ public:
     void setTrackOffset(int trackId, int offsetInPixels);
 
     int getNumOfSelectedRows();
+    int getSelectedRow();
 
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate);
     void releaseResources();

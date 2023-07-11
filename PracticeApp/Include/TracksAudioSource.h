@@ -2,6 +2,10 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TrackAudioBuffer.h"
+//#include "Headers.h"
+#include "EffectsProcessor.h"
+
+//class EffectsProcessor;
 
 /**
 @brief Класс реализует работу со звуком в проекте
@@ -20,6 +24,7 @@ public:
     void removeInputSource(TrackAudioBuffer* input);
     void removeInputSource(int index);
     TrackAudioBuffer* getBuffer(int index);
+    EffectsProcessor& getEffectsProcessor();
     void removeAllInputs();
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
     void releaseResources() override;
@@ -49,6 +54,7 @@ private:
     AudioTransportSource mainSource;
     CriticalSection lock;
     AudioBuffer<float> tempBuffer;
+    EffectsProcessor effectsProcessor;
     double currentSampleRate;
     int bufferSizeExpected;
     int sourcesPlaying = 0;

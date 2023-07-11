@@ -54,6 +54,7 @@ PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
         menu.addSubMenu("Area", subMenu);
     }
     else if (name == "Effects") {
+        menu.addItem(Reverberation, "Reverberation");
         menu.addItem(Deceleration, "Deceleration");
         menu.addItem(Acceleration, "Acceleration");
         menu.addItem(RaisingTone, "Raising the tone");
@@ -70,7 +71,6 @@ PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
 
 void MainMenuBarModel::menuItemSelected(int menuID, int index)
 {
-
     switch (menuID) {
     case Import:
         flbm->openFile();
@@ -81,6 +81,14 @@ void MainMenuBarModel::menuItemSelected(int menuID, int index)
     case AddAudio:
         if(tracks->getNumOfSelectedRows() == 1 && flbm->getNumOfSelectedRows() == 1)
             tracks->setFileOnTrack(flbm->getSelectedFile());
+        break;
+    case Reverberation:
+        if (tracks->getNumOfSelectedRows() == 1)
+        {
+            auto sampleRate = tracks->getAudioSource().getSampleRate();
+            auto buffer = tracks->getAudioSource().getBuffer(tracks->getSelectedRow());
+            tracks->getAudioSource().getEffectsProcessor().makeReverb(*buffer, sampleRate);
+        }
         break;
     }
 }

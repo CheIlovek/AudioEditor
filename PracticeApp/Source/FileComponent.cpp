@@ -27,7 +27,6 @@ FileComponent::~FileComponent()
 
 void FileComponent::paint(Graphics& g)
 {
-	g.fillAll(ProjectColours::Files::fileRowBackgroundUnselected);
 }
 
 void FileComponent::resized(void)

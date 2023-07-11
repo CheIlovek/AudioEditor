@@ -167,6 +167,11 @@ int TracksListBox::getNumOfSelectedRows()
 	return listBox.getSelectedRows().size();
 }
 
+int TracksListBox::getSelectedRow()
+{
+	return listBox.getSelectedRow();
+}
+
 void TracksListBox::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
 	audioMixer.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
