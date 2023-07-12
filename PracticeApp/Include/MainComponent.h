@@ -7,6 +7,7 @@
 #include "FileListBoxComponent.h"
 #include "PlaybackComponent.h"
 #include "FileComponent.h"
+#include "GeneralVolumeComponent.h"
 //
 class MainComponent : public Component
 {
@@ -24,7 +25,7 @@ private:
 
     TracksListBox audioTracksSection;
 
-    DummyComponent generalVolumeSection;
+    GeneralVolumeComponent generalVolumeSection;
 
     PlaybackComponent playbackSection;
 

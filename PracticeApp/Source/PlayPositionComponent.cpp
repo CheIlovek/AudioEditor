@@ -10,7 +10,7 @@ PlayPositionComponent::PlayPositionComponent(TracksAudioSource* transportSourceT
 
 void PlayPositionComponent::paint(juce::Graphics& g) {
     double duration = transportSource->getLengthInSeconds();
-
+    
     if (duration > 0.0) {
         auto audioPosition = (float)transportSource->getCurrentPosition();
         auto drawPosition = (audioPosition / duration) * duration * curZoom * pixelsPerSecond;

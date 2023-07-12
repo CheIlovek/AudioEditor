@@ -2,6 +2,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TracksAudioSource.h"
+#include "PlayButtonLookAndFeel.h"
+#include "StopButtonLookAndFeel.h"
 
 class PlaybackComponent : public AudioAppComponent, public ChangeListener
 {
@@ -30,11 +32,15 @@ private:
     void playButtonClicked();
     void stopButtonClicked();
 
+    PlayButtonLookAndFeel lafPlay;
+    StopButtonLookAndFeel lafStop;
     TextButton playButton;
     TextButton stopButton;
 
     TracksAudioSource* audioSource;
     State state;
+
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PlaybackComponent)
 };

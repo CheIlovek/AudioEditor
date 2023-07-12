@@ -176,6 +176,7 @@ void TracksAudioSource::setOffset(int trackId, double offset) {
         DBG("OFFSET IN SAMP = " << offsetInSamples);
         inputs.getUnchecked(trackId)->setOffset(offsetInSamples);
         recalculateBuffer();
+        auto a = inputs.getUnchecked(0);
     }
     
 }
@@ -192,6 +193,11 @@ void TracksAudioSource::applyReverb(int trackId, int startSamp, int endSamp) {
         effectsProcessor.makeReverb(*inputs.getUnchecked(trackId), sampleRate, startSamp, endSamp - startSamp);
         recalculateBuffer();
     }
+}
+
+float TracksAudioSource::getGain() {
+    auto a = inputs.getUnchecked(0);
+    return mainSource.getGain();
 }
 
 void TracksAudioSource::recalculateBuffer() {

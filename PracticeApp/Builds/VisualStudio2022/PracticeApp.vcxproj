@@ -2680,11 +2680,14 @@
     <ClCompile Include="..\..\Source\EffectsProcessor.cpp" />
     <ClCompile Include="..\..\Source\FileComponent.cpp" />
     <ClCompile Include="..\..\Source\FileListBoxComponent.cpp" />
+    <ClCompile Include="..\..\Source\GeneralVolumeComponent.cpp" />
     <ClCompile Include="..\..\Source\MainComponent.cpp" />
     <ClCompile Include="..\..\Source\MainFrame.cpp" />
     <ClCompile Include="..\..\Source\MainMenuBarModel.cpp" />
     <ClCompile Include="..\..\Source\PlaybackComponent.cpp" />
+    <ClCompile Include="..\..\Source\PlayButtonLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\PlayPositionComponent.cpp" />
+    <ClCompile Include="..\..\Source\StopButtonLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\TrackAudioBuffer.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
     <ClCompile Include="..\..\Source\TracksAudioSource.cpp" />
@@ -2692,6 +2695,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Source\TracksListBox.cpp" />
+    <ClCompile Include="..\..\Source\VolumeSlider.cpp" />
+    <ClCompile Include="..\..\Source\VolumeSliderLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\WaveformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -3748,12 +3753,15 @@
     <ClInclude Include="..\..\Include\EffectsProcessor.h" />
     <ClInclude Include="..\..\Include\FileComponent.h" />
     <ClInclude Include="..\..\Include\FileListBoxComponent.h" />
+    <ClInclude Include="..\..\Include\GeneralVolumeComponent.h" />
     <ClInclude Include="..\..\Include\MainComponent.h" />
     <ClInclude Include="..\..\Include\MainFrame.h" />
     <ClInclude Include="..\..\Include\MainMenuBarModel.h" />
     <ClInclude Include="..\..\Include\PlaybackComponent.h" />
+    <ClInclude Include="..\..\Include\PlayButtonLookAndFeel.h" />
     <ClInclude Include="..\..\Include\PlayPositionComponent.h" />
     <ClInclude Include="..\..\Include\ProjectColours.h" />
+    <ClInclude Include="..\..\Include\StopButtonLookAndFeel.h" />
     <ClInclude Include="..\..\Include\TrackAudioBuffer.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
     <ClInclude Include="..\..\Include\TracksAudioSource.h" />
@@ -3761,6 +3769,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Include\TracksListBox.h" />
+    <ClInclude Include="..\..\Include\VolumeSlider.h" />
+    <ClInclude Include="..\..\Include\VolumeSliderLookAndFeel.h" />
     <ClInclude Include="..\..\Include\WaveformComponent.h" />
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h" />
   </ItemGroup>

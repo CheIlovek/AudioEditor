@@ -5,8 +5,10 @@ PlaybackComponent::PlaybackComponent(TracksAudioSource* audioSource) : state(Sto
     addAndMakeVisible(&playButton);
     addAndMakeVisible(&stopButton);
     
-    playButton.setButtonText("Play");
-    stopButton.setButtonText("Stop");
+
+    playButton.setLookAndFeel(&lafPlay);
+    stopButton.setLookAndFeel(&lafStop);
+    playButton.addShortcut(KeyPress(KeyPress::spaceKey));
 
     playButton.onClick = [this] { playButtonClicked(); };
     stopButton.onClick = [this] { stopButtonClicked(); };
@@ -44,8 +46,8 @@ void PlaybackComponent::releaseResources()
 
 void PlaybackComponent::resized()
 {
-    playButton.setBounds(0, 0, 100, getHeight());
-    stopButton.setBounds(100, 0, 100, getHeight());
+    playButton.setBounds(0, 0, getHeight(), getHeight());
+    stopButton.setBounds(100, 0, getHeight(), getHeight());
 }
 
 void PlaybackComponent::changeListenerCallback(juce::ChangeBroadcaster* source)
@@ -73,8 +75,8 @@ void PlaybackComponent::changeState(State newState)
         switch (state)
         {
         case Stopped:
-            playButton.setButtonText("Play");
-            stopButton.setButtonText("Stop");
+            //playButton.setButtonText("Play");
+            //stopButton.setButtonText("Stop");
             stopButton.setEnabled(false);
             audioSource->setPosition(0.0);
             break;
@@ -86,8 +88,8 @@ void PlaybackComponent::changeState(State newState)
 
         case Playing:
             DBG("Plaaying");
-            playButton.setButtonText("Pause");
-            stopButton.setButtonText("Stop");
+            //playButton.setButtonText("Pause");
+            //stopButton.setButtonText("Stop");
             stopButton.setEnabled(true);
             break;
 
@@ -96,8 +98,8 @@ void PlaybackComponent::changeState(State newState)
             break;
 
         case Paused:
-            playButton.setButtonText("Resume");
-            stopButton.setButtonText("Return to Zero");
+            //playButton.setButtonText("Resume");
+            //stopButton.setButtonText("Return to Zero");
             break;
 
         case Stopping:

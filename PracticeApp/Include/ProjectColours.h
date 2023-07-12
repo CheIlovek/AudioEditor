@@ -31,7 +31,19 @@ namespace ProjectColours {
 	}
 
 	namespace Playback {
-		// Ничего :(
+		namespace PlayButton {
+			const Colour startColour{ 0xff479aff };
+			const Colour endColour{ 0xff3877aa };
+		}
+		
+	}
+
+	namespace VolumeSlider {
+		const Colour background{ 0xff363435 };
+		
+		const Colour startColour{ Colours::green };
+		const Colour middleColour{ Colours::yellow };
+		const Colour endColour{ Colours::red };
 	}
 
 }

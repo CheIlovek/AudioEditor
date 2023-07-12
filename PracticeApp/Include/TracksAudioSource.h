@@ -47,6 +47,7 @@ public:
     void applyReverb(int trackId);
     void applyReverb(int trackId, int startSamp, int endSamp);
 
+    float getGain();
 
 private:
     void recalculateBuffer();
