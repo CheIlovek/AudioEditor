@@ -2683,10 +2683,11 @@
     <ClCompile Include="..\..\Source\GeneralVolumeComponent.cpp" />
     <ClCompile Include="..\..\Source\MainComponent.cpp" />
     <ClCompile Include="..\..\Source\MainFrame.cpp" />
-    <ClCompile Include="..\..\Source\MainMenuBarModel.cpp" />
+    <ClCompile Include="..\..\Source\MainMenuBarComponent.cpp" />
     <ClCompile Include="..\..\Source\PlaybackComponent.cpp" />
     <ClCompile Include="..\..\Source\PlayButtonLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\PlayPositionComponent.cpp" />
+    <ClCompile Include="..\..\Source\ReverbWindowComponent.cpp" />
     <ClCompile Include="..\..\Source\StopButtonLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\TrackAudioBuffer.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
@@ -3756,11 +3757,12 @@
     <ClInclude Include="..\..\Include\GeneralVolumeComponent.h" />
     <ClInclude Include="..\..\Include\MainComponent.h" />
     <ClInclude Include="..\..\Include\MainFrame.h" />
-    <ClInclude Include="..\..\Include\MainMenuBarModel.h" />
+    <ClInclude Include="..\..\Include\MainMenuBarComponent.h" />
     <ClInclude Include="..\..\Include\PlaybackComponent.h" />
     <ClInclude Include="..\..\Include\PlayButtonLookAndFeel.h" />
     <ClInclude Include="..\..\Include\PlayPositionComponent.h" />
     <ClInclude Include="..\..\Include\ProjectColours.h" />
+    <ClInclude Include="..\..\Include\ReverbWindowComponent.h" />
     <ClInclude Include="..\..\Include\StopButtonLookAndFeel.h" />
     <ClInclude Include="..\..\Include\TrackAudioBuffer.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />

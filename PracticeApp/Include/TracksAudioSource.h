@@ -2,10 +2,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "TrackAudioBuffer.h"
-//#include "Headers.h"
 #include "EffectsProcessor.h"
 
-//class EffectsProcessor;
 
 /**
 @brief Класс реализует работу со звуком в проекте
@@ -43,6 +41,7 @@ public:
     void muteTrack(int trackId);
     void soloTrack(int trackId);
     void setOffset(int trackId, double offset);
+    void applyReverb(int trackId);
 
     void applyReverb(int trackId);
     void applyReverb(int trackId, int startSamp, int endSamp);

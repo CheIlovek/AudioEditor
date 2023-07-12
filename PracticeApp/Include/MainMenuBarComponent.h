@@ -4,17 +4,19 @@
 #include "FileListBoxComponent.h"
 #include "TracksListBox.h"
 
-class MainMenuBarModel : public MenuBarModel
+class MainMenuBarComponent : public MenuBarModel, public Component
 {
 public:
-    MainMenuBarModel(FileListBoxComponent*, TracksListBox*);
-    MainMenuBarModel();
-	~MainMenuBarModel();
+    MainMenuBarComponent(FileListBoxComponent*, TracksListBox*);
+	~MainMenuBarComponent();
 
 
-	StringArray getMenuBarNames();
-	PopupMenu getMenuForIndex(int index, const String& name);
-	void menuItemSelected(int menuID, int index);
+	StringArray getMenuBarNames() override;
+	PopupMenu getMenuForIndex(int index, const String& name) override;
+	void menuItemSelected(int menuID, int index) override;
+
+    void resized(void) override;
+    void paint(Graphics& g) override;
 
     enum MenuIDs {
         CreateProject = 1,
@@ -57,6 +59,8 @@ public:
 private:
     FileListBoxComponent* flbm;
     TracksListBox* tracks;
+
+    MenuBarComponent menuBar;
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainMenuBarModel)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainMenuBarComponent)
 };

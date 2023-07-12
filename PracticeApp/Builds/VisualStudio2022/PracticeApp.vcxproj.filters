@@ -3276,7 +3276,7 @@
     <ClCompile Include="..\..\Source\TracksListBox.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\MainMenuBarModel.cpp">
+    <ClCompile Include="..\..\Source\MainMenuBarComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FileListBoxComponent.cpp">
@@ -3319,6 +3319,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\VolumeSlider.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ReverbWindowComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -6488,7 +6491,7 @@
     <ClInclude Include="..\..\Include\TracksListBox.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Include\MainMenuBarModel.h">
+    <ClInclude Include="..\..\Include\MainMenuBarComponent.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\FileListBoxComponent.h">
@@ -6534,6 +6537,9 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\VolumeSlider.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\ReverbWindowComponent.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>
