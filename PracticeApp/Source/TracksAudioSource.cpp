@@ -180,6 +180,15 @@ void TracksAudioSource::setOffset(int trackId, double offset) {
     
 }
 
+void TracksAudioSource::applyReverb(int trackId)
+{
+    if (trackId >= 0 && trackId < inputs.size())
+    {
+        effectsProcessor.makeReverb(*inputs.getUnchecked(trackId), sampleRate);
+        recalculateBuffer();
+    }
+}
+
 void TracksAudioSource::recalculateBuffer() {
     DBG("SOLO IS " << soloId);
     if (soloId >= 0) {

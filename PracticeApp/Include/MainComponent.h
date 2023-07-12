@@ -3,7 +3,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "DummyComponent.h"
 #include "TracksListBox.h"
-#include "MainMenuBarModel.h"
+#include "MainMenuBarComponent.h"
 #include "FileListBoxComponent.h"
 #include "PlaybackComponent.h"
 #include "FileComponent.h"
@@ -28,8 +28,7 @@ private:
 
     PlaybackComponent playbackSection;
 
-    MainMenuBarModel mainMenuBarModel;
-    MenuBarComponent mainMenuBarContainer; 
+    MainMenuBarComponent mainMenuBarSection;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

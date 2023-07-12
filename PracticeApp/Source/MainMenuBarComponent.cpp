@@ -1,25 +1,23 @@
-#include "MainMenuBarModel.h"
+#include "MainMenuBarComponent.h"
 
-MainMenuBarModel::MainMenuBarModel(FileListBoxComponent* flbm, TracksListBox* tracks) :
-    flbm(flbm), tracks(tracks) 
+MainMenuBarComponent::MainMenuBarComponent(FileListBoxComponent* flbm, TracksListBox* tracks) :
+    flbm(flbm), tracks(tracks)
+{
+    menuBar.setModel(this);
+    addAndMakeVisible(menuBar);
+}
+
+MainMenuBarComponent::~MainMenuBarComponent()
 {
 }
 
-MainMenuBarModel::MainMenuBarModel()
-{
-}
-
-MainMenuBarModel::~MainMenuBarModel()
-{
-}
-
-StringArray MainMenuBarModel::getMenuBarNames()
+StringArray MainMenuBarComponent::getMenuBarNames()
 {
     const char* menuNames[] = { "File", "Edit", "Tracks", "Selection", "Effects", "About", 0 };
     return StringArray(menuNames);
 }
 
-PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
+PopupMenu MainMenuBarComponent::getMenuForIndex(int index, const String& name)
 {
     PopupMenu menu;
     if (name == "File")
@@ -69,7 +67,7 @@ PopupMenu MainMenuBarModel::getMenuForIndex(int index, const String& name)
     return menu;
 }
 
-void MainMenuBarModel::menuItemSelected(int menuID, int index)
+void MainMenuBarComponent::menuItemSelected(int menuID, int index)
 {
     switch (menuID) {
     case Import:
@@ -85,10 +83,18 @@ void MainMenuBarModel::menuItemSelected(int menuID, int index)
     case Reverberation:
         if (tracks->getNumOfSelectedRows() == 1)
         {
-            auto sampleRate = tracks->getAudioSource().getSampleRate();
-            auto buffer = tracks->getAudioSource().getBuffer(tracks->getSelectedRow());
-            tracks->getAudioSource().getEffectsProcessor().makeReverb(*buffer, sampleRate);
+            auto trackId = tracks->getSelectedRow();
+            tracks->getAudioSource().applyReverb(trackId);
         }
         break;
     }
+}
+
+void MainMenuBarComponent::resized(void)
+{
+    menuBar.setBounds(0, 0, getWidth(), getHeight());
+}
+
+void MainMenuBarComponent::paint(Graphics& g)
+{
 }

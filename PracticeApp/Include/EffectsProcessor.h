@@ -2,9 +2,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-//#include "Headers.h"
 #include "TrackAudioBuffer.h"
-//class TracksAudioSource;
+#include "ReverbWindowComponent.h"
 
 class EffectsProcessor
 {
@@ -25,4 +24,6 @@ private:
 	Reverb reverb;
 	OwnedArray<IIRFilter> iirFilters;
 	//TracksAudioSource& owner;
+
+	ReverbWindowComponent reverbWindowComponent;
 };

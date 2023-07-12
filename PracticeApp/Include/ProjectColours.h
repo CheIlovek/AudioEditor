@@ -27,6 +27,14 @@ namespace ProjectColours {
 		}
 	}
 
+	namespace DialogWindow {
+		const Colour dialogWindowBackground{ 0xff303030 };
+		const Colour buttonColour{ Colours::grey };
+		const Colour buttonOnColour{ Colours::lightgrey };
+		const Colour buttonTextColour{ 0xff131313 };
+		const Colour sliderColour{ 0xff23c1fe };
+	}
+
 	namespace Playback {
 		// Ничего :(
 	}

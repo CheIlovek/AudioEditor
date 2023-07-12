@@ -15,6 +15,13 @@ void EffectsProcessor::makeReverb(TrackAudioBuffer& buffer, double sampleRate)
 
     reverb.setSampleRate(sampleRate);
 
+    reverbWindowComponent.setSize(390, 280);
+
+    DialogWindow::showDialog("Reverberation", &reverbWindowComponent, NULL, 
+                                ProjectColours::DialogWindow::dialogWindowBackground, true);
+
+    reverb.setParameters(reverbWindowComponent.getParameters());
+
     float* const firstChannel = buffer.getWritePointer(0, 0);
 
     if (buffer.getNumChannels() > 1)

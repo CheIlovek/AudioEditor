@@ -1,18 +1,17 @@
 #include "../Include/MainComponent.h"
 //
 MainComponent::MainComponent(void) :
-    mainMenuBarModel(&fileListBoxSection, &audioTracksSection),
+    mainMenuBarSection(&fileListBoxSection, &audioTracksSection),
     playbackSection(&audioTracksSection.getAudioSource()),
     generalVolumeSection(Colours::grey),
     effectHistorySection(Colours::grey)
 {
-    mainMenuBarContainer.setModel(&mainMenuBarModel);
     addAndMakeVisible(effectHistorySection);
     addAndMakeVisible(fileListBoxSection);
     addAndMakeVisible(audioTracksSection);
     addAndMakeVisible(generalVolumeSection);
     addAndMakeVisible(playbackSection);
-    addAndMakeVisible(mainMenuBarContainer);
+    addAndMakeVisible(mainMenuBarSection);
     setOpaque(true);
     setSize(800, 800);
 }
@@ -35,7 +34,7 @@ void MainComponent::resized(void)
     const double percentagePlayback = 0.05;
     
     auto r = getBounds();
-    mainMenuBarContainer.setBounds(r.removeFromTop(22));
+    mainMenuBarSection.setBounds(r.removeFromTop(22));
     auto leftSide = r.removeFromLeft(getWidth() * percentageLeftSide);
     effectHistorySection.setBounds(leftSide.removeFromTop(leftSide.getHeight() * percentageEffects));
     fileListBoxSection.setBounds(leftSide);
