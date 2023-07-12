@@ -1,5 +1,4 @@
 #include "TracksAudioSource.h"
-//#include "EffectsProcessor.h"
 
 TracksAudioSource::TracksAudioSource()
     : currentSampleRate(0.0), bufferSizeExpected(0), effectsProcessor() {
@@ -181,17 +180,13 @@ void TracksAudioSource::setOffset(int trackId, double offset) {
     
 }
 
-void TracksAudioSource::applyReverb(int trackId) {
-    if (trackId >= 0 && trackId < inputs.size()) {
-        effectsProcessor.makeReverb(*inputs.getUnchecked(trackId), sampleRate);
-        recalculateBuffer();
-    }
-}
-
 void TracksAudioSource::applyReverb(int trackId, int startSamp, int endSamp) {
-    if (trackId >= 0 && trackId < inputs.size() && startSamp < endSamp) {
-        effectsProcessor.makeReverb(*inputs.getUnchecked(trackId), sampleRate, startSamp, endSamp - startSamp);
-        recalculateBuffer();
+    if (trackId >= 0 && trackId < inputs.size()) {
+        if (startSamp == -1 || endSamp == -1)
+            effectsProcessor.makeReverb([this] {recalculateBuffer(); }, *inputs.getUnchecked(trackId), sampleRate);
+        else if (startSamp < endSamp)
+            effectsProcessor.makeReverb([this] {recalculateBuffer(); }, *inputs.getUnchecked(trackId), sampleRate, startSamp, endSamp - startSamp);
+        //recalculateBuffer();
     }
 }
 

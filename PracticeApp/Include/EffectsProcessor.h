@@ -17,8 +17,7 @@ public:
 	EffectsProcessor();
 	~EffectsProcessor();
 
-	void makeReverb(TrackAudioBuffer& buffer, double sampleRate, int startSamp, int len);
-	void makeReverb(TrackAudioBuffer& buffer, double sampleRate);
+	void makeReverb(std::function<void()> updateBuffer, TrackAudioBuffer& buffer, double sampleRate, int startSamp = 0, int len = -1);
 
 
 private:

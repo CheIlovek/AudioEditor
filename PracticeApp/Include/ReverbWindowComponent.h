@@ -13,7 +13,8 @@ public:
 	void paint(Graphics& g) override;
 	void resized(void) override;
 
-	void applyButtonClicked();
+	void updateParameters();
+	TextButton* getApllyButton();
 	Reverb::Parameters getParameters();
 
 private:

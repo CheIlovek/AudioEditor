@@ -22,7 +22,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	muteButton.setAlpha(1.0f);
 	muteButton.setEnabled(true);
 	muteButton.setClickingTogglesState(true);
-	muteButton.setToggleState(false, juce::dontSendNotification);
+	muteButton.setToggleState(true, juce::dontSendNotification);
 	muteButton.onClick = [this] {
 		if (muteButton.getToggleState()) {
 			muteButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour);
@@ -41,7 +41,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	superiorButton.setColour(TextButton::textColourOnId,	ProjectColours::textColour);
 	superiorButton.setEnabled(true);
 	superiorButton.setClickingTogglesState(true);
-	superiorButton.setToggleState(false, juce::dontSendNotification);
+	superiorButton.setToggleState(true, juce::dontSendNotification);
 	superiorButton.onClick = [this] {
 		if (superiorButton.getToggleState()) {
 			superiorButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour);
