@@ -5,7 +5,6 @@ MainComponent::MainComponent(void) :
     playbackSection(&audioTracksSection.getAudioSource()),
     effectHistorySection(Colours::grey)
 {
-    mainMenuBarContainer.setModel(&mainMenuBarModel);
     addAndMakeVisible(effectHistorySection);
     addAndMakeVisible(fileListBoxSection);
     addAndMakeVisible(audioTracksSection);
