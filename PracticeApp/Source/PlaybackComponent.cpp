@@ -4,10 +4,12 @@ PlaybackComponent::PlaybackComponent(TracksAudioSource* audioSource) : state(Sto
 {
     addAndMakeVisible(&playButton);
     addAndMakeVisible(&stopButton);
-    
 
     playButton.setLookAndFeel(&lafPlay);
     stopButton.setLookAndFeel(&lafStop);
+    playButton.setToggleable(true);
+    stopButton.setToggleable(true);
+
     playButton.addShortcut(KeyPress(KeyPress::spaceKey));
 
     playButton.onClick = [this] { playButtonClicked(); };
@@ -47,7 +49,7 @@ void PlaybackComponent::releaseResources()
 void PlaybackComponent::resized()
 {
     playButton.setBounds(0, 0, getHeight(), getHeight());
-    stopButton.setBounds(100, 0, getHeight(), getHeight());
+    stopButton.setBounds(getHeight() + 10, 0, getHeight(), getHeight());
 }
 
 void PlaybackComponent::changeListenerCallback(juce::ChangeBroadcaster* source)
@@ -75,8 +77,6 @@ void PlaybackComponent::changeState(State newState)
         switch (state)
         {
         case Stopped:
-            //playButton.setButtonText("Play");
-            //stopButton.setButtonText("Stop");
             stopButton.setEnabled(false);
             audioSource->setPosition(0.0);
             break;
@@ -88,8 +88,6 @@ void PlaybackComponent::changeState(State newState)
 
         case Playing:
             DBG("Plaaying");
-            //playButton.setButtonText("Pause");
-            //stopButton.setButtonText("Stop");
             stopButton.setEnabled(true);
             break;
 
@@ -98,8 +96,7 @@ void PlaybackComponent::changeState(State newState)
             break;
 
         case Paused:
-            //playButton.setButtonText("Resume");
-            //stopButton.setButtonText("Return to Zero");
+
             break;
 
         case Stopping:
@@ -126,11 +123,14 @@ void PlaybackComponent::playButtonClicked()
     else if ((state == Stopped) || (state == Paused))
     {
         DBG("Start");
+        playButton.setToggleState(true, juce::dontSendNotification);
         changeState(Starting);
     }
         
-    else if (state == Playing)
+    else if (state == Playing) {
+        playButton.setToggleState(false, juce::dontSendNotification);
         changeState(Pausing);
+    }
 
     
 }

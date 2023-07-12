@@ -75,6 +75,7 @@ public:
     void setTrackOffset(int trackId, int offsetInPixels);
 
     void applyReverbOnTrack(int trackId);
+    void setStereoBalanceOnTrack(int trackId, float newBalance);
 
     int getNumOfSelectedRows();
     int getSelectedRow();

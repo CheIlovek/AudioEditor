@@ -56,6 +56,9 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 
 	balanceSlider.setSliderStyle(juce::Slider::SliderStyle::Rotary);
 	balanceSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
+	balanceSlider.setRange(-1, 1);
+	balanceSlider.setValue(0);
+	balanceSlider.addListener(this);
 	balanceSlider.setColour(Slider::thumbColourId, ProjectColours::Tracks::sliderColour);
 	balanceSlider.setBounds(0, 0, 50, 100);
 	volumeSlider.setBounds(0, 0, 50, 100);
@@ -201,6 +204,12 @@ std::pair<float, float> TrackComponent::getSelectedAreaInPixels() {
 	pos.second = std::min(pos.second, (float)waveformSize);
 
 	return pos;
+}
+
+void TrackComponent::sliderValueChanged(juce::Slider* slider) {
+	if (slider == &balanceSlider) {
+		owner.setStereoBalanceOnTrack(row,balanceSlider.getValue());
+	}
 }
 
 

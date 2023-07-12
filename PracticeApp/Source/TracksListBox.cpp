@@ -179,6 +179,10 @@ void TracksListBox::applyReverbOnTrack(int trackId) {
 
 }
 
+void TracksListBox::setStereoBalanceOnTrack(int trackId, float newBalance) {
+	audioMixer.setStereoBalanceOnTrack(trackId, newBalance);
+}
+
 int TracksListBox::getNumOfSelectedRows()
 {
 	return listBox.getSelectedRows().size();

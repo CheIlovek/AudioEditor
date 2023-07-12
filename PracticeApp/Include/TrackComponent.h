@@ -12,7 +12,7 @@ class TracksListBox;
 /**
 @brief Графическое отображение одной звуквой дорожки
 */
-class TrackComponent : public Component {
+class TrackComponent : public Component, public Slider::Listener {
 public:
     TrackComponent(juce::AudioFormatManager&, TracksListBox&, int, const double&);
     ~TrackComponent(void) override;
@@ -56,9 +56,12 @@ public:
 
     bool haveSelection();
     std::pair<float, float> getSelectedAreaInPixels();
+
+    
     
 
 private:
+    void sliderValueChanged(juce::Slider* slider) override;
 
     enum State {
         selecting,

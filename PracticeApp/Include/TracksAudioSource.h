@@ -43,6 +43,7 @@ public:
     void setOffset(int trackId, double offset);
 
     void applyReverb(int trackId, int startSamp = -1, int endSamp = -1);
+    void setStereoBalanceOnTrack(int trackId, float newBalance);
 
     float getGain();
 

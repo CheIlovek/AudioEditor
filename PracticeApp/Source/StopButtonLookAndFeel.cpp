@@ -17,8 +17,7 @@ void StopButtonLookAndFeel::drawButtonBackground(Graphics& g, Button& button, co
 		ProjectColours::Playback::PlayButton::endColour, area.getWidth(), area.getHeight(), false));
 	g.drawEllipse(area, circleThickness);
 
-	area.reduce(circleThickness * 3.f, circleThickness * 2.f);
+	area.reduce(circleThickness * 2.2f, circleThickness * 2.2f);
 
-	g.fillRect(area.getX() - thickness / 2, area.getY(), thickness, area.getHeight());
-	g.fillRect(area.getRight() - thickness / 2, area.getY(), thickness, area.getHeight());
+	g.fillRect(area);
 }

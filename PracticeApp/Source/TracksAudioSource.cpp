@@ -190,6 +190,16 @@ void TracksAudioSource::applyReverb(int trackId, int startSamp, int endSamp) {
     }
 }
 
+void TracksAudioSource::setStereoBalanceOnTrack(int trackId, float newBalance) {
+    if (trackId >= 0 && trackId < inputs.size()) {
+        auto* in = inputs.getUnchecked(trackId);
+        if (in->getNumSamples() > 0) {
+            in->setStereoBalance(newBalance);
+            recalculateBuffer();
+        }
+    }
+}
+
 float TracksAudioSource::getGain() {
     auto a = inputs.getUnchecked(0);
     return mainSource.getGain();
@@ -199,17 +209,16 @@ void TracksAudioSource::recalculateBuffer() {
     mainSource.stop();
     DBG("SOLO IS " << soloId);
     if (soloId >= 0) {
-        TrackAudioBuffer resBuffer(inputs[soloId]->getNumChannels(), inputs[soloId]->getNumSamples() + inputs[soloId]->getOffset());
+        auto* curInput = inputs.getUnchecked(soloId);
+        TrackAudioBuffer resBuffer(curInput->getNumChannels(), curInput->getNumSamples() + curInput->getOffset());
         resBuffer.clear();
         AudioSourceChannelInfo info(resBuffer);
-
+        curInput->applyBalanceSettings();
         for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
-            if (chan < inputs.getUnchecked(soloId)->getNumChannels()) {
-                DBG("OFFSET FOR " << soloId << " = " << inputs.getUnchecked(soloId)->getOffset());
-                DBG("NUMSAMPLES FOR " << soloId << " = " << inputs.getUnchecked(soloId)->getNumSamples());
-                info.buffer->addFrom(chan, inputs.getUnchecked(soloId)->getOffset(), *inputs.getUnchecked(soloId), chan, 0, inputs.getUnchecked(soloId)->getNumSamples());
+            if (!curInput->isChannelMuted(chan)) {
+                info.buffer->addFrom(chan, curInput->getOffset(), *curInput, chan, 0, curInput->getNumSamples());
             }
-
+        curInput->restoreBalance();
         auto newSource = std::make_unique<MemoryAudioSource>(*info.buffer, true);
         mainSource.setSource(newSource.get(), 0, nullptr, sampleRate, inputs[soloId]->getNumChannels());
         mainBuffer.reset(newSource.release());
@@ -223,15 +232,16 @@ void TracksAudioSource::recalculateBuffer() {
         resBuffer.clear();
         AudioSourceChannelInfo info(resBuffer);
         for (int i = 0; i < inputs.size(); ++i) {
-            if (/*exampleBuffer == inputs.getUnchecked(i) ||*/ muteChannels[i])
+            if (muteChannels[i])
                 continue;
-                
+            auto* curInput = inputs.getUnchecked(i);
+            curInput->applyBalanceSettings();
             for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
-                if (chan < inputs.getUnchecked(i)->getNumChannels()) {
-                    DBG("OFFSET FOR " << i << " = " << inputs.getUnchecked(i)->getOffset());
-                    DBG("NUMSAMPLES FOR " << i << " = " << inputs.getUnchecked(i)->getNumSamples());
-                    info.buffer->addFrom(chan, inputs.getUnchecked(i)->getOffset(), *inputs.getUnchecked(i), chan, 0, inputs.getUnchecked(i)->getNumSamples());
+                if (!curInput->isChannelMuted(chan)) {
+                    DBG("I WAS HERE");
+                    info.buffer->addFrom(chan, curInput->getOffset(), *curInput, chan, 0, curInput->getNumSamples());
                 }
+            curInput->restoreBalance();
         }
         info.buffer->setNotClear();
         
