@@ -91,6 +91,7 @@ StyleCopReport.xml
 *.tmp_proj
 *_wpftmp.csproj
 *.log
+!modules/juce_audio_processors/format_types/LV2_SDK/lv2/lv2/log
 !modules/juce_audio_processors/format_types/LV2_SDK/lv2/lv2/log/**
 *.vspscc
 *.vssscc
