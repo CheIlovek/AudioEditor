@@ -34,3 +34,8 @@ private:
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FileListBoxComponent)
 };
+
+namespace RussianText {
+	const std::wstring added(L"Добавлен");
+	const std::wstring name(L"Имя");
+}

@@ -16,5 +16,9 @@ private:
     VolumeSlider slider;
 };
 
+namespace RussianText {
+    const std::wstring generalVolume(L"Общая громкость");
+}
+
 
 #pragma once

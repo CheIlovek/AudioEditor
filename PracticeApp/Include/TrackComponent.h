@@ -91,6 +91,13 @@ private:
     static int TrackNumber;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TrackComponent);
+
 };
+
+namespace RussianText {
+    const std::wstring mute(L"Без звука");
+    const std::wstring solo(L"Соло");
+    const std::wstring audio(L"Аудио");
+}
 
 

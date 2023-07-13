@@ -10,8 +10,8 @@ FileListBoxComponent::FileListBoxComponent()
     addAndMakeVisible(&name);
     addAndMakeVisible(&added);
 
-    name.setText("Name");
-    added.setText("Added");
+    name.setText(RussianText::name.c_str());
+    added.setText(RussianText::added.c_str());
     name.setColour(ProjectColours::textColour);
     added.setColour(ProjectColours::textColour);
     name.setFontHeight(16);

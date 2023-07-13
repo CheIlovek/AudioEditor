@@ -11,10 +11,11 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	row(row),
 	waveformZoom(zoom) {
 	trackName.setColour(ProjectColours::textColour);
-	trackName.setText("Audio " + std::to_string(TrackNumber));
+	juce::String audio(RussianText::audio.c_str());
+	trackName.setText(audio + ' ' + std::to_string(TrackNumber));
 	TrackNumber++;
 
-	muteButton.setButtonText("MUTE");
+	muteButton.setButtonText(RussianText::mute.c_str());
 	muteButton.setColour(TextButton::buttonColourId,	ProjectColours::Tracks::buttonColour);
 	muteButton.setColour(TextButton::buttonOnColourId,	ProjectColours::Tracks::buttonColour);
 	muteButton.setColour(TextButton::textColourOffId,	ProjectColours::textColour);
@@ -34,7 +35,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 		}
 	};
 
-	superiorButton.setButtonText("SOLO");
+	superiorButton.setButtonText(RussianText::solo.c_str());
 	superiorButton.setColour(TextButton::buttonColourId,	ProjectColours::Tracks::buttonColour);
 	superiorButton.setColour(TextButton::buttonOnColourId,	ProjectColours::Tracks::buttonColour);
 	superiorButton.setColour(TextButton::textColourOffId,	ProjectColours::textColour);

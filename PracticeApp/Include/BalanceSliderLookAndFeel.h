@@ -8,3 +8,8 @@ public:
 						int width, int height, float sliderPosProportional,
 						float rotaryStartAngle, float rotaryEndAngle, Slider& slider) override;
 };
+
+namespace RussianText {
+	const std::wstring left(L"Ë");
+	const std::wstring right(L"Ï");
+}

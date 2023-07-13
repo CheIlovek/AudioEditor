@@ -8,8 +8,8 @@ void BalanceSliderLookAndFeel::drawRotarySlider(Graphics& g, int x, int y,
 	const float circleThickness = 2.f;
 	const float pointerThickness = 2.f;
 	const float letterSize = 0.15f;
-	Rectangle<float> circleArea(x, y, width, height);
 
+	Rectangle<float> circleArea(x, y, width, height);
 	auto valueTextArea = circleArea.removeFromBottom(width * letterSize * 2.f);
 	auto leftLetterArea =	circleArea.removeFromLeft(width * letterSize);
 	auto rightLetterArea =	circleArea.removeFromRight(width * letterSize);
@@ -19,8 +19,8 @@ void BalanceSliderLookAndFeel::drawRotarySlider(Graphics& g, int x, int y,
 	// Рисуем буквы
 	g.setFont(20);
 	g.setColour(mainColour);
-	g.drawText("L", leftLetterArea, juce::Justification::centredBottom);
-	g.drawText("R", rightLetterArea, juce::Justification::centredBottom);
+	g.drawText(RussianText::left.c_str(),	 leftLetterArea,	juce::Justification::centredBottom);
+	g.drawText(RussianText::right.c_str(),	 rightLetterArea,	juce::Justification::centredBottom);
 
 	// Рисуем значение слайдера
 	char val[6];
