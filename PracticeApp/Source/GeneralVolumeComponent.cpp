@@ -12,7 +12,7 @@ GeneralVolumeComponent::GeneralVolumeComponent(void) {
 }
 
 void GeneralVolumeComponent::paint(Graphics& g) {
-	g.fillAll(Colours::cyan);
+	g.fillAll(ProjectColours::VolumeSlider::background);
 }
 
 void GeneralVolumeComponent::resized(void) {

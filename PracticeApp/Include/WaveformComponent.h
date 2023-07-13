@@ -22,6 +22,7 @@ public:
 private:
     void thumbnailChanged();
     static int brushCounter;
+    Colour colour;
 
     juce::AudioThumbnail thumbnail;
 

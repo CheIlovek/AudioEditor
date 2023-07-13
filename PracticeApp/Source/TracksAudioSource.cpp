@@ -237,7 +237,7 @@ void TracksAudioSource::recalculateBuffer() {
             auto* curInput = inputs.getUnchecked(i);
             curInput->applyBalanceSettings();
             for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
-                if (!curInput->isChannelMuted(chan)) {
+                if (!curInput->isChannelMuted(chan) && chan < curInput->getNumChannels()) {
                     DBG("I WAS HERE");
                     info.buffer->addFrom(chan, curInput->getOffset(), *curInput, chan, 0, curInput->getNumSamples());
                 }

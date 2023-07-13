@@ -95,13 +95,16 @@ void TrackComponent::resized(void) {
 	leftSideBox.flexDirection = juce::FlexBox::Direction::column;
 	leftSideBox.flexWrap = juce::FlexBox::Wrap::wrap;
 	leftSideBox.alignContent = juce::FlexBox::AlignContent::flexStart;
-	leftSideBox.justifyContent = juce::FlexBox::JustifyContent::flexStart;
+	leftSideBox.justifyContent = juce::FlexBox::JustifyContent::spaceBetween;
 
 
 	juce::FlexItem trackNameItem(100, 20, trackName);
 	juce::FlexItem muteButtonItem(30, 20, muteButton);
 	juce::FlexItem superiorButtonItem(30, 20, superiorButton);
 	juce::FlexItem balanceSliderItem(70, 70, balanceSlider);
+
+	superiorButtonItem.maxWidth = 70;
+	muteButtonItem.maxWidth = 70;
 	
 	balanceSliderItem.alignSelf = FlexItem::AlignSelf::center;
 	balanceSliderItem.maxWidth = 80;

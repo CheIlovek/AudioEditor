@@ -26,7 +26,12 @@ namespace ProjectColours {
 			const Colour noLoadFileBackground{ Colours::white };
 			const Colour noLoadFileText{ Colours::darkgrey };
 			const Colour loadFileBackground{ 0xff121011 };
-			const Colour brush{ 0xff25c1fe };
+			const Array<Colour> waveformBrushes = { 
+				Colour(0xff25c1ff),
+				Colour(0xff25ff70),
+				Colour(0xffffea25),
+				Colour(0xffff7e25)
+			};
 		}
 	}
 

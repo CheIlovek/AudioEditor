@@ -6,6 +6,8 @@ WaveformComponent::WaveformComponent(int sourceSamplesPerThumbnailSample,
     juce::AudioFormatManager& formatManager,
     juce::AudioThumbnailCache& cache)
     : thumbnail(sourceSamplesPerThumbnailSample, formatManager, cache) {
+    auto& colours = ProjectColours::Tracks::Waveform::waveformBrushes;
+    colour = colours[brushCounter++ % colours.size()];
     thumbnail.addChangeListener(this);
 }
 
@@ -28,7 +30,7 @@ void WaveformComponent::paintIfNoFileLoaded(juce::Graphics& g) {
 
 void WaveformComponent::paintIfFileLoaded(juce::Graphics& g) {
     g.fillAll(ProjectColours::Tracks::Waveform::loadFileBackground);
-    g.setColour(ProjectColours::Tracks::Waveform::brush);
+    g.setColour(colour);
     thumbnail.drawChannels(g, getLocalBounds(), 0.0, thumbnail.getTotalLength(), 1.0f);
 }
 
