@@ -1,9 +1,9 @@
 #include "../Include/MainComponent.h"
 //
 MainComponent::MainComponent(void) :
-    mainMenuBarSection(&fileListBoxSection, &audioTracksSection),
+    mainMenuBarSection(&fileListBoxSection, &audioTracksSection, &effectHistorySection),
     playbackSection(&audioTracksSection.getAudioSource()),
-    effectHistorySection(Colours::grey)
+    effectHistorySection(&audioTracksSection)
 {
     addAndMakeVisible(effectHistorySection);
     addAndMakeVisible(fileListBoxSection);

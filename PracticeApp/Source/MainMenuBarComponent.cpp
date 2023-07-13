@@ -1,7 +1,7 @@
 #include "MainMenuBarComponent.h"
 
-MainMenuBarComponent::MainMenuBarComponent(FileListBoxComponent* flbm, TracksListBox* tracks) :
-    flbm(flbm), tracks(tracks)
+MainMenuBarComponent::MainMenuBarComponent(FileListBoxComponent* flbm, TracksListBox* tracks, EffectHistoryComponent* effectHistory) :
+    flbm(flbm), tracks(tracks), effectHistory(effectHistory)
 {
     menuBar.setModel(this);
     addAndMakeVisible(menuBar);
@@ -84,6 +84,7 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
         break;
     case AddTrack:
         tracks->addNewTrack();
+        effectHistory->addNewTrackHistory();
         break;
     case AddAudio:
         if(tracks->getNumOfSelectedRows() == 1 && flbm->getNumOfSelectedRows() == 1)
@@ -92,8 +93,9 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
     case Reverberation:
         if (tracks->getNumOfSelectedRows() == 1)
         {
-            int index = tracks->getSelectedRow();
-            tracks->applyReverbOnTrack(index);
+            bool isApplied = tracks->applyReverbOnTrack();
+            if (isApplied)
+                effectHistory->addNewEffect(RussianText::Effects::reverberation.c_str());
         }
         break;
     }

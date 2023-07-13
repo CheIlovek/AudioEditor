@@ -162,7 +162,8 @@ void TracksListBox::setTrackOffset(int trackId, int offsetInPixels) {
 	audioMixer.setOffset(trackId, offsetInSeconds);
 }
 
-void TracksListBox::applyReverbOnTrack(int trackId) {
+bool TracksListBox::applyReverbOnTrack() {
+	int trackId = getSelectedRow();
 	if (trackId >= 0 && trackId < dataList.size()) {
 		auto* curTrack = dataList[trackId];
 		if (curTrack->haveSelection()) {
@@ -174,9 +175,9 @@ void TracksListBox::applyReverbOnTrack(int trackId) {
 		else {
 			audioMixer.applyReverb(trackId);
 		}
+		return true;
 	}
-	
-
+	return false;
 }
 
 void TracksListBox::setStereoBalanceOnTrack(int trackId, float newBalance) {
@@ -191,6 +192,11 @@ int TracksListBox::getNumOfSelectedRows()
 int TracksListBox::getSelectedRow()
 {
 	return listBox.getSelectedRow();
+}
+
+TrackComponent* TracksListBox::getTrack(int trackId)
+{
+	return dataList[trackId];
 }
 
 void TracksListBox::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {

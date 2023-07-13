@@ -74,11 +74,13 @@ public:
     */
     void setTrackOffset(int trackId, int offsetInPixels);
 
-    void applyReverbOnTrack(int trackId);
+    bool applyReverbOnTrack();
     void setStereoBalanceOnTrack(int trackId, float newBalance);
 
     int getNumOfSelectedRows();
     int getSelectedRow();
+    TrackComponent* getTrack(int trackId);
+
 
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate);
     void releaseResources();

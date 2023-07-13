@@ -8,6 +8,7 @@
 #include "PlaybackComponent.h"
 #include "FileComponent.h"
 #include "GeneralVolumeComponent.h"
+#include "EffectHistoryComponent.h"
 //
 class MainComponent : public Component
 {
@@ -19,7 +20,7 @@ public:
     void resized(void) override;
     //
 private:
-    DummyComponent effectHistorySection;
+    EffectHistoryComponent effectHistorySection;
 
     FileListBoxComponent fileListBoxSection;
 

@@ -1,0 +1,37 @@
+#pragma once
+
+#include "../JuceLibraryCode/JuceHeader.h"
+#include "ProjectColours.h"
+#include "EffectListBoxModel.h"
+#include "TracksListBox.h"
+
+class EffectHistoryComponent : public Component
+{
+public:
+	EffectHistoryComponent(TracksListBox*);
+	~EffectHistoryComponent();
+
+	void resized(void) override;
+	void paint(Graphics& g) override;
+
+	void addNewTrackHistory();
+	void addNewEffect(String effectName);
+
+	void comboBoxItemChanged();
+
+private:
+	Array<EffectListBoxModel*> modelList;
+	ComboBox namesComboBox;
+	ListBox listBox;
+	TextButton clearButton;
+
+	TracksListBox* tracks;
+};
+
+namespace RussianText {
+	const std::wstring all(L"целиком");
+	const std::wstring choice(L"Выбрать дорожку...");
+	const std::wstring empty(L"Дорожки отсутствуют");
+	const std::wstring clear(L"Удалить все эффекты");
+
+}

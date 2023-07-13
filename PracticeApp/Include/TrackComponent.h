@@ -54,7 +54,8 @@ public:
     * @brief Возвращает на какой строке списка находится дорожка
     */
     int getRow();
-
+    String getTrackName();
+    int getWaveformSize();
     bool haveSelection();
     std::pair<float, float> getSelectedAreaInPixels();
 

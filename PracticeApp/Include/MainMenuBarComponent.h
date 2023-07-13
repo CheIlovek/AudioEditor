@@ -3,11 +3,12 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "FileListBoxComponent.h"
 #include "TracksListBox.h"
+#include "EffectHistoryComponent.h"
 
 class MainMenuBarComponent : public MenuBarModel, public Component
 {
 public:
-    MainMenuBarComponent(FileListBoxComponent*, TracksListBox*);
+    MainMenuBarComponent(FileListBoxComponent*, TracksListBox*, EffectHistoryComponent*);
 	~MainMenuBarComponent();
 
 
@@ -59,6 +60,7 @@ public:
 private:
     FileListBoxComponent* flbm;
     TracksListBox* tracks;
+    EffectHistoryComponent* effectHistory;
 
     MenuBarComponent menuBar;
 

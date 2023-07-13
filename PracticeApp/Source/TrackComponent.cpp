@@ -147,6 +147,16 @@ int TrackComponent::getRow() {
 	return row;
 }
 
+String TrackComponent::getTrackName()
+{
+	return trackName.getText();
+}
+
+int TrackComponent::getWaveformSize()
+{
+	return waveformSize;
+}
+
 void TrackComponent::mouseDown(const juce::MouseEvent& event) {
 	DBG("BUTTON PRESSED");
 	owner.listBoxItemClicked(row, event);

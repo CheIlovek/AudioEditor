@@ -141,4 +141,5 @@ void PlaybackComponent::stopButtonClicked()
         changeState(Stopped);
     else
         changeState(Stopping);
+    playButton.setToggleState(false, juce::dontSendNotification);
 }

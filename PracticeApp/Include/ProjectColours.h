@@ -35,6 +35,17 @@ namespace ProjectColours {
 		}
 	}
 
+	namespace EffectHistory {
+		const Colour rowBackground{ 0xff303030 };
+		const Colour listBoxBackground{ 0xff242223 };
+		const Colour listBoxOutline{ Colours::grey };
+		const Colour comboBoxOutline{ Colours::black };
+		const Colour comboBoxFocusedOutline{ Colours::white };
+		const Colour buttonColour{ 0xff363636 };
+		const Colour buttonOnColour{ buttonColour.brighter()};
+		const Colour comboBoxbackgroundColour{ 0xff131313 };
+	}
+
 	namespace DialogWindow {
 		const Colour dialogWindowBackground{ 0xff303030 };
 		const Colour buttonColour{ Colours::grey };

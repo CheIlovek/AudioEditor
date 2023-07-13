@@ -2678,6 +2678,8 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_video.cpp" />
     <ClCompile Include="..\..\Source\BalanceSliderLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\DummyComponent.cpp" />
+    <ClCompile Include="..\..\Source\EffectHistoryComponent.cpp" />
+    <ClCompile Include="..\..\Source\EffectListBoxModel.cpp" />
     <ClCompile Include="..\..\Source\EffectsProcessor.cpp" />
     <ClCompile Include="..\..\Source\FileComponent.cpp" />
     <ClCompile Include="..\..\Source\FileListBoxComponent.cpp" />
@@ -3753,6 +3755,8 @@
     <ClInclude Include="..\..\Include\Application.h" />
     <ClInclude Include="..\..\Include\BalanceSliderLookAndFeel.h" />
     <ClInclude Include="..\..\Include\DummyComponent.h" />
+    <ClInclude Include="..\..\Include\EffectHistoryComponent.h" />
+    <ClInclude Include="..\..\Include\EffectListBoxModel.h" />
     <ClInclude Include="..\..\Include\EffectsProcessor.h" />
     <ClInclude Include="..\..\Include\FileComponent.h" />
     <ClInclude Include="..\..\Include\FileListBoxComponent.h" />
