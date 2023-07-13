@@ -13,6 +13,8 @@ MainComponent::MainComponent(void) :
     addAndMakeVisible(mainMenuBarSection);
     setOpaque(true);
     setSize(800, 800);
+    playbackSection.setVolumeGUI(&generalVolumeSection.getSlider());
+    generalVolumeSection.getSlider().setSource(&audioTracksSection.getAudioSource());
 }
 //
 MainComponent::~MainComponent(void)

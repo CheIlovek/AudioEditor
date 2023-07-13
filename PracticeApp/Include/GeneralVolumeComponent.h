@@ -9,6 +9,7 @@ public:
 
     void paint(Graphics&) override;
     void resized(void) override;
+    VolumeSlider& getSlider();
 
 private:
     StretchableLayoutManager layout;

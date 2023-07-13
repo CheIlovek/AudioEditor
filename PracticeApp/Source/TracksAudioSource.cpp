@@ -204,6 +204,10 @@ float TracksAudioSource::getGain() {
     return mainSource.getGain();
 }
 
+void TracksAudioSource::setGain(float gain) {
+    mainSource.setGain(gain);
+}
+
 void TracksAudioSource::recalculateBuffer() {
     mainSource.stop();
     DBG("SOLO IS " << soloId);
