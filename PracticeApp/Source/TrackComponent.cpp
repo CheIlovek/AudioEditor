@@ -55,12 +55,13 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 
 
 	balanceSlider.setSliderStyle(juce::Slider::SliderStyle::Rotary);
-	balanceSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
+	balanceSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 100, 20);
 	balanceSlider.setRange(-1, 1);
 	balanceSlider.setValue(0);
 	balanceSlider.addListener(this);
 	balanceSlider.setColour(Slider::thumbColourId, ProjectColours::Tracks::sliderColour);
-	balanceSlider.setBounds(0, 0, 50, 100);
+	balanceSlider.setBounds(0, 0, 100, 100);
+	balanceSlider.setLookAndFeel(&balanceLaf);
 	volumeSlider.setBounds(0, 0, 50, 100);
 
 
@@ -99,8 +100,13 @@ void TrackComponent::resized(void) {
 	juce::FlexItem trackNameItem(100, 20, trackName);
 	juce::FlexItem muteButtonItem(30, 20, muteButton);
 	juce::FlexItem superiorButtonItem(30, 20, superiorButton);
-	juce::FlexItem balanceSliderItem(50, 70, balanceSlider);
-	//balanceSliderItem.maxWidth = 200;
+	juce::FlexItem balanceSliderItem(70, 70, balanceSlider);
+	
+	balanceSliderItem.alignSelf = FlexItem::AlignSelf::center;
+	balanceSliderItem.maxWidth = 80;
+	balanceSliderItem.minWidth = 80;
+	balanceSliderItem.maxHeight = 80;
+	balanceSliderItem.minHeight = 80;
 	leftSideBox.items = { trackNameItem, muteButtonItem, superiorButtonItem, balanceSliderItem };
 	auto r = getLocalBounds();
 	leftSideBox.performLayout(r.removeFromLeft(100));

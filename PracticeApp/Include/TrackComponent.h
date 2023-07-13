@@ -6,6 +6,7 @@
 #include "WaveformComponent.h"
 #include "ProjectColours.h"
 #include "TrackSelection.h"
+#include "BalanceSliderLookAndFeel.h"
 
 class TracksListBox;
 
@@ -71,6 +72,7 @@ private:
     
     State curState = State::none;
 
+    BalanceSliderLookAndFeel balanceLaf;
     juce::DrawableText trackName;
     juce::TextButton muteButton;
     juce::TextButton superiorButton;
