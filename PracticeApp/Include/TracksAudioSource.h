@@ -46,6 +46,7 @@ public:
     void setStereoBalanceOnTrack(int trackId, float newBalance);
 
     float getGain();
+    void setGain(float gain);
 
 private:
     void recalculateBuffer();
