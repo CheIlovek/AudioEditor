@@ -39,6 +39,12 @@ void PlaybackComponent::prepareToPlay(int samplesPerBlockExpected, double sample
 void PlaybackComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo& bufferToFill)
 {
 	audioSource->getNextAudioBlock(bufferToFill);
+    if (slider != nullptr && bufferToFill.numSamples > 0) {
+        float left =    bufferToFill.buffer->getMagnitude(0, 0, bufferToFill.numSamples);
+        float right =   bufferToFill.buffer->getMagnitude(1, 0, bufferToFill.numSamples);
+        slider->update(left, right);
+    }
+    
 }
 
 void PlaybackComponent::releaseResources()
@@ -66,6 +72,10 @@ void PlaybackComponent::changeListenerCallback(juce::ChangeBroadcaster* source)
         else if (state == Pausing)
             changeState(Paused);
     }
+}
+
+void PlaybackComponent::setVolumeGUI(VolumeSlider* slider) {
+    this->slider = slider;
 }
 
 void PlaybackComponent::changeState(State newState)

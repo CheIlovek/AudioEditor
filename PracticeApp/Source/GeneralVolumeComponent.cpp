@@ -23,3 +23,7 @@ void GeneralVolumeComponent::resized(void) {
 	slider.setBounds(area);
 	
 }
+
+VolumeSlider& GeneralVolumeComponent::getSlider() {
+	return slider;
+}

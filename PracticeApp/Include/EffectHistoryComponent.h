@@ -19,6 +19,8 @@ public:
 
 	void comboBoxItemChanged();
 
+	void clearButtonClicked();
+
 private:
 	Array<EffectListBoxModel*> modelList;
 	ComboBox namesComboBox;

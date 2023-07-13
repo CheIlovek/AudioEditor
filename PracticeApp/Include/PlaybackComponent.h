@@ -4,6 +4,7 @@
 #include "TracksAudioSource.h"
 #include "PlayButtonLookAndFeel.h"
 #include "StopButtonLookAndFeel.h"
+#include "VolumeSlider.h"
 
 class PlaybackComponent : public AudioAppComponent, public ChangeListener
 {
@@ -16,6 +17,7 @@ public:
     void releaseResources() override;
     void resized() override;
     void changeListenerCallback(juce::ChangeBroadcaster* source) override;
+    void setVolumeGUI(VolumeSlider* slider);
 
 private:
     enum State
@@ -39,7 +41,7 @@ private:
 
     TracksAudioSource* audioSource;
     State state;
-
+    VolumeSlider* slider = nullptr;
 
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PlaybackComponent)
