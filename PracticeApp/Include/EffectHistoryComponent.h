@@ -9,7 +9,7 @@ class EffectHistoryComponent : public Component
 {
 public:
 	EffectHistoryComponent(TracksListBox*);
-	~EffectHistoryComponent();
+	~EffectHistoryComponent() override;
 
 	void resized(void) override;
 	void paint(Graphics& g) override;
@@ -18,6 +18,7 @@ public:
 	void addNewEffect(String effectName);
 
 	void comboBoxItemChanged();
+	void clearButtonClicked();
 
 private:
 	Array<EffectListBoxModel*> modelList;
@@ -31,7 +32,7 @@ private:
 namespace RussianText {
 	const std::wstring all(L"целиком");
 	const std::wstring choice(L"Выбрать дорожку...");
-	const std::wstring empty(L"Дорожки отсутствуют");
+	const std::wstring empty(L"Пусто");
 	const std::wstring clear(L"Удалить все эффекты");
 
 }

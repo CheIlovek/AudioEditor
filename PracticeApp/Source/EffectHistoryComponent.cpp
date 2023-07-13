@@ -26,6 +26,7 @@ EffectHistoryComponent::EffectHistoryComponent(TracksListBox* tracks) : tracks(t
 	listBox.setRowHeight(20);
 	listBox.setColour(ListBox::backgroundColourId, ProjectColours::EffectHistory::listBoxBackground);
 	listBox.setColour(ListBox::outlineColourId, ProjectColours::EffectHistory::listBoxOutline);
+	listBox.setOutlineThickness(1);
 }
 
 EffectHistoryComponent::~EffectHistoryComponent()
@@ -78,11 +79,10 @@ void EffectHistoryComponent::addNewEffect(String effectName)
 		
 		std::time_t startTime((double)pos.first / pixelsBySecond);
 		std::tm* t1 = gmtime(&startTime);
+		time1 = std::to_string(t1->tm_hour) + ':' + std::to_string(t1->tm_min) + ':' + std::to_string(t1->tm_sec);
 
 		std::time_t endTime((double)pos.second / pixelsBySecond);
 		std::tm* t2 = gmtime(&endTime);
-
-		time1 = std::to_string(t1->tm_hour) + ':' + std::to_string(t1->tm_min) + ':' + std::to_string(t1->tm_sec);
 		time2 = std::to_string(t2->tm_hour) + ':' + std::to_string(t2->tm_min) + ':' + std::to_string(t2->tm_sec);
 
 		modelList[trackId]->addNewElement(effectName + ' ' + time1 + " - " + time2);
@@ -90,18 +90,22 @@ void EffectHistoryComponent::addNewEffect(String effectName)
 	else {
 		std::time_t startTime((double)0);
 		std::tm* t1 = gmtime(&startTime);
+		time1 = std::to_string(t1->tm_hour) + ':' + std::to_string(t1->tm_min) + ':' + std::to_string(t1->tm_sec);
 
 		std::time_t endTime((double)track->getWaveformSize() / pixelsBySecond);
 		std::tm* t2 = gmtime(&endTime);
-
-		time1 = std::to_string(t1->tm_hour) + ':' + std::to_string(t1->tm_min) + ':' + std::to_string(t1->tm_sec);
 		time2 = std::to_string(t2->tm_hour) + ':' + std::to_string(t2->tm_min) + ':' + std::to_string(t2->tm_sec);
 
 		modelList[trackId]->addNewElement(effectName + ' ' + time1 + " - " + time2 + ' ' + RussianText::all.c_str());
 	}
 
 	if (namesComboBox.getSelectedId() == trackId + 1)
+	{
 		listBox.updateContent();
+		listBox.setSize(getWidth(), 150);
+		resized();
+	}
+		
 }
 
 void EffectHistoryComponent::comboBoxItemChanged()
@@ -109,6 +113,7 @@ void EffectHistoryComponent::comboBoxItemChanged()
 	int modelId = namesComboBox.getSelectedId() - 1;
 	listBox.setModel(modelList[modelId]);
 	listBox.updateContent();
+	listBox.setSize(getWidth(), 150);
 	resized();
 }
 

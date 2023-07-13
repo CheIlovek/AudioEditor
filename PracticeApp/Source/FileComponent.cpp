@@ -31,9 +31,12 @@ void FileComponent::paint(Graphics& g)
 
 void FileComponent::resized(void)
 {
-	fileName.setBounds(5, 0, getWidth() * 0.8 - 5, getHeight());
-	fileName.setBoundingBox(Parallelogram<float>(Rectangle<float>(5, 0, getWidth() * 0.8 - 5, getHeight())));
-	isAddedToggle.setBounds(getWidth() * 0.8, 0, getWidth() * 0.2, getHeight());
+	double textProportion = 0.7;
+	double toggleProportion = 1 - textProportion;
+	int margin = 5;
+	fileName.setBounds(margin, 0, getWidth() * textProportion - margin, getHeight());
+	fileName.setBoundingBox(Parallelogram<float>(Rectangle<float>(margin, 0, getWidth() * textProportion - margin, getHeight())));
+	isAddedToggle.setBounds(getWidth() * textProportion, 0, getWidth() * toggleProportion, getHeight());
 }
 
 void FileComponent::mouseDown(const juce::MouseEvent& event)

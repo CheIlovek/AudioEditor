@@ -3,7 +3,6 @@
 FileListBoxComponent::FileListBoxComponent()
 {
     fileListBox.setModel(this);
-    fileListBox.setOutlineThickness(1);
     fileListBox.setRowSelectedOnMouseDown(true);
 
     addAndMakeVisible(fileListBox);
@@ -17,6 +16,9 @@ FileListBoxComponent::FileListBoxComponent()
     added.setFontHeight(16);
     fileListBox.setRowHeight(20);
     fileListBox.setColour(ListBox::backgroundColourId, ProjectColours::Files::listBoxBackground);
+
+    fileListBox.setColour(ListBox::ColourIds::outlineColourId, ProjectColours::Files::listBoxOutline);
+    fileListBox.setOutlineThickness(1);
     
     resized();
 }
@@ -59,9 +61,20 @@ void FileListBoxComponent::backgroundClicked(const MouseEvent&)
 
 void FileListBoxComponent::resized(void)
 {
-    name.setBounds(5, 0, getWidth() * 0.8 - 5, 20);
-    added.setBounds(getWidth() * 0.8, 0, getWidth() * 0.2, 20);
-    fileListBox.setBounds(0, 20, getWidth(), getHeight() - 20);
+    double textProportion = 0.7;
+    double toggleProportion = 1 - textProportion;
+    int headersHeight = 20;
+    int margin = 5;
+
+    name.setBounds(margin, margin, getWidth() * textProportion - margin, headersHeight);
+    Rectangle<float> nameBoundingBoxRectangle(name.getX(), name.getY(), name.getWidth(), name.getHeight());
+    name.setBoundingBox(Parallelogram<float>(nameBoundingBoxRectangle));
+
+    added.setBounds(getWidth() * textProportion, margin, getWidth() * toggleProportion, headersHeight);
+    Rectangle<float> addedBoundingBoxRectangle(added.getX(), added.getY(), added.getWidth(), added.getHeight());
+    added.setBoundingBox(Parallelogram<float>(addedBoundingBoxRectangle));
+
+    fileListBox.setBounds(margin, headersHeight + 2 * margin, getWidth() - margin, getHeight() - (headersHeight + 2 * margin));
 }
 
 void FileListBoxComponent::paint(Graphics& g)

@@ -74,7 +74,7 @@ public:
     */
     void setTrackOffset(int trackId, int offsetInPixels);
 
-    bool applyReverbOnTrack();
+    bool applyReverbOnTrack(std::function<void()> activateEffectHistory);
     void setStereoBalanceOnTrack(int trackId, float newBalance);
 
     int getNumOfSelectedRows();
