@@ -20,8 +20,6 @@ public:
 	void comboBoxItemChanged();
 	void clearButtonClicked();
 
-	void clearButtonClicked();
-
 private:
 	Array<EffectListBoxModel*> modelList;
 	ComboBox namesComboBox;
