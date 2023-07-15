@@ -52,6 +52,7 @@ PopupMenu MainMenuBarComponent::getMenuForIndex(int index, const String& name)
         menu.addItem(SelectAllTracks,   RussianText::Tracks::selectAllTracks.c_str(), false);
     }
     else if (name == RussianText::Selection::selection.c_str()) {
+        //MAKE DISABLED, IF THESE BUTTONS WILL NOT BE IMPLEMENTED!!!!!!!
         menu.addItem(SelectAll,             RussianText::Selection::selectAll               .c_str());
         PopupMenu subMenu;
         subMenu.addItem(FromStartToCursor,  RussianText::Selection::Area::fromStartToCursor .c_str());
@@ -79,8 +80,20 @@ PopupMenu MainMenuBarComponent::getMenuForIndex(int index, const String& name)
 void MainMenuBarComponent::menuItemSelected(int menuID, int index)
 {
     switch (menuID) {
+    case OpenProject:
+
+        break;
+    case SaveAs:
+        
+        break;
+    case ExportAs:
+
+        break;
     case Import:
         flbm->openFile();
+        break;
+    case Exit:
+
         break;
     case AddTrack:
         tracks->addNewTrack();
@@ -93,11 +106,25 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
             flbm->selectedFileAdded();
         }
         break;
+    case Mute:
+
+        break;
+    case Solo:
+
+        break;
+    //"SELECTION" MENU ITEMS WOULD BE HERE
     case Reverberation:
         if (tracks->getNumOfSelectedRows() == 1)
             tracks->applyReverbOnTrack([this] {effectHistory->addNewEffect(RussianText::Effects::reverberation.c_str()); });
         break;
+    case Description:
+        showDescriptionWindow();
+        break;
+    case Help:
+        showHelpWindow();
+        break;
     }
+    
 }
 
 void MainMenuBarComponent::resized(void)
@@ -106,5 +133,15 @@ void MainMenuBarComponent::resized(void)
 }
 
 void MainMenuBarComponent::paint(Graphics& g)
+{
+}
+
+void MainMenuBarComponent::showDescriptionWindow()
+{
+    AlertWindow::showMessageBoxAsync(MessageBoxIconType::InfoIcon, "ASAP Audition",
+        RussianText::About::descriptionText.c_str(), "OK");
+}
+
+void MainMenuBarComponent::showHelpWindow()
 {
 }

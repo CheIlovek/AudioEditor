@@ -19,6 +19,9 @@ public:
     void resized(void) override;
     void paint(Graphics& g) override;
 
+    void showDescriptionWindow();
+    void showHelpWindow();
+
     enum MenuIDs {
         CreateProject = 1,
         OpenProject,
@@ -118,9 +121,10 @@ namespace RussianText {
     }
 
     namespace About {
-        const std::wstring about(L"О нас");
-        const std::wstring decsription(L"Описание");
+        const std::wstring about(L"Справка");
+        const std::wstring decsription(L"О программе");
         const std::wstring help(L"Помощь");
+        const std::wstring descriptionText(L"\nАвторы: Соловьёв Александр, Правдин Андрей\nНазначение: аудио редактор\nЯзык и фреймворк: С++ Juce");
     }
 
 }
