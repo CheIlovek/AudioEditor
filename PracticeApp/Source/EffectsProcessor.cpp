@@ -10,13 +10,13 @@ EffectsProcessor::~EffectsProcessor()
 {
 }
 
-void EffectsProcessor::makeReverb(std::function<void()> updateBuffer, TrackAudioBuffer& buffer, double sampleRate, int startSamp, int len)
+void EffectsProcessor::makeReverb(std::function<void()> updateBufferAndActivateHistory, TrackAudioBuffer& buffer, double sampleRate, int startSamp, int len)
 {
     if (len == -1)
         len = buffer.getNumSamples();
     reverb.setSampleRate(sampleRate);
 
-    reverbWindowComponent.getApllyButton()->onClick = [this, updateBuffer, &buffer, sampleRate, startSamp, len] 
+    reverbWindowComponent.getApllyButton()->onClick = [this, updateBufferAndActivateHistory, &buffer, sampleRate, startSamp, len] 
     {
         reverbWindowComponent.updateParameters();
         reverb.setParameters(reverbWindowComponent.getParameters());
@@ -31,12 +31,12 @@ void EffectsProcessor::makeReverb(std::function<void()> updateBuffer, TrackAudio
         else {
             reverb.processMono(firstChannel, len);
         }
-        updateBuffer();
+        updateBufferAndActivateHistory();
     };
 
-    DialogWindow::showDialog("Reverberation", &reverbWindowComponent, NULL, 
+    DialogWindow::showDialog(RussianText::reverberation.c_str(), &reverbWindowComponent, NULL,
                                 ProjectColours::DialogWindow::dialogWindowBackground, true, false);
-    reverbWindowComponent.setSize(500, 500);
+    reverbWindowComponent.setSize(600, 600);
 }
 
 

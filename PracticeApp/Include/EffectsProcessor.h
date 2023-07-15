@@ -17,7 +17,7 @@ public:
 	EffectsProcessor();
 	~EffectsProcessor();
 
-	void makeReverb(std::function<void()> updateBuffer, TrackAudioBuffer& buffer, double sampleRate, int startSamp = 0, int len = -1);
+	void makeReverb(std::function<void()> updateBufferAndActivateHistory, TrackAudioBuffer& buffer, double sampleRate, int startSamp = 0, int len = -1);
 
 
 private:
@@ -27,3 +27,8 @@ private:
 
 	ReverbWindowComponent reverbWindowComponent;
 };
+
+namespace RussianText {
+	const std::wstring reverberation(L"Реверберация");
+
+}

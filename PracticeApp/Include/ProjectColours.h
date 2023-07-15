@@ -8,7 +8,7 @@ namespace ProjectColours {
 		const Colour fileRowBackgroundUnselected{ 0xff303030 };
 		const Colour fileRowBackgroundSelected{ Colours::grey };
 		const Colour listBoxBackground{ 0xff242223 };
-		const Colour listBoxOutline{ Colours::black };
+		const Colour listBoxOutline{ Colours::grey };
 	}
 
 	namespace Tracks {
@@ -39,7 +39,7 @@ namespace ProjectColours {
 		const Colour rowBackground{ 0xff303030 };
 		const Colour listBoxBackground{ 0xff242223 };
 		const Colour listBoxOutline{ Colours::grey };
-		const Colour comboBoxOutline{ Colours::black };
+		const Colour comboBoxOutline{ Colours::grey };
 		const Colour comboBoxFocusedOutline{ Colours::white };
 		const Colour buttonColour{ 0xff363636 };
 		const Colour buttonOnColour{ buttonColour.brighter()};

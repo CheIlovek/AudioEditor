@@ -2,12 +2,12 @@
 
 ReverbWindowComponent::ReverbWindowComponent()
 {
-	roomSize.setText("Room Size");
-	damping.setText("Damping");
-	wetLevel.setText("Wet Level");
-	dryLevel.setText("Dry Level");
-	width.setText("Width");
-	freezeMode.setText("Freeze Mode");
+	roomSize.setText(RussianText::roomSize.c_str());
+	damping.setText(RussianText::damping.c_str());
+	wetLevel.setText(RussianText::wetLevel.c_str());
+	dryLevel.setText(RussianText::dryLevel.c_str());
+	width.setText(RussianText::width.c_str());
+	freezeMode.setText(RussianText::freezeMode.c_str());
 
 	labels.add(&roomSize);
 	labels.add(&damping);
@@ -23,7 +23,7 @@ ReverbWindowComponent::ReverbWindowComponent()
 	sliders.add(&widthSlider);
 	sliders.add(&freezeModeSlider);
 
-	applyButton.setButtonText("Apply");
+	applyButton.setButtonText(RussianText::apply.c_str());
 	applyButton.setColour(TextButton::buttonColourId, ProjectColours::DialogWindow::buttonColour);
 	applyButton.setColour(TextButton::buttonOnColourId, ProjectColours::DialogWindow::buttonOnColour);
 	applyButton.setColour(TextButton::textColourOnId, ProjectColours::DialogWindow::buttonTextColour);
@@ -62,10 +62,14 @@ void ReverbWindowComponent::paint(Graphics& g)
 void ReverbWindowComponent::resized(void)
 {
 	// 440 x 320
-	int textWidth = 100;
+	int textWidth = 150;
 	int sliderWidth = 300;
 	int rowHeight = 40;
 	int margin = 20;
+	int buttonWidth = 100;
+	int buttonHeight = 30;
+	int allWidth = 2 * margin + textWidth + sliderWidth;
+	int allHeight = 3 * margin + 6 * rowHeight + buttonHeight;
 	Rectangle<float> textLabelsRectangle(margin, margin, textWidth, rowHeight * 6);
 
 	FlexBox labelsBox;
@@ -86,8 +90,8 @@ void ReverbWindowComponent::resized(void)
 	labelsBox.items = labelItems;
 	labelsBox.performLayout(textLabelsRectangle);
 
-	applyButton.setBounds(190, 270, 60, 30);
-	setSize(440, 320);
+	applyButton.setBounds(allWidth / 2 - buttonWidth / 2, 2 * margin + rowHeight * 6, buttonWidth, buttonHeight);
+	setSize(allWidth, allHeight);
 }
 
 void ReverbWindowComponent::updateParameters()

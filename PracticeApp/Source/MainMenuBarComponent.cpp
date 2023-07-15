@@ -92,11 +92,7 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
         break;
     case Reverberation:
         if (tracks->getNumOfSelectedRows() == 1)
-        {
-            bool isApplied = tracks->applyReverbOnTrack();
-            if (isApplied)
-                effectHistory->addNewEffect(RussianText::Effects::reverberation.c_str());
-        }
+            tracks->applyReverbOnTrack([this] {effectHistory->addNewEffect(RussianText::Effects::reverberation.c_str()); });
         break;
     }
 }

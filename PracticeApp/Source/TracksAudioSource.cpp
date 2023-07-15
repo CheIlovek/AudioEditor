@@ -180,13 +180,12 @@ void TracksAudioSource::setOffset(int trackId, double offset) {
     
 }
 
-void TracksAudioSource::applyReverb(int trackId, int startSamp, int endSamp) {
+void TracksAudioSource::applyReverb(std::function<void()> activateEffectHistory, int trackId, int startSamp, int endSamp) {
     if (trackId >= 0 && trackId < inputs.size()) {
         if (startSamp == -1 || endSamp == -1)
-            effectsProcessor.makeReverb([this] {recalculateBuffer(); }, *inputs.getUnchecked(trackId), sampleRate);
+            effectsProcessor.makeReverb([this, activateEffectHistory] {recalculateBuffer(); activateEffectHistory(); }, *inputs.getUnchecked(trackId), sampleRate);
         else if (startSamp < endSamp)
-            effectsProcessor.makeReverb([this] {recalculateBuffer(); }, *inputs.getUnchecked(trackId), sampleRate, startSamp, endSamp - startSamp);
-        //recalculateBuffer();
+            effectsProcessor.makeReverb([this, activateEffectHistory] {recalculateBuffer(); activateEffectHistory(); }, *inputs.getUnchecked(trackId), sampleRate, startSamp, endSamp - startSamp);
     }
 }
 

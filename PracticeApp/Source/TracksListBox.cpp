@@ -164,7 +164,7 @@ void TracksListBox::setTrackOffset(int trackId, int offsetInPixels) {
 	audioMixer.setOffset(trackId, offsetInSeconds);
 }
 
-bool TracksListBox::applyReverbOnTrack() {
+bool TracksListBox::applyReverbOnTrack(std::function<void()> activateEffectHistory) {
 	int trackId = getSelectedRow();
 	if (trackId >= 0 && trackId < dataList.size()) {
 		auto* curTrack = dataList[trackId];
@@ -172,10 +172,10 @@ bool TracksListBox::applyReverbOnTrack() {
 			auto pos = curTrack->getSelectedAreaInPixels();
 			int startInSamps = (double)pos.first / defaultPixelsBySecond * audioMixer.getSampleRate();
 			int endInSamps = (double)pos.second / defaultPixelsBySecond * audioMixer.getSampleRate();
-			audioMixer.applyReverb(trackId, startInSamps, endInSamps);
+			audioMixer.applyReverb(activateEffectHistory, trackId, startInSamps, endInSamps);
 		}
 		else {
-			audioMixer.applyReverb(trackId);
+			audioMixer.applyReverb(activateEffectHistory, trackId);
 		}
 		return true;
 	}
