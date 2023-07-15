@@ -240,3 +240,13 @@ void TrackComponent::setAudioFilename(juce::String str) {
 	audioFilename = str;
 }
 
+void TrackComponent::muteButtonClicked()
+{
+	muteButton.triggerClick();
+}
+
+void TrackComponent::superiorButtonClicked()
+{
+	superiorButton.triggerClick();
+}
+

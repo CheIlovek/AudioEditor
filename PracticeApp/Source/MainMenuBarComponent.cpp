@@ -108,10 +108,18 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
         }
         break;
     case Mute:
-
+        if (tracks->getNumOfSelectedRows() == 1)
+        {
+            auto track = tracks->getTrack(tracks->getSelectedRow());
+            track->muteButtonClicked();
+        }
         break;
     case Solo:
-
+        if (tracks->getNumOfSelectedRows() == 1)
+        {
+            auto track = tracks->getTrack(tracks->getSelectedRow());
+            track->superiorButtonClicked();
+        }
         break;
     //"SELECTION" MENU ITEMS WOULD BE HERE
     case Reverberation:

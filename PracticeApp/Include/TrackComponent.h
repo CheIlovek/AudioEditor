@@ -59,10 +59,10 @@ public:
     bool haveSelection();
     std::pair<float, float> getSelectedAreaInPixels();
     void setAudioFilename(juce::String str);
+    void muteButtonClicked();
+    void superiorButtonClicked();
 
     
-    
-
 private:
     void sliderValueChanged(juce::Slider* slider) override;
 

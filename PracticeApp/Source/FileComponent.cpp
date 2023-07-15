@@ -57,7 +57,8 @@ File FileComponent::getFile()
 
 void FileComponent::fileAdded()
 {
-	isAddedToggle.triggerClick();
+	if(!isAddedToggle.getToggleState())
+		isAddedToggle.triggerClick();
 }
 
 void FileComponent::deselect()
