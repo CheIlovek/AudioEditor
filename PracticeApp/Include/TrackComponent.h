@@ -58,6 +58,7 @@ public:
     int getWaveformSize();
     bool haveSelection();
     std::pair<float, float> getSelectedAreaInPixels();
+    void setAudioFilename(juce::String str);
 
     
     
@@ -90,6 +91,8 @@ private:
     const double& waveformZoom;
     int oldWaveformOffset = 0;
     static int TrackNumber;
+    const int audioFilenameHeight = 15;
+    juce::String audioFilename;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TrackComponent);
 

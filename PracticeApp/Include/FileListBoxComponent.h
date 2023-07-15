@@ -38,4 +38,5 @@ private:
 namespace RussianText {
 	const std::wstring added(L"Добавлен");
 	const std::wstring name(L"Имя");
+	const std::wstring noFileInList(L"Нет файлов!\nВы можете добавить файл через меню Файл -> Импортировать");
 }

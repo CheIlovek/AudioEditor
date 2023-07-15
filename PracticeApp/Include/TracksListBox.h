@@ -108,4 +108,8 @@ private:
 
 };
 
+namespace RussianText {
+    const std::wstring noTracks(L"Нет дорожек!\nВы можете добавить дорожку через меню Треки -> Добавить дорожку");
+}
+
 

@@ -5,7 +5,7 @@ VolumeSlider::VolumeSlider(void) {
 	slider.setSliderStyle(Slider::SliderStyle::LinearBarVertical);
 	slider.setRange(0, 1);
 	slider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
-	slider.setValue(1);
+	slider.setValue(0.7);
 	slider.setLookAndFeel(&laf);
 	slider.addListener(this);
 	addAndMakeVisible(slider);

@@ -7,7 +7,7 @@ TracksListBox::TracksListBox(void) :
 	timeline(zoomRatio, defaultPixelsBySecond,110) {
 	formatManager.registerBasicFormats();
 	listBox.setColour(ListBox::outlineColourId,		ProjectColours::Tracks::listBoxOutline);
-	listBox.setColour(ListBox::backgroundColourId,	ProjectColours::Tracks::listBoxBackground);
+	listBox.setColour(ListBox::backgroundColourId,	Colour(0x00000000));
 	listBox.setOutlineThickness(1);
 	listBox.setMultipleSelectionEnabled(false);
 	listBox.setRowSelectedOnMouseDown(true);
@@ -103,7 +103,24 @@ void TracksListBox::mouseWheelMove(const MouseEvent& event, const MouseWheelDeta
 }
 
 void TracksListBox::paint(Graphics& g) {
-	g.fillAll(ProjectColours::Tracks::listBoxBackground);
+	if (dataList.isEmpty()) {
+		
+		g.fillAll(ProjectColours::Tracks::listBoxNoTracksBackground);
+		g.setColour(ProjectColours::Tracks::listBoxNoTracksText);
+		auto area = getLocalBounds();
+		g.drawMultiLineText(
+			RussianText::noTracks.c_str(),
+			area.getX(),
+			area.getCentreY(),
+			area.getWidth(),
+			Justification::horizontallyCentred,
+			0.4f);
+	}
+	else {
+		g.fillAll(ProjectColours::Tracks::listBoxBackground);
+	}
+
+	
 }
 
 void TracksListBox::addNewTrack() {
@@ -139,6 +156,7 @@ void TracksListBox::setFileOnTrack(int trackId, juce::File file) {
 				int waveformSize = (double)(info.numSamples * defaultPixelsBySecond) / (reader->sampleRate) ;
 				DBG("LISTBOX SIZE: " << waveformSize);
 				dataList[trackId]->setSource(buffer, reader->sampleRate, waveformSize);
+				dataList[trackId]->setAudioFilename(file.getFileName());
 			}
 			delete reader;
 		}

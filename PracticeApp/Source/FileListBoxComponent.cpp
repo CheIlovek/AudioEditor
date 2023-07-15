@@ -15,9 +15,8 @@ FileListBoxComponent::FileListBoxComponent()
     name.setFontHeight(16);
     added.setFontHeight(16);
     fileListBox.setRowHeight(20);
-    fileListBox.setColour(ListBox::backgroundColourId, ProjectColours::Files::listBoxBackground);
-
-    fileListBox.setColour(ListBox::ColourIds::outlineColourId, ProjectColours::Files::listBoxOutline);
+    fileListBox.setColour(ListBox::backgroundColourId,          Colour(0));
+    fileListBox.setColour(ListBox::ColourIds::outlineColourId,  ProjectColours::Files::listBoxOutline);
     fileListBox.setOutlineThickness(1);
     
     resized();
@@ -79,7 +78,23 @@ void FileListBoxComponent::resized(void)
 
 void FileListBoxComponent::paint(Graphics& g)
 {
-    g.fillAll(ProjectColours::Files::listBoxBackground);
+    if (fileList.isEmpty()) {
+        g.fillAll(ProjectColours::Files::listBoxNoFileBackground);
+        g.setColour(ProjectColours::Files::listBoxNoFileText);
+        auto area = getLocalBounds();
+        g.drawMultiLineText(
+            RussianText::noFileInList.c_str(),
+            area.getX(),
+            area.getCentreY(),
+            area.getWidth(),
+            Justification::horizontallyCentred,
+            0.4f);
+    }
+    else {
+        g.fillAll(ProjectColours::Files::listBoxBackground);
+    }
+
+    
 }
 
 void FileListBoxComponent::openFile()
@@ -101,6 +116,7 @@ void FileListBoxComponent::openFile()
                 
                 fileListBox.updateContent();
                 fileListBox.selectRow(fileList.size() - 1, true, true);
+                repaint();
             }
         });
 }

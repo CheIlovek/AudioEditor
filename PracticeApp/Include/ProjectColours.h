@@ -7,14 +7,24 @@ namespace ProjectColours {
 	namespace Files {
 		const Colour fileRowBackgroundUnselected{ 0xff303030 };
 		const Colour fileRowBackgroundSelected{ Colours::grey };
+
 		const Colour listBoxBackground{ 0xff242223 };
 		const Colour listBoxOutline{ Colours::grey };
+
+		const Colour listBoxNoFileBackground{ 0x40403D3F };
+		const Colour listBoxNoFileText{ Colours::white };
 	}
 
 	namespace Tracks {
 
+		const Colour filenameBackground{ 0xff302E30 };
+		const Colour filenameText{ Colours::white };
+
 		const Colour listBoxBackground{ 0xff242223 };
 		const Colour listBoxOutline{ Colours::black };
+		const Colour listBoxNoTracksBackground{ 0x99403D3F };
+		const Colour listBoxNoTracksText{ Colours::white };
+
 		const Colour playMarker{ Colours::green };
 
 		const Colour selectionArea{ Colours::blue.withAlpha(.2f)};

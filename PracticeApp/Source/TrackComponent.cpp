@@ -81,6 +81,13 @@ TrackComponent::~TrackComponent(void) {
 }
 
 void TrackComponent::paint(Graphics& g) {
+	auto area = getLocalBounds();
+	area.removeFromLeft(110);
+	area = area.removeFromTop(audioFilenameHeight);
+	g.setColour(ProjectColours::Tracks::filenameBackground);
+	g.fillRect(area);
+	g.setColour(ProjectColours::Tracks::filenameText);
+	g.drawSingleLineText(audioFilename, area.getX(), area.getHeight()-2);
 }
 
 void TrackComponent::resized(void) {
@@ -115,6 +122,7 @@ void TrackComponent::resized(void) {
 	auto r = getLocalBounds();
 	leftSideBox.performLayout(r.removeFromLeft(100));
 	volumeSlider.setBounds(r.removeFromLeft(10));
+	r.removeFromTop(audioFilenameHeight);
 	selection.setBounds(r);
 	if (waveformSize != 0)
 		r.setBounds(r.getX() + (waveformOffset * waveformZoom), r.getY(), waveformSize * waveformZoom, r.getHeight());
@@ -233,4 +241,8 @@ void TrackComponent::sliderValueChanged(juce::Slider* slider) {
 	}
 }
 
+
+void TrackComponent::setAudioFilename(juce::String str) {
+	audioFilename = str;
+}
 
