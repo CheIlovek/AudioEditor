@@ -27,11 +27,6 @@ void TimelineComponent::paint(juce::Graphics& g) {
 
 	g.setColour(Colours::white);
 
-	DBG("minSecRatio: " << minSecRatio);
-	DBG("pixelStep: " << pixelStep);
-	DBG("numSteps: " << numSteps);
-	DBG("\n\n");
-
 	for (int step = 0; step < numSteps; step++) {
 		if (step % freqOfTimeLables == 0) {
 			

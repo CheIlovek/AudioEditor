@@ -79,6 +79,7 @@ PopupMenu MainMenuBarComponent::getMenuForIndex(int index, const String& name)
 
 void MainMenuBarComponent::menuItemSelected(int menuID, int index)
 {
+    auto& source = tracks->getAudioSource();
     switch (menuID) {
     case OpenProject:
 
@@ -92,8 +93,8 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
     case Import:
         flbm->openFile();
         break;
-    case Exit:
-
+    case ExportAs:
+        flbm->saveFile(&source, source.getNumSamples(), source.getNumChannels(), source.getSampleRate());
         break;
     case AddTrack:
         tracks->addNewTrack();

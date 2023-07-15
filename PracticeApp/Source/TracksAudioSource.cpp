@@ -116,6 +116,15 @@ double TracksAudioSource::getCurrentPosition() const {
     return mainSource.getCurrentPosition();
 }
 
+int TracksAudioSource::getNumSamples() {
+    auto buff = getBufferMaxSize();
+    return buff->getNumSamples() + buff->getOffset();
+}
+
+int TracksAudioSource::getNumChannels() {
+    return 2;
+}
+
 void TracksAudioSource::changeListenerCallback(juce::ChangeBroadcaster* source) {
     if (source = &mainSource)
         sendChangeMessage();
@@ -207,6 +216,7 @@ float TracksAudioSource::getGain() {
 void TracksAudioSource::setGain(float gain) {
     mainSource.setGain(gain);
 }
+
 
 void TracksAudioSource::recalculateBuffer() {
     mainSource.stop();
