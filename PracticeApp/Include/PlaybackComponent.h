@@ -5,6 +5,7 @@
 #include "PlayButtonLookAndFeel.h"
 #include "StopButtonLookAndFeel.h"
 #include "VolumeSlider.h"
+#include "PlayTimerComponent.h"
 
 class PlaybackComponent : public AudioAppComponent, public ChangeListener
 {
@@ -39,6 +40,7 @@ private:
     TextButton playButton;
     TextButton stopButton;
 
+    PlayTimerComponent timer;
     TracksAudioSource* audioSource;
     State state;
     VolumeSlider* slider = nullptr;

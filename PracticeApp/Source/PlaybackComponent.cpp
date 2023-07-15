@@ -1,9 +1,13 @@
 #include "PlaybackComponent.h"
 
-PlaybackComponent::PlaybackComponent(TracksAudioSource* audioSource) : state(Stopped), audioSource(audioSource)
+PlaybackComponent::PlaybackComponent(TracksAudioSource* audioSource) :
+    state(Stopped),
+    audioSource(audioSource),
+    timer(audioSource) 
 {
     addAndMakeVisible(&playButton);
     addAndMakeVisible(&stopButton);
+    addAndMakeVisible(timer);
 
     playButton.setLookAndFeel(&lafPlay);
     stopButton.setLookAndFeel(&lafStop);
@@ -54,8 +58,34 @@ void PlaybackComponent::releaseResources()
 
 void PlaybackComponent::resized()
 {
-    playButton.setBounds(0, 0, getHeight(), getHeight());
-    stopButton.setBounds(getHeight() + 10, 0, getHeight(), getHeight());
+    int height = getHeight();
+
+    juce::FlexBox flexBoxControls;
+    flexBoxControls.flexDirection = juce::FlexBox::Direction::row;
+    flexBoxControls.flexWrap = juce::FlexBox::Wrap::noWrap;
+    flexBoxControls.alignContent = juce::FlexBox::AlignContent::flexStart;
+    flexBoxControls.justifyContent = juce::FlexBox::JustifyContent::spaceBetween;
+
+    juce::FlexItem playButtonItem(height, height, playButton);
+    juce::FlexItem stopButtonItem(height, height, stopButton);
+
+    flexBoxControls.items = { playButtonItem, stopButtonItem};
+
+    juce::FlexBox flexBox;
+    flexBox.flexDirection = juce::FlexBox::Direction::row;
+    flexBox.flexWrap = juce::FlexBox::Wrap::noWrap;
+    flexBox.alignContent = juce::FlexBox::AlignContent::flexStart;
+    flexBox.justifyContent = juce::FlexBox::JustifyContent::spaceBetween;
+
+    juce::FlexItem timerItem(300, height, timer);
+    
+    timerItem.margin = FlexItem::Margin::Margin(0, 200, 0, 10);
+    juce::FlexItem flexBoxControlsItem(100, height, flexBoxControls);
+    flexBoxControlsItem.margin = FlexItem::Margin::Margin(0, 10, 0, 10);
+
+    flexBox.items = { flexBoxControlsItem, timerItem };
+
+    flexBox.performLayout(getLocalBounds());
 }
 
 void PlaybackComponent::changeListenerCallback(juce::ChangeBroadcaster* source)

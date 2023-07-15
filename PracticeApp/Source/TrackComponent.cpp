@@ -92,12 +92,6 @@ void TrackComponent::paint(Graphics& g) {
 
 void TrackComponent::resized(void) {
 
-	juce::FlexBox controlsBox;
-	controlsBox.flexDirection = juce::FlexBox::Direction::row;
-	controlsBox.flexWrap = juce::FlexBox::Wrap::noWrap;
-	controlsBox.alignContent = juce::FlexBox::AlignContent::flexStart;
-	controlsBox.justifyContent = juce::FlexBox::JustifyContent::flexStart;
-
 	juce::FlexBox leftSideBox;
 	leftSideBox.flexDirection = juce::FlexBox::Direction::column;
 	leftSideBox.flexWrap = juce::FlexBox::Wrap::wrap;

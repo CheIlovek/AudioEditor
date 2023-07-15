@@ -69,6 +69,12 @@ namespace ProjectColours {
 			const Colour startColour{ 0xff479aff };
 			const Colour endColour{ 0xff3877aa };
 		}
+
+		namespace Timer {
+			const Colour boxOutline{ Colours::black };
+			const Colour boxBackground{ 0xff1f1f1f };
+			const Colour text{ 0xff62a5fc };
+		}
 		
 	}
 
