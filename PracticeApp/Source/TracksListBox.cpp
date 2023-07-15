@@ -39,7 +39,6 @@ Component* TracksListBox::refreshComponentForRow(int rowNumber, bool isRowSelect
 
 void TracksListBox::resized(void) {
 	auto r = getLocalBounds();
-	r.setWidth(10000);
 	listBox.setBounds(r);
 	r.removeFromLeft(100 + 10);
 	playPosition.setBounds(r);
@@ -91,6 +90,9 @@ void TracksListBox::mouseWheelMove(const MouseEvent& event, const MouseWheelDeta
 		for (TrackComponent* comp : dataList) {
 			comp->resized();
 		}
+	}
+	else {
+		listBox.mouseWheelMove(event, wheel);
 	}
 	
 }
