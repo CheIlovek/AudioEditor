@@ -60,8 +60,8 @@ namespace ProjectColours {
 
 	namespace DialogWindow {
 		const Colour dialogWindowBackground{ 0xff303030 };
-		const Colour buttonColour{ Colours::grey };
-		const Colour buttonOnColour{ Colours::lightgrey };
+		const Colour buttonColour{ 0xffe9e9e9 };
+		const Colour buttonOnColour{ Colours::grey };
 		const Colour buttonTextColour{ 0xff131313 };
 		const Colour sliderColour{ 0xff23c1fe };
 	}

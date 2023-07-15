@@ -25,9 +25,7 @@ ReverbWindowComponent::ReverbWindowComponent()
 
 	applyButton.setButtonText(RussianText::apply.c_str());
 	applyButton.setColour(TextButton::buttonColourId, ProjectColours::DialogWindow::buttonColour);
-	applyButton.setColour(TextButton::buttonOnColourId, ProjectColours::DialogWindow::buttonOnColour);
 	applyButton.setColour(TextButton::textColourOnId, ProjectColours::DialogWindow::buttonTextColour);
-	applyButton.setColour(TextButton::textColourOffId, ProjectColours::DialogWindow::buttonTextColour);
 	addAndMakeVisible(&applyButton);
 
 	for (int i = 0; i < 6; i++) {
@@ -56,6 +54,10 @@ ReverbWindowComponent::~ReverbWindowComponent()
 
 void ReverbWindowComponent::paint(Graphics& g)
 {
+	if(applyButton.isDown())
+		applyButton.setColour(TextButton::buttonColourId, ProjectColours::DialogWindow::buttonOnColour);
+	else
+		applyButton.setColour(TextButton::buttonColourId, ProjectColours::DialogWindow::buttonColour);
 	g.fillAll(ProjectColours::DialogWindow::dialogWindowBackground);
 }
 
