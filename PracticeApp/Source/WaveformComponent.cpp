@@ -25,7 +25,7 @@ void WaveformComponent::paint(juce::Graphics& g) {
 void WaveformComponent::paintIfNoFileLoaded(juce::Graphics& g) {
     g.fillAll(ProjectColours::Tracks::Waveform::noLoadFileBackground);
     g.setColour(ProjectColours::Tracks::Waveform::noLoadFileText);
-    g.drawFittedText("No File Loaded", getLocalBounds(), juce::Justification::centred, 1);
+    g.drawFittedText(RussianText::noFile.c_str(), getLocalBounds(), juce::Justification::centred, 2);
 }
 
 void WaveformComponent::paintIfFileLoaded(juce::Graphics& g) {

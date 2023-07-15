@@ -18,7 +18,7 @@ private:
 };
 
 namespace RussianText {
-    const std::wstring generalVolume(L"Общая громкость");
+    const std::wstring generalVolume(L"Общая\nгромкость");
 }
 
 

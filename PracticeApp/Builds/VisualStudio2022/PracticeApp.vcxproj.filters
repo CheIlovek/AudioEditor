@@ -3324,11 +3324,16 @@
     <ClCompile Include="..\..\Source\ReverbWindowComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\BalanceSliderLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\EffectHistoryComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\EffectListBoxModel.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TimelineComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BalanceSliderLookAndFeel.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -6549,11 +6554,16 @@
     <ClInclude Include="..\..\Include\ReverbWindowComponent.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Include\BalanceSliderLookAndFeel.h" />
     <ClInclude Include="..\..\Include\EffectHistoryComponent.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\EffectListBoxModel.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\TimelineComponent.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\BalanceSliderLookAndFeel.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>

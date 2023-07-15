@@ -1,6 +1,7 @@
 #include "GeneralVolumeComponent.h"
 
 GeneralVolumeComponent::GeneralVolumeComponent(void) {
+	label.setColour(Colours::white);
 	label.setText(RussianText::generalVolume.c_str());
 	label.setFontHeight(16);
 	label.setJustification(Justification::centred);

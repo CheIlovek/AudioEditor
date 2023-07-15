@@ -3,7 +3,8 @@
 
 TracksListBox::TracksListBox(void) : 
 	playPosition(&audioMixer, zoomRatio, defaultPixelsBySecond),
-	listBox("ListBox", this) {
+	listBox("ListBox", this),
+	timeline(zoomRatio, defaultPixelsBySecond,110) {
 	formatManager.registerBasicFormats();
 	listBox.setColour(ListBox::outlineColourId,		ProjectColours::Tracks::listBoxOutline);
 	listBox.setColour(ListBox::backgroundColourId,	ProjectColours::Tracks::listBoxBackground);
@@ -11,6 +12,7 @@ TracksListBox::TracksListBox(void) :
 	listBox.setMultipleSelectionEnabled(false);
 	listBox.setRowSelectedOnMouseDown(true);
 	addAndMakeVisible(listBox);
+	addAndMakeVisible(timeline);
 	addAndMakeVisible(playPosition);
 	listBox.setRowHeight(150);
 	//resized();
@@ -39,9 +41,12 @@ Component* TracksListBox::refreshComponentForRow(int rowNumber, bool isRowSelect
 
 void TracksListBox::resized(void) {
 	auto r = getLocalBounds();
+	timeline.setBounds(r.removeFromTop(30));
 	listBox.setBounds(r);
+	r = getLocalBounds();
 	r.removeFromLeft(100 + 10);
 	playPosition.setBounds(r);
+	
 }
 
 void TracksListBox::listBoxItemClicked(int row, const MouseEvent& event) {
@@ -55,6 +60,7 @@ void TracksListBox::backgroundClicked(const MouseEvent&)
 }
 
 void TracksListBox::mouseDown(const MouseEvent& event) {
+	DBG("BUTTON DOWN");
 	for (TrackComponent* comp : dataList) {
 		auto relEvent = event.getEventRelativeTo(comp);
 		if (comp->contains(relEvent.getMouseDownPosition())) {
@@ -84,15 +90,14 @@ void TracksListBox::mouseDrag(const MouseEvent& event) {
 
 void TracksListBox::mouseWheelMove(const MouseEvent& event, const MouseWheelDetails& wheel) {
 	auto relEvent = event.getEventRelativeTo(&playPosition);
-	if (event.mods.isAltDown() && playPosition.contains(relEvent.getPosition())) {
-		DBG("WHEEL WITH ALT SCROLLED");
-		zoomRatio += wheel.deltaY * scrollStep;
+	if (event.mods.isAltDown() && playPosition.contains(relEvent.getPosition()) && dataList.size() > 0) {
+		zoomRatio = std::max(
+			std::min(zoomRatio + wheel.deltaY * scrollStep, zoomMaxValue),
+			zoomMinValue);
 		for (TrackComponent* comp : dataList) {
 			comp->resized();
 		}
-	}
-	else {
-		listBox.mouseWheelMove(event, wheel);
+		timeline.repaint();
 	}
 	
 }

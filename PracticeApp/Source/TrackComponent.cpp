@@ -116,7 +116,8 @@ void TrackComponent::resized(void) {
 	leftSideBox.performLayout(r.removeFromLeft(100));
 	volumeSlider.setBounds(r.removeFromLeft(10));
 	selection.setBounds(r);
-	r.setBounds(r.getX() + (waveformOffset * waveformZoom), r.getY(), waveformSize * waveformZoom, r.getHeight());
+	if (waveformSize != 0)
+		r.setBounds(r.getX() + (waveformOffset * waveformZoom), r.getY(), waveformSize * waveformZoom, r.getHeight());
 	waveform.setBounds(r);
 	
 }

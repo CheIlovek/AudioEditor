@@ -23,8 +23,8 @@ namespace ProjectColours {
 		const Colour sliderColour{ 0xff23c1fe };
 
 		namespace Waveform {
-			const Colour noLoadFileBackground{ Colours::white };
-			const Colour noLoadFileText{ Colours::darkgrey };
+			const Colour noLoadFileBackground{ 0xff403D3F };
+			const Colour noLoadFileText{ Colours::white };
 			const Colour loadFileBackground{ 0xff121011 };
 			const Array<Colour> waveformBrushes = { 
 				Colour(0xff25c1ff),

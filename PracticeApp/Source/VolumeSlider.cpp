@@ -51,7 +51,6 @@ void VolumeSlider::sliderValueChanged(Slider* slider) {
 }
 
 void VolumeSlider::timerCallback() {
-	DBG(slider.getValue());
 	repaint();
 }
 

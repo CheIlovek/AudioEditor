@@ -2692,6 +2692,7 @@
     <ClCompile Include="..\..\Source\PlayPositionComponent.cpp" />
     <ClCompile Include="..\..\Source\ReverbWindowComponent.cpp" />
     <ClCompile Include="..\..\Source\StopButtonLookAndFeel.cpp" />
+    <ClCompile Include="..\..\Source\TimelineComponent.cpp" />
     <ClCompile Include="..\..\Source\TrackAudioBuffer.cpp" />
     <ClCompile Include="..\..\Source\TrackComponent.cpp" />
     <ClCompile Include="..\..\Source\TracksAudioSource.cpp" />
@@ -3770,6 +3771,7 @@
     <ClInclude Include="..\..\Include\ProjectColours.h" />
     <ClInclude Include="..\..\Include\ReverbWindowComponent.h" />
     <ClInclude Include="..\..\Include\StopButtonLookAndFeel.h" />
+    <ClInclude Include="..\..\Include\TimelineComponent.h" />
     <ClInclude Include="..\..\Include\TrackAudioBuffer.h" />
     <ClInclude Include="..\..\Include\TrackComponent.h" />
     <ClInclude Include="..\..\Include\TracksAudioSource.h" />

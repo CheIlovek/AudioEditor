@@ -28,3 +28,7 @@ private:
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(WaveformComponent)
 };
+
+namespace RussianText {
+    const std::wstring noFile(L"На дорожке нет аудио!\nЗагрузите файл на дорожку через меню Треки -> Добавить аудио");
+}

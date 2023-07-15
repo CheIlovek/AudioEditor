@@ -5,6 +5,7 @@
 #include "TracksAudioSource.h"
 #include "PlayPositionComponent.h"
 #include "ProjectColours.h"
+#include "TimelineComponent.h"
 
 /**
 @brief Класс для работы со звуковыми дорожками
@@ -92,7 +93,11 @@ private:
     const double scrollStep = 1;
     double zoomRatio = 1;
 
+    const double zoomMinValue = 0.01;
+    const double zoomMaxValue = 13;
+
     PlayPositionComponent playPosition;
+    TimelineComponent timeline;
     juce::AudioFormatManager formatManager;
     TracksAudioSource audioMixer;
     juce::Array<TrackComponent*> dataList;
