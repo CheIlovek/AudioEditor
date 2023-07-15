@@ -30,6 +30,8 @@ namespace ProjectColours {
 		const Colour selectionArea{ Colours::blue.withAlpha(.2f)};
 		const Colour selectionBorders{ Colours::blue };
 		const Colour buttonColour{ 0xff363636 };
+		const Colour muteButtonActiveColour{ 0xffbf0000 };
+		const Colour superiorButtonActiveColour{ 0xffbfbf00 };
 		const Colour sliderColour{ 0xff23c1fe };
 
 		namespace Waveform {

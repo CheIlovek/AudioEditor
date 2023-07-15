@@ -22,6 +22,7 @@ EffectHistoryComponent::EffectHistoryComponent(TracksListBox* tracks) : tracks(t
 	clearButton.setColour(TextButton::ColourIds::buttonOnColourId, ProjectColours::EffectHistory::buttonOnColour);
 	clearButton.setColour(TextButton::ColourIds::textColourOnId, ProjectColours::textColour);
 	clearButton.setColour(TextButton::ColourIds::textColourOffId, ProjectColours::textColour);
+	clearButton.setEnabled(false);
 	
 	listBox.setRowHeight(20);
 	listBox.setColour(ListBox::backgroundColourId, ProjectColours::EffectHistory::listBoxBackground);

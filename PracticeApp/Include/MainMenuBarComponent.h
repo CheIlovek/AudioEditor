@@ -80,7 +80,7 @@ namespace RussianText {
         const std::wstring exit(L"Выйти");
     }
     namespace Edit {
-        const std::wstring edit(L"Редактирование");
+        const std::wstring edit(L"Правка");
         const std::wstring redo(L"Вернуть действие");
         const std::wstring undo(L"Отменить действие");
     }

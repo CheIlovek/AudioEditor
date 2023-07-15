@@ -30,26 +30,26 @@ PopupMenu MainMenuBarComponent::getMenuForIndex(int index, const String& name)
     PopupMenu menu;
     if (name == RussianText::File::file.c_str())
     {
-        menu.addItem(CreateProject, RussianText::File::createProject.c_str());
+        menu.addItem(CreateProject, RussianText::File::createProject.c_str(), false);
         menu.addItem(OpenProject,   RussianText::File::openProject  .c_str());
-        menu.addItem(Save,          RussianText::File::save         .c_str());
+        menu.addItem(Save,          RussianText::File::save         .c_str(), false);
         menu.addItem(SaveAs,        RussianText::File::saveAs       .c_str());
         menu.addItem(ExportAs,      RussianText::File::exportAs     .c_str());
         menu.addItem(Import,        RussianText::File::import       .c_str());
-        menu.addItem(CloseProject,  RussianText::File::closeProject .c_str());
+        menu.addItem(CloseProject,  RussianText::File::closeProject .c_str(), false);
         menu.addItem(Exit,          RussianText::File::exit         .c_str());
     }
     else if (name == RussianText::Edit::edit.c_str()) {
-        menu.addItem(Undo, RussianText::Edit::undo.c_str());
-        menu.addItem(Redo, RussianText::Edit::redo.c_str());
+        menu.addItem(Undo, RussianText::Edit::undo.c_str(), false);
+        menu.addItem(Redo, RussianText::Edit::redo.c_str(), false);
     }
     else if (name == RussianText::Tracks::tracks.c_str()) {
         menu.addItem(AddTrack,          RussianText::Tracks::addTrack       .c_str());
-        menu.addItem(RemoveTrack,       RussianText::Tracks::removeTrack    .c_str());
+        menu.addItem(RemoveTrack,       RussianText::Tracks::removeTrack    .c_str(), false);
         menu.addItem(AddAudio,          RussianText::Tracks::addAudio       .c_str());
         menu.addItem(Mute,              RussianText::Tracks::mute           .c_str());
         menu.addItem(Solo,              RussianText::Tracks::solo           .c_str());
-        menu.addItem(SelectAllTracks,   RussianText::Tracks::selectAllTracks.c_str());
+        menu.addItem(SelectAllTracks,   RussianText::Tracks::selectAllTracks.c_str(), false);
     }
     else if (name == RussianText::Selection::selection.c_str()) {
         menu.addItem(SelectAll,             RussianText::Selection::selectAll               .c_str());
@@ -62,12 +62,12 @@ PopupMenu MainMenuBarComponent::getMenuForIndex(int index, const String& name)
     }
     else if (name == RussianText::Effects::effects.c_str()) {
         menu.addItem(Reverberation, RussianText::Effects::reverberation     .c_str());
-        menu.addItem(Deceleration,  RussianText::Effects::deceleration      .c_str());
-        menu.addItem(Acceleration,  RussianText::Effects::accecelaration    .c_str());
-        menu.addItem(RaisingTone,   RussianText::Effects::rasingTheTone     .c_str());
-        menu.addItem(LoweringTone,  RussianText::Effects::loweringTheTone   .c_str());
-        menu.addItem(Echo,          RussianText::Effects::echo              .c_str());
-        menu.addItem(Equalizer,     RussianText::Effects::equalizer         .c_str());
+        menu.addItem(Deceleration,  RussianText::Effects::deceleration      .c_str(), false);
+        menu.addItem(Acceleration,  RussianText::Effects::accecelaration    .c_str(), false);
+        menu.addItem(RaisingTone,   RussianText::Effects::rasingTheTone     .c_str(), false);
+        menu.addItem(LoweringTone,  RussianText::Effects::loweringTheTone   .c_str(), false);
+        menu.addItem(Echo,          RussianText::Effects::echo              .c_str(), false);
+        menu.addItem(Equalizer,     RussianText::Effects::equalizer         .c_str(), false);
     }
     else if (name == RussianText::About::about.c_str()) {
         menu.addItem(Description,   RussianText::About::decsription .c_str());

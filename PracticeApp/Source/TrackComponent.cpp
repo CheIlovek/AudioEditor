@@ -30,7 +30,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 			owner.unmuteTrack(this->row);
 		}
 		else {
-			muteButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour.darker());
+			muteButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::muteButtonActiveColour);
 			owner.muteTrack(this->row);
 		}
 	};
@@ -49,7 +49,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 			owner.soloTrack(-1);
 		}
 		else {
-			superiorButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::buttonColour.darker());
+			superiorButton.setColour(juce::TextButton::buttonColourId, ProjectColours::Tracks::superiorButtonActiveColour);
 			owner.soloTrack(this->row);
 		}
 	};
