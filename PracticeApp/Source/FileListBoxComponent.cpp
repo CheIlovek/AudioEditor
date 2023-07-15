@@ -46,21 +46,27 @@ Component* FileListBoxComponent::refreshComponentForRow(int rowNumber, bool isRo
     return fileList[rowNumber];
 }
 
-void FileListBoxComponent::listBoxItemClicked(int row, const MouseEvent&)
+void FileListBoxComponent::listBoxItemClicked(int row, const MouseEvent& event)
 {
     DBG("clicked");
+    backgroundClicked(event);
     fileListBox.selectRow(row);
     repaint();
 }
 
 void FileListBoxComponent::backgroundClicked(const MouseEvent&)
 {
+    if (fileListBox.getNumSelectedRows() == 1)
+    {
+        fileList[fileListBox.getSelectedRow()]->deselect();
+    }
+
     fileListBox.deselectAllRows();
 }
 
 void FileListBoxComponent::resized(void)
 {
-    double textProportion = 0.7;
+    double textProportion = 0.75;
     double toggleProportion = 1 - textProportion;
     int headersHeight = 20;
     int margin = 5;
@@ -115,6 +121,10 @@ void FileListBoxComponent::openFile()
                 fileList.add(fileComponent.release());
                 
                 fileListBox.updateContent();
+                if (fileListBox.getNumSelectedRows() == 1)
+                {
+                    fileList[fileListBox.getSelectedRow()]->deselect();
+                }
                 fileListBox.selectRow(fileList.size() - 1, true, true);
                 repaint();
             }
@@ -134,5 +144,16 @@ File FileListBoxComponent::getSelectedFile() {
 int FileListBoxComponent::getNumOfSelectedRows()
 {
     return fileListBox.getSelectedRows().size();
+}
+
+void FileListBoxComponent::selectedFileAdded()
+{
+    auto index = fileListBox.getSelectedRow();
+    fileList[index]->fileAdded();
+}
+
+int FileListBoxComponent::getSelectedRow()
+{
+    return fileListBox.getSelectedRow();
 }
 

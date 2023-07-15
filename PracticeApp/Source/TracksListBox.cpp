@@ -166,7 +166,7 @@ void TracksListBox::setFileOnTrack(int trackId, juce::File file) {
 void TracksListBox::setFileOnTrack(juce::File file) {
 	int index = listBox.getSelectedRow();
 	if (index >= 0)
-		setFileOnTrack(listBox.getSelectedRow(),file);
+		setFileOnTrack(index,file);
 }
 
 void TracksListBox::muteTrack(int trackId) {

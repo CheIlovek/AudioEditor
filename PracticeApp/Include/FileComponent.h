@@ -19,6 +19,8 @@ public:
 
 	String getFileName();
 	File getFile();
+	void fileAdded();
+	void deselect();
 
 private:
 	FileListBoxComponent& owner;

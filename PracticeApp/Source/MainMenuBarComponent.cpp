@@ -87,8 +87,11 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
         effectHistory->addNewTrackHistory();
         break;
     case AddAudio:
-        if(tracks->getNumOfSelectedRows() == 1 && flbm->getNumOfSelectedRows() == 1)
+        if (tracks->getNumOfSelectedRows() == 1 && flbm->getNumOfSelectedRows() == 1)
+        {
             tracks->setFileOnTrack(flbm->getSelectedFile());
+            flbm->selectedFileAdded();
+        }
         break;
     case Reverberation:
         if (tracks->getNumOfSelectedRows() == 1)

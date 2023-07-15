@@ -7,12 +7,12 @@ FileComponent::FileComponent(const File newFile, FileListBoxComponent& newOwner,
 	addAndMakeVisible(isAddedToggle);
 
 	fileName.setColour(ProjectColours::textColour);
-
 	fileName.setFontHeight(16);
 
-	isAddedToggle.setEnabled(false);
-
+	isAddedToggle.setEnabled(true);
 	isAddedToggle.setInterceptsMouseClicks(false, false);
+	isAddedToggle.setColour(ToggleButton::tickColourId, ProjectColours::textColour);
+	isAddedToggle.setColour(ToggleButton::tickDisabledColourId, ProjectColours::Files::fileRowBackgroundSelected);
 
 	fileName.toBack();
 	isAddedToggle.toBack();
@@ -31,7 +31,7 @@ void FileComponent::paint(Graphics& g)
 
 void FileComponent::resized(void)
 {
-	double textProportion = 0.7;
+	double textProportion = 0.8;
 	double toggleProportion = 1 - textProportion;
 	int margin = 5;
 	fileName.setBounds(margin, 0, getWidth() * textProportion - margin, getHeight());
@@ -42,6 +42,7 @@ void FileComponent::resized(void)
 void FileComponent::mouseDown(const juce::MouseEvent& event)
 {
 	owner.listBoxItemClicked(row, event);
+	isAddedToggle.setColour(ToggleButton::tickDisabledColourId, ProjectColours::Files::fileRowBackgroundSelected);
 }
 
 String FileComponent::getFileName()
@@ -52,4 +53,14 @@ String FileComponent::getFileName()
 File FileComponent::getFile()
 {
 	return file;
+}
+
+void FileComponent::fileAdded()
+{
+	isAddedToggle.triggerClick();
+}
+
+void FileComponent::deselect()
+{
+	isAddedToggle.setColour(ToggleButton::tickDisabledColourId, ProjectColours::Files::fileRowBackgroundUnselected);
 }

@@ -23,6 +23,8 @@ public:
 	File getFile(int index);
 	File getSelectedFile();
 	int getNumOfSelectedRows();
+	void selectedFileAdded();
+	int getSelectedRow();
 
 private:
 	std::unique_ptr<juce::FileChooser> chooser;
