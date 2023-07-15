@@ -9,7 +9,8 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	volumeSlider(Colours::black),
 	owner(newOwner),
 	row(row),
-	waveformZoom(zoom) {
+	waveformZoom(zoom),
+	selection(zoom) {
 	trackName.setColour(ProjectColours::textColour);
 	juce::String audio(RussianText::audio.c_str());
 	trackName.setText(audio + ' ' + std::to_string(TrackNumber));
@@ -155,9 +156,17 @@ String TrackComponent::getTrackName()
 	return trackName.getText();
 }
 
-int TrackComponent::getWaveformSize()
+float TrackComponent::getWaveformSize()
 {
-	return waveformSize;
+	return waveformSize * waveformZoom;
+}
+
+float TrackComponent::getWaveformOffset() {
+	return waveformOffset;
+}
+
+float TrackComponent::getTrueWaveformOffset() {
+	return waveformOffset * waveformZoom;
 }
 
 void TrackComponent::mouseDown(const juce::MouseEvent& event) {
@@ -227,6 +236,49 @@ std::pair<float, float> TrackComponent::getSelectedAreaInPixels() {
 	pos.second = std::min(pos.second, (float)waveformSize);
 
 	return pos;
+}
+
+void TrackComponent::setSelectedAreaInPixels(float start, float end) {
+	selection.setSelectedArea(start, end);
+}
+
+void TrackComponent::selectAll(bool selectOnlyOnWaveform) {
+	if (selectOnlyOnWaveform) {
+		float offset = waveformOffset * waveformZoom;
+		float size = waveformSize * waveformZoom;
+		selection.setSelectedArea(offset, offset + size);
+	}
+	else {
+		selection.setSelectedArea(0, selection.getWidth());
+	}
+}
+
+void TrackComponent::selectAllBefore(float end, bool selectOnlyOnWaveform) {
+	if (selectOnlyOnWaveform) {
+		float offset = waveformOffset * waveformZoom;
+		float size = waveformSize * waveformZoom;
+		if (offset < end) {
+			end = std::min(offset + size, end);
+			selection.setSelectedArea(offset, end);
+		}
+	}
+	else {
+		selection.setSelectedArea(0, end);
+	}
+}
+
+void TrackComponent::selectAllAfter(float start, bool selectOnlyOnWaveform) {
+	if (selectOnlyOnWaveform) {
+		float offset = waveformOffset * waveformZoom;
+		float size = waveformSize * waveformZoom;
+		if (start < offset + size) {
+			start = std::max(offset, start);
+			selection.setSelectedArea(start, offset + size);
+		}
+	}
+	else {
+		selection.setSelectedArea(start, selection.getWidth());
+	}
 }
 
 void TrackComponent::sliderValueChanged(juce::Slider* slider) {

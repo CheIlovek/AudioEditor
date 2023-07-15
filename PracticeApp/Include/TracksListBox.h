@@ -78,6 +78,11 @@ public:
     bool applyReverbOnTrack(std::function<void()> activateEffectHistory);
     void setStereoBalanceOnTrack(int trackId, float newBalance);
 
+    void selectAllOnTrack(int trackId = -1);
+    void selectAreaBeforePointer(int trackId = -1);
+    void selectAreaAfterPointer(int trackId = -1);
+
+
     int getNumOfSelectedRows();
     int getSelectedRow();
     TrackComponent* getTrack(int trackId);

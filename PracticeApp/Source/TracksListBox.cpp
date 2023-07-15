@@ -209,6 +209,33 @@ void TracksListBox::setStereoBalanceOnTrack(int trackId, float newBalance) {
 	audioMixer.setStereoBalanceOnTrack(trackId, newBalance);
 }
 
+void TracksListBox::selectAllOnTrack(int trackId) {
+	if (trackId == -1)
+		trackId = listBox.getSelectedRow();
+	if (trackId >= 0 && trackId < dataList.size()) {
+		auto* track = dataList.getUnchecked(trackId);
+		track->selectAll();
+	}
+}
+
+void TracksListBox::selectAreaBeforePointer(int trackId) {
+	if (trackId == -1)
+		trackId = listBox.getSelectedRow();
+	if (trackId >= 0 && trackId < dataList.size()) {
+		auto* track = dataList.getUnchecked(trackId);
+		track->selectAllBefore(playPosition.getPositionInPixels());
+	}
+}
+
+void TracksListBox::selectAreaAfterPointer(int trackId) {
+	if (trackId == -1)
+		trackId = listBox.getSelectedRow();
+	if (trackId >= 0 && trackId < dataList.size()) {
+		auto* track = dataList.getUnchecked(trackId);
+		track->selectAllAfter(playPosition.getPositionInPixels());
+	}
+}
+
 int TracksListBox::getNumOfSelectedRows()
 {
 	return listBox.getSelectedRows().size();

@@ -13,10 +13,12 @@ public:
     void mouseDown(const juce::MouseEvent& event) override;
     void mouseDrag(const MouseEvent& event) override;
     void mouseUp(const MouseEvent& event) override;
+    double getPositionInPixels();
 
 private:
     const double& curZoom;
     const double& pixelsPerSecond;
+    double curPos = 0;
     void timerCallback() override;
 
     TracksAudioSource* transportSource;

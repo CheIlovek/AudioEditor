@@ -121,7 +121,16 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
             track->superiorButtonClicked();
         }
         break;
-    //"SELECTION" MENU ITEMS WOULD BE HERE
+    case SelectAll:
+        tracks->selectAllOnTrack();
+        break;
+    case FromStartToCursor:
+        tracks->selectAreaBeforePointer();
+        break;
+    case FromCursorToEnd:
+        tracks->selectAreaAfterPointer();
+        break;
+        //Осталась AREAAAAAAAAAAAAA
     case Reverberation:
         if (tracks->getNumOfSelectedRows() == 1)
             tracks->applyReverbOnTrack([this] {effectHistory->addNewEffect(RussianText::Effects::reverberation.c_str()); });
