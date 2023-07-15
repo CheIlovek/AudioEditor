@@ -3,7 +3,7 @@
 #include "../Include/Application.h"
 //
 MainFrame::MainFrame(const String& name)
-   : DocumentWindow(name, Desktop::getInstance().getDefaultLookAndFeel()
+   : DocumentWindow("ASAP Audition", Desktop::getInstance().getDefaultLookAndFeel()
       .findColour(ResizableWindow::backgroundColourId),
       DocumentWindow::allButtons)
 {
