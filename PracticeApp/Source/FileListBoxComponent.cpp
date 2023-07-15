@@ -121,6 +121,23 @@ void FileListBoxComponent::openFile()
         });
 }
 
+void FileListBoxComponent::saveFile(AudioSource* source, int numSamples, int numChannels, int sampleRate) {
+    chooser = std::make_unique<juce::FileChooser>("Select a path to save...", juce::File{}, "*.wav");
+
+    auto chooserFlags = juce::FileBrowserComponent::saveMode
+        | juce::FileBrowserComponent::canSelectFiles;
+    chooser->launchAsync(chooserFlags, [source, numSamples, numChannels, sampleRate](const juce::FileChooser& fc) {
+        auto file = fc.getResult();
+
+        if (file != juce::File{}) {
+            auto stream = file.createOutputStream();
+            WavAudioFormat format;
+            auto a = format.createWriterFor(stream.get(), sampleRate, numChannels,32,"", 0); // Нужны метаданныеееее
+            a->writeFromAudioSource(*source, numSamples);
+        }
+        });
+}
+
 File FileListBoxComponent::getFile(int index)
 {
     return fileList[index]->getFile();

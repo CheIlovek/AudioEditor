@@ -30,6 +30,8 @@ public:
 
     double getLengthInSeconds() const;
     double getCurrentPosition() const;
+    int getNumSamples();
+    int getNumChannels();
     void changeListenerCallback(juce::ChangeBroadcaster* source) override;
     bool isPlaying() const;
     void setPosition(double newPosition);

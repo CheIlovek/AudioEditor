@@ -20,6 +20,7 @@ public:
 	void resized(void) override;
 	void paint(Graphics& g) override;
 	void openFile();
+	void saveFile(AudioSource* buff, int numSamples, int numChannels, int sampleRate);
 	File getFile(int index);
 	File getSelectedFile();
 	int getNumOfSelectedRows();
