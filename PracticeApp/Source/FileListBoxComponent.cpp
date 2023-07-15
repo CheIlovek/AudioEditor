@@ -105,7 +105,7 @@ void FileListBoxComponent::paint(Graphics& g)
 
 void FileListBoxComponent::openFile()
 {
-    chooser = std::make_unique<juce::FileChooser>("Select a Wave file to play...", juce::File{}, "*.wav,*.mp3");     
+    chooser = std::make_unique<juce::FileChooser>("Select an audio file to open...", juce::File{}, "*.wav,*.mp3");     
 
     auto chooserFlags = juce::FileBrowserComponent::openMode
         | juce::FileBrowserComponent::canSelectFiles;

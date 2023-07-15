@@ -4,6 +4,7 @@
 #include "FileListBoxComponent.h"
 #include "TracksListBox.h"
 #include "EffectHistoryComponent.h"
+#include "ProjectManager.h"
 
 class MainMenuBarComponent : public MenuBarModel, public Component
 {
@@ -64,6 +65,7 @@ private:
     FileListBoxComponent* flbm;
     TracksListBox* tracks;
     EffectHistoryComponent* effectHistory;
+    ProjectManager manager;
 
     MenuBarComponent menuBar;
 

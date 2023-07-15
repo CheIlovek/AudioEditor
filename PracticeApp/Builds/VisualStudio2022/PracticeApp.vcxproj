@@ -2691,6 +2691,7 @@
     <ClCompile Include="..\..\Source\PlayButtonLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\PlayPositionComponent.cpp" />
     <ClCompile Include="..\..\Source\PlayTimerComponent.cpp" />
+    <ClCompile Include="..\..\Source\ProjectManager.cpp" />
     <ClCompile Include="..\..\Source\ReverbWindowComponent.cpp" />
     <ClCompile Include="..\..\Source\StopButtonLookAndFeel.cpp" />
     <ClCompile Include="..\..\Source\TimelineComponent.cpp" />
@@ -3771,6 +3772,7 @@
     <ClInclude Include="..\..\Include\PlayPositionComponent.h" />
     <ClInclude Include="..\..\Include\PlayTimerComponent.h" />
     <ClInclude Include="..\..\Include\ProjectColours.h" />
+    <ClInclude Include="..\..\Include\ProjectManager.h" />
     <ClInclude Include="..\..\Include\ReverbWindowComponent.h" />
     <ClInclude Include="..\..\Include\StopButtonLookAndFeel.h" />
     <ClInclude Include="..\..\Include\TimelineComponent.h" />

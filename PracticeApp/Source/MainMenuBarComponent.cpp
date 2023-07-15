@@ -82,10 +82,10 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
     auto& source = tracks->getAudioSource();
     switch (menuID) {
     case OpenProject:
-
+        manager.openProject();
         break;
     case SaveAs:
-        
+        manager.saveProject();
         break;
     case ExportAs:
         flbm->saveFile(&source, source.getNumSamples(), source.getNumChannels(), source.getSampleRate());
@@ -94,7 +94,7 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
         flbm->openFile();
         break;
     case Exit:
-        
+        JUCEApplication::getInstance()->systemRequestedQuit();
         break;
     case AddTrack:
         tracks->addNewTrack();
@@ -133,7 +133,6 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
         showHelpWindow();
         break;
     }
-    
 }
 
 void MainMenuBarComponent::resized(void)
