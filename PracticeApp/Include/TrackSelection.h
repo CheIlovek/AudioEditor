@@ -6,7 +6,7 @@
 class TrackSelection : public juce::Component {
 
 public:
-    TrackSelection();
+    TrackSelection(const double& zoom);
 
     void paint(juce::Graphics& g) override;
 
@@ -23,6 +23,7 @@ private:
     float startSelectionPos = -1;
     float endSelectionPos = 0;
     const float lineWidth = 2.f;
+    const double& zoom;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TrackSelection);
 };

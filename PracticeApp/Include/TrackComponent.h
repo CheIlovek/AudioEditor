@@ -55,9 +55,18 @@ public:
     */
     int getRow();
     String getTrackName();
-    int getWaveformSize();
+    float getWaveformSize();
+    float getWaveformOffset();
+    float getTrueWaveformOffset();
+    float getTrueWaveformSize();
+
     bool haveSelection();
     std::pair<float, float> getSelectedAreaInPixels();
+    void setSelectedAreaInPixels(float start, float end);
+    void selectAll(bool selectOnlyOnWaveform = true);
+    void selectAllBefore(float end, bool selectOnlyOnWaveform = true);
+    void selectAllAfter(float start, bool selectOnlyOnWaveform = true);
+
     void setAudioFilename(juce::String str);
     void muteButtonClicked();
     void superiorButtonClicked();
@@ -86,8 +95,8 @@ private:
     TrackSelection selection;
     TracksListBox& owner;
     int row;
-    int waveformSize = 0;
-    int waveformOffset = 0;
+    float waveformSize = 0;
+    float waveformOffset = 0;
     const double& waveformZoom;
     int oldWaveformOffset = 0;
     static int TrackNumber;

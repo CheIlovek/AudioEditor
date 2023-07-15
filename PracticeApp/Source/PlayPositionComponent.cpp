@@ -13,10 +13,10 @@ void PlayPositionComponent::paint(juce::Graphics& g) {
     
     if (duration > 0.0) {
         auto audioPosition = (float)transportSource->getCurrentPosition();
-        auto drawPosition = (audioPosition / duration) * duration * curZoom * pixelsPerSecond;
+        curPos = (audioPosition / duration) * duration * curZoom * pixelsPerSecond;
 
         g.setColour(ProjectColours::Tracks::playMarker);
-        g.drawLine(drawPosition, 0.0f, drawPosition, (float)getHeight(), 2.0f);
+        g.drawLine(curPos, 0.0f, curPos, (float)getHeight(), 2.0f);
     }
 }
 
@@ -38,6 +38,10 @@ void PlayPositionComponent::mouseDrag(const MouseEvent& event) {
 
 void PlayPositionComponent::mouseUp(const MouseEvent& event) {
     getParentComponent()->mouseUp(event);
+}
+
+double PlayPositionComponent::getPositionInPixels() {
+    return curPos;
 }
 
 
