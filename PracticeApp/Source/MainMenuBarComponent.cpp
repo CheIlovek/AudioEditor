@@ -144,4 +144,5 @@ void MainMenuBarComponent::showDescriptionWindow()
 
 void MainMenuBarComponent::showHelpWindow()
 {
+
 }
