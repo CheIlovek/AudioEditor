@@ -88,13 +88,13 @@ void MainMenuBarComponent::menuItemSelected(int menuID, int index)
         
         break;
     case ExportAs:
-
+        flbm->saveFile(&source, source.getNumSamples(), source.getNumChannels(), source.getSampleRate());
         break;
     case Import:
         flbm->openFile();
         break;
-    case ExportAs:
-        flbm->saveFile(&source, source.getNumSamples(), source.getNumChannels(), source.getSampleRate());
+    case Exit:
+        
         break;
     case AddTrack:
         tracks->addNewTrack();
