@@ -57,7 +57,7 @@ PopupMenu MainMenuBarComponent::getMenuForIndex(int index, const String& name)
         PopupMenu subMenu;
         subMenu.addItem(FromStartToCursor,  RussianText::Selection::Area::fromStartToCursor .c_str());
         subMenu.addItem(FromCursorToEnd,    RussianText::Selection::Area::fromCursorToEnd   .c_str());
-        subMenu.addItem(SetRange,           RussianText::Selection::Area::setRange          .c_str());
+        subMenu.addItem(SetRange,           RussianText::Selection::Area::setRange          .c_str(), false);
         menu.addSubMenu(                    RussianText::Selection::Area::area              .c_str(),
             subMenu);
     }

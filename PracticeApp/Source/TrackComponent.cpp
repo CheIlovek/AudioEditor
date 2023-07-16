@@ -72,7 +72,7 @@ TrackComponent::TrackComponent(juce::AudioFormatManager& formatManager, TracksLi
 	addAndMakeVisible(superiorButton);
 	addAndMakeVisible(balanceSlider);
 	addAndMakeVisible(waveform);
-	addAndMakeVisible(volumeSlider);
+	//addAndMakeVisible(volumeSlider);
 	addAndMakeVisible(selection);
 	resized();
 
@@ -117,8 +117,8 @@ void TrackComponent::resized(void) {
 	balanceSliderItem.minHeight = 80;
 	leftSideBox.items = { trackNameItem, muteButtonItem, superiorButtonItem, balanceSliderItem };
 	auto r = getLocalBounds();
-	leftSideBox.performLayout(r.removeFromLeft(100));
-	volumeSlider.setBounds(r.removeFromLeft(10));
+	leftSideBox.performLayout(r.removeFromLeft(110));
+	//volumeSlider.setBounds(r.removeFromLeft(10));
 	r.removeFromTop(audioFilenameHeight);
 	selection.setBounds(r);
 	if (waveformSize != 0)
