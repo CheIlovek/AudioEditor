@@ -31,8 +31,8 @@ HelpWindowComponent::~HelpWindowComponent()
 
 void HelpWindowComponent::resized(void)
 {
-	int height = 400;
-	int width = 400;
+	int height = 300;
+	int width = 500;
 	int margin = 20;
 	int comboBoxWidth = 200;
 	int comboBoxHeight = 30;
