@@ -24,15 +24,15 @@ ReverbWindowComponent::ReverbWindowComponent()
 	sliders.add(&freezeModeSlider);
 
 	applyButton.setButtonText(RussianText::apply.c_str());
-	applyButton.setColour(TextButton::buttonColourId, ProjectColours::DialogWindow::buttonColour);
-	applyButton.setColour(TextButton::textColourOffId, ProjectColours::DialogWindow::buttonTextColour);
+	applyButton.setColour(TextButton::buttonColourId, ProjectColours::ReverbWindow::buttonColour);
+	applyButton.setColour(TextButton::textColourOffId, ProjectColours::ReverbWindow::buttonTextColour);
 	addAndMakeVisible(&applyButton);
 
 	for (int i = 0; i < 6; i++) {
 		labels[i]->setColour(ProjectColours::textColour);
 		sliders[i]->setSliderStyle(Slider::LinearHorizontal);
 		sliders[i]->setTextBoxStyle(Slider::TextBoxRight, true, 100, 20);
-		sliders[i]->setColour(Slider::thumbColourId, ProjectColours::DialogWindow::sliderColour);
+		sliders[i]->setColour(Slider::thumbColourId, ProjectColours::ReverbWindow::sliderColour);
 		sliders[i]->setRange(0.0, 1.0, 0.01);
 		addAndMakeVisible(labels[i]);
 		addAndMakeVisible(sliders[i]);
@@ -55,10 +55,10 @@ ReverbWindowComponent::~ReverbWindowComponent()
 void ReverbWindowComponent::paint(Graphics& g)
 {
 	if(applyButton.isDown())
-		applyButton.setColour(TextButton::buttonColourId, ProjectColours::DialogWindow::buttonOnColour);
+		applyButton.setColour(TextButton::buttonColourId, ProjectColours::ReverbWindow::buttonOnColour);
 	else
-		applyButton.setColour(TextButton::buttonColourId, ProjectColours::DialogWindow::buttonColour);
-	g.fillAll(ProjectColours::DialogWindow::dialogWindowBackground);
+		applyButton.setColour(TextButton::buttonColourId, ProjectColours::ReverbWindow::buttonColour);
+	g.fillAll(ProjectColours::ReverbWindow::dialogWindowBackground);
 }
 
 void ReverbWindowComponent::resized(void)

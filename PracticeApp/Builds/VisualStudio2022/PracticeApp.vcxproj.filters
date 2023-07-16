@@ -3339,6 +3339,9 @@
     <ClCompile Include="..\..\Source\PlayTimerComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\HelpWindowComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -6573,6 +6576,9 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\PlayTimerComponent.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\HelpWindowComponent.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\ProjectManager.h">

@@ -161,5 +161,6 @@ void MainMenuBarComponent::showDescriptionWindow()
 
 void MainMenuBarComponent::showHelpWindow()
 {
-
+    DialogWindow::showDialog(RussianText::About::help.c_str(), &helpWindowComponent, NULL,
+        ProjectColours::HelpWindow::backgroundColour, true);
 }

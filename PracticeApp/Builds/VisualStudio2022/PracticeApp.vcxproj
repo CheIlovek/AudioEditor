@@ -2684,6 +2684,7 @@
     <ClCompile Include="..\..\Source\FileComponent.cpp" />
     <ClCompile Include="..\..\Source\FileListBoxComponent.cpp" />
     <ClCompile Include="..\..\Source\GeneralVolumeComponent.cpp" />
+    <ClCompile Include="..\..\Source\HelpWindowComponent.cpp" />
     <ClCompile Include="..\..\Source\MainComponent.cpp" />
     <ClCompile Include="..\..\Source\MainFrame.cpp" />
     <ClCompile Include="..\..\Source\MainMenuBarComponent.cpp" />
@@ -3764,6 +3765,7 @@
     <ClInclude Include="..\..\Include\FileComponent.h" />
     <ClInclude Include="..\..\Include\FileListBoxComponent.h" />
     <ClInclude Include="..\..\Include\GeneralVolumeComponent.h" />
+    <ClInclude Include="..\..\Include\HelpWindowComponent.h" />
     <ClInclude Include="..\..\Include\MainComponent.h" />
     <ClInclude Include="..\..\Include\MainFrame.h" />
     <ClInclude Include="..\..\Include\MainMenuBarComponent.h" />

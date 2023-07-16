@@ -8,7 +8,7 @@ class ReverbWindowComponent : public Component
 {
 public:
 	ReverbWindowComponent();
-	~ReverbWindowComponent();
+	~ReverbWindowComponent() override;
 
 	void paint(Graphics& g) override;
 	void resized(void) override;

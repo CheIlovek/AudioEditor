@@ -35,7 +35,7 @@ void EffectsProcessor::makeReverb(std::function<void()> updateBufferAndActivateH
     };
 
     DialogWindow::showDialog(RussianText::reverberation.c_str(), &reverbWindowComponent, NULL,
-                                ProjectColours::DialogWindow::dialogWindowBackground, true, false);
+                                ProjectColours::ReverbWindow::dialogWindowBackground, true);
     reverbWindowComponent.setSize(600, 600);
 }
 

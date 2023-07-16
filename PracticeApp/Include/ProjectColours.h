@@ -65,7 +65,7 @@ namespace ProjectColours {
 		const Colour comboBoxbackgroundColour{ 0xff131313 };
 	}
 
-	namespace DialogWindow {
+	namespace ReverbWindow {
 		const Colour dialogWindowBackground{ 0xff303030 };
 		const Colour buttonColour{ 0xffe9e9e9 };
 		const Colour buttonOnColour{ Colours::grey };
@@ -93,6 +93,13 @@ namespace ProjectColours {
 		const Colour startColour{ Colours::green };
 		const Colour middleColour{ Colours::yellow };
 		const Colour endColour{ Colours::red };
+	}
+
+	namespace HelpWindow {
+		const Colour backgroundColour{ 0xff242223 };
+		const Colour comboBoxOutline{ Colours::grey };
+		const Colour comboBoxFocusedOutline{ Colours::white };
+		const Colour comboBoxbackgroundColour{ 0xff131313 };
 	}
 
 }

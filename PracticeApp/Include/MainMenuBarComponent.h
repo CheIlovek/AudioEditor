@@ -5,12 +5,13 @@
 #include "TracksListBox.h"
 #include "EffectHistoryComponent.h"
 #include "ProjectManager.h"
+#include "HelpWindowComponent.h"
 
 class MainMenuBarComponent : public MenuBarModel, public Component
 {
 public:
     MainMenuBarComponent(FileListBoxComponent*, TracksListBox*, EffectHistoryComponent*);
-	~MainMenuBarComponent();
+	~MainMenuBarComponent() override;
 
 
 	StringArray getMenuBarNames() override;
@@ -66,6 +67,7 @@ private:
     TracksListBox* tracks;
     EffectHistoryComponent* effectHistory;
     ProjectManager manager;
+    HelpWindowComponent helpWindowComponent;
 
     MenuBarComponent menuBar;
 

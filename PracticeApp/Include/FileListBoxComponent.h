@@ -10,7 +10,7 @@ class FileListBoxComponent : public Component, public ListBoxModel
 public:
 
 	FileListBoxComponent();
-	~FileListBoxComponent();
+	~FileListBoxComponent() override;
 
 	int getNumRows() override;
 	void paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) override;
