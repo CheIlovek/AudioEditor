@@ -77,7 +77,7 @@ void PlaybackComponent::resized()
     flexBox.alignContent = juce::FlexBox::AlignContent::flexStart;
     flexBox.justifyContent = juce::FlexBox::JustifyContent::spaceBetween;
 
-    juce::FlexItem timerItem(300, height, timer);
+    juce::FlexItem timerItem(300, height-3, timer);
     
     timerItem.margin = FlexItem::Margin::Margin(0, 200, 0, 10);
     juce::FlexItem flexBoxControlsItem(100, height, flexBoxControls);

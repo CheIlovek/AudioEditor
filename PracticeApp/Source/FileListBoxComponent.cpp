@@ -99,6 +99,15 @@ void FileListBoxComponent::paint(Graphics& g)
     else {
         g.fillAll(ProjectColours::Files::listBoxBackground);
     }
+    ColourGradient headerColour(
+        ProjectColours::Files::headerStartColour,
+        0,0,
+        ProjectColours::Files::headerEndColour,
+        getWidth(),35,
+        true
+    );
+    g.setGradientFill(headerColour);
+    g.fillRect(0, 0, getWidth(), 35);
 
     
 }

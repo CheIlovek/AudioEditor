@@ -89,6 +89,8 @@ void TrackComponent::paint(Graphics& g) {
 	g.fillRect(area);
 	g.setColour(ProjectColours::Tracks::filenameText);
 	g.drawSingleLineText(audioFilename, area.getX(), area.getHeight()-2);
+	g.setColour(Colours::black);
+	g.drawHorizontalLine(getHeight()-1, 0, 110);
 }
 
 void TrackComponent::resized(void) {
@@ -300,5 +302,9 @@ void TrackComponent::muteButtonClicked()
 void TrackComponent::superiorButtonClicked()
 {
 	superiorButton.triggerClick();
+}
+
+void TrackComponent::setSoloButtonState(bool state) {
+	superiorButton.setToggleState(state,dontSendNotification);
 }
 

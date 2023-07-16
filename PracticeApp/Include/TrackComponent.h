@@ -70,6 +70,7 @@ public:
     void setAudioFilename(juce::String str);
     void muteButtonClicked();
     void superiorButtonClicked();
+    void setSoloButtonState(bool state);
 
     
 private:
