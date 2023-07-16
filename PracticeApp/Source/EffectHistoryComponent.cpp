@@ -56,6 +56,16 @@ void EffectHistoryComponent::resized(void)
 void EffectHistoryComponent::paint(Graphics& g)
 {
 	g.fillAll(ProjectColours::EffectHistory::listBoxBackground);
+
+	ColourGradient headerColour(
+		ProjectColours::EffectHistory::headerStartColour,
+		0, 0,
+		ProjectColours::EffectHistory::headerEndColour,
+		getWidth(), 40,
+		true
+	);
+	g.setGradientFill(headerColour);
+	g.fillRect(0, 0, getWidth(), 40);
 }
 
 void EffectHistoryComponent::addNewTrackHistory()

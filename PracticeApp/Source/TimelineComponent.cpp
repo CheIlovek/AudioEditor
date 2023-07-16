@@ -44,7 +44,7 @@ void TimelineComponent::paint(juce::Graphics& g) {
 }
 
 juce::String TimelineComponent::getFormattedSting(float valueInSec) {
-	int milsec = (int)(valueInSec * 100) % 1000;
+	int milsec = (int)(valueInSec * 1000) % 1000;
 	int remainSecs = valueInSec;
 	int hours = remainSecs / (60 * 60);
 	remainSecs %= (60 * 60);

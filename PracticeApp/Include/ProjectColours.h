@@ -5,11 +5,14 @@ namespace ProjectColours {
 	const Colour textColour{ Colours::white };
 	const Colour generalBackground { 0xff131313 };
 	namespace Files {
+		const Colour headerStartColour{ 0xff111111 };
+		const Colour headerEndColour{ 0xff181818 };
+
 		const Colour fileRowBackgroundUnselected{ 0xff303030 };
-		const Colour fileRowBackgroundSelected{ Colours::grey };
+		const Colour fileRowBackgroundSelected{ 0xff363636 };
 
 		const Colour listBoxBackground{ 0xff242223 };
-		const Colour listBoxOutline{ Colours::grey };
+		const Colour listBoxOutline{ 0 };
 
 		const Colour listBoxNoFileBackground{ 0x40403D3F };
 		const Colour listBoxNoFileText{ Colours::white };
@@ -21,17 +24,18 @@ namespace ProjectColours {
 		const Colour filenameText{ Colours::white };
 
 		const Colour listBoxBackground{ 0xff242223 };
+		const Colour listBoxBackgroundSelected{ 0xff353334 };
 		const Colour listBoxOutline{ Colours::black };
 		const Colour listBoxNoTracksBackground{ 0x99403D3F };
 		const Colour listBoxNoTracksText{ Colours::white };
 
-		const Colour playMarker{ Colours::green };
+		const Colour playMarker{ 0xffff002a };
 
 		const Colour selectionArea{ Colours::blue.withAlpha(.2f)};
 		const Colour selectionBorders{ Colours::blue };
 		const Colour buttonColour{ 0xff363636 };
-		const Colour muteButtonActiveColour{ 0xffbf0000 };
-		const Colour superiorButtonActiveColour{ 0xffbfbf00 };
+		const Colour muteButtonActiveColour{ 0xff790a0a };
+		const Colour superiorButtonActiveColour{ 0xff154b0a };
 		const Colour sliderColour{ 0xff23c1fe };
 
 		namespace Waveform {
@@ -48,9 +52,12 @@ namespace ProjectColours {
 	}
 
 	namespace EffectHistory {
+		const Colour headerStartColour{ 0xff111111 };
+		const Colour headerEndColour{ 0xff181818 };
+
 		const Colour rowBackground{ 0xff303030 };
 		const Colour listBoxBackground{ 0xff242223 };
-		const Colour listBoxOutline{ Colours::grey };
+		const Colour listBoxOutline{ 0 };
 		const Colour comboBoxOutline{ Colours::grey };
 		const Colour comboBoxFocusedOutline{ Colours::white };
 		const Colour buttonColour{ 0xff363636 };

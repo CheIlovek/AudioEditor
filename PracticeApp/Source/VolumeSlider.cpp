@@ -6,6 +6,7 @@ VolumeSlider::VolumeSlider(void) {
 	slider.setRange(0, 1);
 	slider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
 	slider.setValue(0.7);
+	slider.setColour(Slider::ColourIds::textBoxOutlineColourId, Colour(0));
 	slider.setLookAndFeel(&laf);
 	slider.addListener(this);
 	addAndMakeVisible(slider);

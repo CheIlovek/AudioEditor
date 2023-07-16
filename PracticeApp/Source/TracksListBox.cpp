@@ -28,7 +28,7 @@ int TracksListBox::getNumRows() {
 
 void TracksListBox::paintListBoxItem(int rowNumber, Graphics& g, int width, int height, bool rowIsSelected) {
 	if (rowIsSelected) {
-		g.fillAll(ProjectColours::Tracks::listBoxBackground.brighter());
+		g.fillAll(ProjectColours::Tracks::listBoxBackgroundSelected);
 	}
 }
 
@@ -179,6 +179,10 @@ void TracksListBox::unmuteTrack(int trackId) {
 
 void TracksListBox::soloTrack(int trackId) {
 	audioMixer.soloTrack(trackId);
+	for (int i = 0; i < dataList.size(); i++) {
+		if (i == trackId) continue;
+		dataList.getUnchecked(i)->setSoloButtonState(true);
+	}
 }
 
 void TracksListBox::setTrackOffset(int trackId, int offsetInPixels) {
