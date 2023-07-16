@@ -9,7 +9,7 @@ namespace ProjectColours {
 		const Colour headerEndColour{ 0xff181818 };
 
 		const Colour fileRowBackgroundUnselected{ 0xff303030 };
-		const Colour fileRowBackgroundSelected{ 0xff363636 };
+		const Colour fileRowBackgroundSelected{ 0xff454545 };
 
 		const Colour listBoxBackground{ 0xff242223 };
 		const Colour listBoxOutline{ 0 };

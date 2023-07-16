@@ -79,7 +79,7 @@ void FileListBoxComponent::resized(void)
     Rectangle<float> addedBoundingBoxRectangle(added.getX(), added.getY(), added.getWidth(), added.getHeight());
     added.setBoundingBox(Parallelogram<float>(addedBoundingBoxRectangle));
 
-    fileListBox.setBounds(margin, headersHeight + 2 * margin, getWidth() - margin, getHeight() - (headersHeight + 2 * margin));
+    fileListBox.setBounds(0, headersHeight + 2 * margin, getWidth(), getHeight() - (headersHeight + 2 * margin));
 }
 
 void FileListBoxComponent::paint(Graphics& g)
@@ -103,11 +103,11 @@ void FileListBoxComponent::paint(Graphics& g)
         ProjectColours::Files::headerStartColour,
         0,0,
         ProjectColours::Files::headerEndColour,
-        getWidth(),35,
+        getWidth(),30,
         true
     );
     g.setGradientFill(headerColour);
-    g.fillRect(0, 0, getWidth(), 35);
+    g.fillRect(0, 0, getWidth(), 30);
 
     
 }

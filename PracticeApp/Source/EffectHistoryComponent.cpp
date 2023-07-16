@@ -42,7 +42,7 @@ void EffectHistoryComponent::resized(void)
 	int rowHeight = 20;
 	clearButton.setBounds(getWidth() - buttonWidth, margin, buttonWidth, topSideHeight);
 	namesComboBox.setBounds(margin, margin, getWidth() - buttonWidth - margin * 2, topSideHeight);
-	listBox.setBounds(margin, topSideHeight + margin * 2, getWidth() - margin, getHeight() - (topSideHeight + margin * 2));
+	listBox.setBounds(0, topSideHeight + margin * 2, getWidth(), getHeight() - (topSideHeight + margin * 2));
 	for (EffectListBoxModel* model : modelList)
 	{
 		for (int i = 0; i < model->getNumRows(); i++)
