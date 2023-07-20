@@ -32,8 +32,6 @@ int TrackAudioBuffer::getStereoBalance() {
 
 void TrackAudioBuffer::applyBalanceSettings() {
 	if (getNumChannels() == 2) {
-		DBG("LEFT APPLY : " << 1.f - balance);
-		DBG("RIGHT APPLY : " << 1.f + balance);
 		applyGain(0, 0, getNumSamples(), 1.f - balance);
 		applyGain(1, 0, getNumSamples(), 1.f + balance);
 	}
@@ -41,8 +39,6 @@ void TrackAudioBuffer::applyBalanceSettings() {
 
 void TrackAudioBuffer::restoreBalance() {
 	if (getNumChannels() == 2) {
-		DBG("LEFT RESTORE : " << 1.f / (1.f - balance));
-		DBG("RIGHT RESTORE : " << 1.f / (1.f + balance));
 		applyGain(0, 0, getNumSamples(), 1.f / (1.f - balance));
 		applyGain(1, 0, getNumSamples(), 1.f / (1.f + balance));
 	}

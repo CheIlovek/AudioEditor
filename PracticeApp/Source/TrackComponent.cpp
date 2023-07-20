@@ -107,6 +107,11 @@ void TrackComponent::resized(void) {
 	juce::FlexItem superiorButtonItem(30, 20, superiorButton);
 	juce::FlexItem balanceSliderItem(70, 70, balanceSlider);
 
+	trackNameItem.margin =		FlexItem::Margin::Margin(0, 0, 0, 5);
+	muteButtonItem.margin =		FlexItem::Margin::Margin(0, 0, 0, 5);
+	superiorButtonItem.margin = FlexItem::Margin::Margin(0, 0, 0, 5);
+	balanceSliderItem.margin =	FlexItem::Margin::Margin(0, 0, 5, 0);
+
 	superiorButtonItem.maxWidth = 70;
 	muteButtonItem.maxWidth = 70;
 	
@@ -121,8 +126,7 @@ void TrackComponent::resized(void) {
 	//volumeSlider.setBounds(r.removeFromLeft(10));
 	r.removeFromTop(audioFilenameHeight);
 	selection.setBounds(r);
-	if (waveformSize != 0)
-		r.setBounds(r.getX() + (waveformOffset * waveformZoom), r.getY(), waveformSize * waveformZoom, r.getHeight());
+	r.setBounds(r.getX() + (waveformOffset * waveformZoom), r.getY(), waveformSize * waveformZoom, r.getHeight());
 	waveform.setBounds(r);
 	
 }
@@ -172,7 +176,6 @@ float TrackComponent::getTrueWaveformOffset() {
 }
 
 void TrackComponent::mouseDown(const juce::MouseEvent& event) {
-	DBG("BUTTON PRESSED");
 	owner.listBoxItemClicked(row, event);
 	if (curState == State::selecting)
 		selection.clearSelection();
@@ -180,7 +183,6 @@ void TrackComponent::mouseDown(const juce::MouseEvent& event) {
 		auto relEvent = event.getEventRelativeTo(&waveform);
 		auto startPoint = event.getMouseDownPosition();
 		if (waveform.contains(relEvent.getMouseDownPosition())) {
-			DBG("WAVEFORM DOWNED");
 			curState = State::dragging;
 			oldWaveformOffset = waveformOffset;
 		}

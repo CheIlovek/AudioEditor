@@ -238,7 +238,6 @@ void TracksAudioSource::recalculateBuffer() {
         return;
     }
 
-    DBG("CLEAR BIT: " << muteChannels.findNextClearBit(0));
     if (inputs.size() > 0 && muteChannels.findNextClearBit(0) < inputs.size()) {
         TrackAudioBuffer* exampleBuffer = getBufferMaxSize();
         TrackAudioBuffer resBuffer(exampleBuffer->getNumChannels(), exampleBuffer->getNumSamples() + exampleBuffer->getOffset());
@@ -251,12 +250,10 @@ void TracksAudioSource::recalculateBuffer() {
             curInput->applyBalanceSettings();
             for (int chan = 0; chan < info.buffer->getNumChannels(); ++chan)
                 if (!curInput->isChannelMuted(chan) && chan < curInput->getNumChannels()) {
-                    DBG("I WAS HERE");
                     info.buffer->addFrom(chan, curInput->getOffset(), *curInput, chan, 0, curInput->getNumSamples());
                 }
             curInput->restoreBalance();
         }
-        info.buffer->setNotClear();
         
         
         auto newSource = std::make_unique<MemoryAudioSource>(*info.buffer, true);

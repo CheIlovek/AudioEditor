@@ -22,7 +22,6 @@ void PlayPositionComponent::paint(juce::Graphics& g) {
 
 void PlayPositionComponent::mouseDown(const juce::MouseEvent& event) {
     auto duration = transportSource->getLengthInSeconds();
-
     if (duration > 0.0) {
         auto clickPosition = event.position.x;
         auto audioPosition = (clickPosition / (duration *curZoom * pixelsPerSecond)) * duration;

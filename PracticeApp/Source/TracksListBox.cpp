@@ -51,7 +51,6 @@ void TracksListBox::resized(void) {
 
 void TracksListBox::listBoxItemClicked(int row, const MouseEvent& event) {
 	listBox.selectRowsBasedOnModifierKeys(row, event.mods, false);
-	DBG("ITEM CLICKED DIST: " << event.getDistanceFromDragStartX());
 }
 
 void TracksListBox::backgroundClicked(const MouseEvent&)
@@ -60,7 +59,6 @@ void TracksListBox::backgroundClicked(const MouseEvent&)
 }
 
 void TracksListBox::mouseDown(const MouseEvent& event) {
-	DBG("BUTTON DOWN");
 	for (TrackComponent* comp : dataList) {
 		auto relEvent = event.getEventRelativeTo(comp);
 		if (comp->contains(relEvent.getMouseDownPosition())) {
@@ -125,7 +123,9 @@ void TracksListBox::paint(Graphics& g) {
 
 void TracksListBox::addNewTrack() {
 	auto track = std::make_unique<TrackComponent>(formatManager, *this, dataList.size(), zoomRatio);
-	audioMixer.addInputSource(new TrackAudioBuffer(0, 0));
+	auto buffer = std::make_unique<TrackAudioBuffer>(0, 0);
+	buffer->clear();
+	audioMixer.addInputSource(buffer.release());
 	dataList.add(track.release());
 	listBox.updateContent();
 	listBox.selectRow(dataList.size() - 1, true, true);

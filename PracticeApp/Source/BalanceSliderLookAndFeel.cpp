@@ -15,8 +15,7 @@ void BalanceSliderLookAndFeel::drawRotarySlider(Graphics& g, int x, int y,
 	auto rightLetterArea =	circleArea.removeFromRight(width * letterSize);
 	circleArea.reduce(circleThickness * 2.f, circleThickness * 2.f);
 	
-	
-	// Рисуем буквы
+	// Отрисовываем буквы
 	g.setFont(20);
 	g.setColour(mainColour);
 	g.drawText(RussianText::left.c_str(),	 leftLetterArea,	juce::Justification::centredBottom);
@@ -35,6 +34,7 @@ void BalanceSliderLookAndFeel::drawRotarySlider(Graphics& g, int x, int y,
 	g.setColour(mainColour);
 	g.drawEllipse(circleArea,circleThickness);
 
+	// Рисуем бегунок
 	float r = circleArea.getWidth() / 2.f;
 	double angle = rotaryStartAngle + sliderPosProportional * (rotaryEndAngle - rotaryStartAngle);
 
